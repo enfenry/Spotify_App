@@ -1,0 +1,24 @@
+{
+  "name": "spotify_app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client": "npm run start --prefix spotify",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enfenry/Spotify_App.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/enfenry/Spotify_App/issues"
+  },
+  "homepage": "https://github.com/enfenry/Spotify_App#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
