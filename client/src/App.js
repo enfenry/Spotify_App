@@ -1,13 +1,26 @@
 import React from 'react';
 import './App.css';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import SearchBar from './components/SearchBar';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <Button variant="outline-danger">Good afternoon.</Button>
-      </header>
+      <Container fluid>
+        <Header />
+        <main>
+          <SearchBar />
+        </main>
+
+        <Footer />
+
+      </Container>
     </div>
   );
 }
