@@ -26,7 +26,7 @@ function SearchBar() {
                                         {/* <Form.Control type="email" placeholder="Enter location" style={{ height: "100%" }, { border: "0px" }} /> */}
                                     </Col>
                                     <Col sm="auto">
-                                        <Button variant="success" type="submit">
+                                        <Button variant="primary" type="submit" className="btn-search">
                                             {/* <Button variant="success" type="submit" style={{ height: "100%" }}> */}
                                             Search
                                         </Button>
@@ -35,7 +35,7 @@ function SearchBar() {
                                 <Form.Row>
                                     <Col>
                                         <Form.Text className="text-muted">
-                                            You can search by city, state, or zip.
+                                            <small>You can search by city, state, or zip.</small>
                                         </Form.Text>
                                     </Col>
                                 </Form.Row>

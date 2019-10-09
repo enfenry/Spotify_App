@@ -13,7 +13,11 @@ function App() {
   return (
     <div className="App">
       <Container fluid>
+        <br />
         <Header />
+        <br />
+        <br />
+
         <main>
           <SearchBar />
         </main>

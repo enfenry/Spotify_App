@@ -1,0 +1,12 @@
+.btn-search {
+    background-color: rgb(52, 55, 209) !important;
+    border-color: rgb(36, 38, 148) !important;
+}
+
+.btn-search:hover {
+    opacity: .8;
+}
+
+.btn-search:focus {
+    box-shadow: 0 0 0 0.2rem rgb(36, 38, 148) !important;
+}
