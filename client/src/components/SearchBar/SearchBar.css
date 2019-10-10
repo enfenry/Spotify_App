@@ -1,0 +1,29 @@
+.btn-search {
+    background-color: rgb(52, 55, 209) !important;
+    border-color: rgb(36, 38, 148) !important;
+}
+
+.btn-search:hover {
+    opacity: .8;
+}
+
+.btn-search:focus {
+    box-shadow: 0 0 0 0.2rem rgb(36, 38, 148) !important;
+}
+
+.form-row {
+    /* text-align: center;
+    background-color: rgb(32, 32, 34);
+    min-height: 100vh;
+    display: flex; */
+    /* flex-direction: column !important; */
+    align-items: center !important;
+    justify-content: center !important;
+    /* font-size: calc(10px + 2vmin); */
+    /* color: white; */
+  }
+
+  .form-group {
+      margin-bottom: 0px !important;
+  }
+  
