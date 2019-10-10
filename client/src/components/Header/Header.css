@@ -1,5 +1,5 @@
 .emphasis {
-    color: rgb(52, 55, 209);
+    color: white;
 }
 
 #spotify-logo-header {
@@ -12,6 +12,11 @@
     color: black !important;
 }
 
-.spotify-login:hover {
-    opacity: .8;
+.spotify-login:hover, a h1:hover {
+    transition: .3s ease;
+    opacity: .7;
+}
+
+a:hover {
+    text-decoration: none !important;
 }

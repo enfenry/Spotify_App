@@ -15,11 +15,11 @@ function Results({ path, setPath }) {
     return (
         <div className="Results">
             <br />
-            <Row>
+            <Row className="centered">
                 <Col xs="auto">
                     <Header />
                 </Col>
-                <Col>
+                <Col className="centered">
                     <SearchBar path={path} setPath={setPath} />
                 </Col>
             </Row>

@@ -18,7 +18,7 @@ export default function Header({ path, setPath }) {
 
     return (
         <header>
-            <h1>This<span className="emphasis">Weekend</span></h1>
+            <a href="/" onClick={()=>setPath("/")}><h1><span className="emphasis">This</span>Weekend</h1></a>
             {renderLogin(path)}
         </header>
     )

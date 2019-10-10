@@ -1,10 +1,12 @@
 .btn-search {
     background-color: rgb(52, 55, 209) !important;
     border-color: rgb(36, 38, 148) !important;
+    height: calc(1.5em + .75rem + 2px) !important;
 }
 
 .btn-search:hover {
-    opacity: .8;
+    opacity: .7;
+    transition: .3s ease;
 }
 
 .btn-search:focus {
@@ -27,3 +29,6 @@
       margin-bottom: 0px !important;
   }
   
+  .form-control {
+      /* height:100% !important; */
+  }

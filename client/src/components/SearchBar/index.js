@@ -47,11 +47,9 @@ export default function SearchBar({ path, setPath }) {
                                 <Form.Row>
                                     <Col>
                                         <Form.Control type="location" placeholder="Enter location" />
-                                        {/* <Form.Control type="email" placeholder="Enter location" style={{ height: "100%" }, { border: "0px" }} /> */}
                                     </Col>
                                     <Col sm="auto">
                                         <Button variant="primary" type="submit" className="btn-search" onClick={() => setPath("/results")}>
-                                            {/* <Button variant="success" type="submit" style={{ height: "100%" }}> */}
                                             Search
                                         </Button>
                                     </Col>
