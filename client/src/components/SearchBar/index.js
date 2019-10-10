@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './SearchBar.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -6,39 +6,59 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-function SearchBar() {
+export default function SearchBar({ path, setPath }) {
+
+    const renderLabel = (path) => {
+        if (path === "/") {
+            return (
+                <Form.Row>
+                    <Col>
+                        <Form.Label>Search for concerts in your area</Form.Label>
+                    </Col>
+                </Form.Row>
+            );
+        }
+    };
+
+    const renderHelperText = (path) => {
+        if (path === "/") {
+            return (
+                <Form.Row>
+                    <Col>
+                        <Form.Text className="text-muted">
+                            <small>You can search by city, state, or zip.</small>
+                        </Form.Text>
+                    </Col>
+                </Form.Row>
+            )
+        }
+    };
+
     return (
         <div className="SearchBar">
-
             <Container>
                 <Row>
-                    <Col>
+                    <Col xs="12">
                         <Form>
                             <Form.Group controlId="formLocation">
-                                <Form.Row>
-                                    <Col>
-                                        <Form.Label>Search for concerts in your area</Form.Label>
-                                    </Col>
-                                </Form.Row>
+
+                                {renderLabel(path)}
+
                                 <Form.Row>
                                     <Col>
                                         <Form.Control type="location" placeholder="Enter location" />
                                         {/* <Form.Control type="email" placeholder="Enter location" style={{ height: "100%" }, { border: "0px" }} /> */}
                                     </Col>
                                     <Col sm="auto">
-                                        <Button variant="primary" type="submit" className="btn-search">
+                                        <Button variant="primary" type="submit" className="btn-search" onClick={() => setPath("/results")}>
                                             {/* <Button variant="success" type="submit" style={{ height: "100%" }}> */}
                                             Search
                                         </Button>
                                     </Col>
                                 </Form.Row>
-                                <Form.Row>
-                                    <Col>
-                                        <Form.Text className="text-muted">
-                                            <small>You can search by city, state, or zip.</small>
-                                        </Form.Text>
-                                    </Col>
-                                </Form.Row>
+
+                                {renderHelperText(path)}
+
                             </Form.Group>
                         </Form>
                     </Col>
@@ -47,5 +67,3 @@ function SearchBar() {
         </div>
     );
 }
-
-export default SearchBar;
