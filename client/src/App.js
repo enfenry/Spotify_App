@@ -8,22 +8,23 @@ import Container from 'react-bootstrap/Container';
 export default function App() {
 
   const [path, setPath] = useState("/");
+  const [results, setResults] = useState([]);
 
   const renderSwitch = (path) => {
     switch (path) {
       case "/":
-        return <Login path={path} setPath={setPath} />;
+        return <Login path={path} setPath={setPath} results={results} setResults={setResults} />;
       case "/results":
-        return <Results path={path} setPath={setPath} />;
+        return <Results path={path} setPath={setPath} results={results} setResults={setResults} />;
       default:
-        return <Login />;
+        return <Login path={path} setPath={setPath} results={results} setResults={setResults} />;
     }
   };
 
   return (
     <div className="App">
       <Container fluid>
-      {renderSwitch(path)}
+        {renderSwitch(path)}
       </Container>
     </div>
   );
