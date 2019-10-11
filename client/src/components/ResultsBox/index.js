@@ -12,10 +12,13 @@ export default function ResultsBox({ results, setResults }) {
 
     const renderResults = (results) => {
         var mapResults = [];
-        mapResults = results.map((result,index) => {
+        mapResults = results.map((result, index) => {
             return (
-                <Col key={index} sm="3">
-                    <img className="resImg" src={result.src} alt={result.artistName} key={"img-" + index} />
+                <Col key={index} sm="auto">
+                    <div className="image-container">
+                        {/* {result.artistName} */}
+                        <img className="result-image" src={result.src} alt={result.artistName} key={"img-" + index} />
+                    </div>
                 </Col>
             )
         })
