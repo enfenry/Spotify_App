@@ -35,11 +35,10 @@ export default function ModalArtist({
                             <div className="modal-image-container view view-first">
                                 <img className="modal-image" src={currentEvent.src} alt={currentEvent.artistName} key={"img-current"} />
                                 <div className="mask">
-                                    {currentEvent.price}
                                     <h2>{currentEvent.day} {currentEvent.time}</h2>
                                     <p>{currentEvent.location}</p>
                                     {currentEvent.price}
-                                    <a href="#" className="info">Genre: {currentEvent.genre}</a>
+                                    <h3>Genre: {currentEvent.genre}</h3>
                                 </div>
                             </div>
                         </Col>
