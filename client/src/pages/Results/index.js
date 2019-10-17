@@ -32,9 +32,11 @@ function Results({
                     <SearchBar path={path} setPath={setPath} results={results} setResults={setResults} />
                 </Col>
             </Row>
-            <Row>
-                <ResultsBox results={results} setResults={setResults} modalShow={modalShow} setModalShow={setModalShow} currentEvent={currentEvent} setCurrentEvent={setCurrentEvent} />
-            </Row>
+            <main>
+                <Row className="centered">
+                    <ResultsBox results={results} setResults={setResults} modalShow={modalShow} setModalShow={setModalShow} currentEvent={currentEvent} setCurrentEvent={setCurrentEvent} />
+                </Row>
+            </main>
             <Row className="padded">
             </Row>
             <Footer />
