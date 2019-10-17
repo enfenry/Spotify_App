@@ -7,12 +7,12 @@
     height: 2rem;
 }
 
-.spotify-login {
+.btn-spotify {
     background-color: rgb(30, 215, 96) !important;
     color: black !important;
 }
 
-.spotify-login:hover, a h1:hover {
+.btn-spotify:hover, a h1:hover {
     transition: .3s ease;
     opacity: .7;
 }

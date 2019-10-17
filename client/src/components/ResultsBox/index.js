@@ -28,7 +28,7 @@ export default function ResultsBox({
                 <Col key={index} sm="auto">
                     {result.artistName}
                     <div className="image-container">
-                        <img className="result-image" src={result.src} alt={result.artistName} key={"img-" + index} onClick={() => handleModal(result)} />
+                        <img className="result-image" src={result.src} alt={result.artistName} key={"img-" + index} onClick={() => handleModal(result)} data-toggle="modal" data-target="#modal-artist" />
                     </div>
                 </Col>
             )
@@ -40,7 +40,7 @@ export default function ResultsBox({
         <>
             {renderResults(results)}
 
-            <ModalArtist modalShow={modalShow} setModalShow={setModalShow} currentArtist={currentArtist} />
+            <ModalArtist id="modal-artist" modalShow={modalShow} setModalShow={setModalShow} currentArtist={currentArtist} />
         </>
     )
 };

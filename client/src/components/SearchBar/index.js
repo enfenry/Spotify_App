@@ -66,7 +66,7 @@ export default function SearchBar({ path, setPath , results, setResults}) {
                                         <Form.Control type="location" placeholder="Enter location" />
                                     </Col>
                                     <Col sm="auto">
-                                        <Button variant="primary" type="submit" className="btn-search" onClick={() => handleSearch()}>
+                                        <Button variant="primary" type="submit" className="btn-default" onClick={() => handleSearch()}>
                                             Search
                                         </Button>
                                     </Col>
