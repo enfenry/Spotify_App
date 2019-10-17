@@ -88,6 +88,24 @@
         "time": "7PM",
         "location": "Rock and Roll Hotel",
         "price": "$30"
+    },
+    {
+        "artistName": "Bon Iver",
+        "src": "https://media.pitchfork.com/photos/59359c0b9726246adc7c5d80/2:1/w_790/0065f843.jpg",
+        "genre": "rock",
+        "day": "1/20/2020",
+        "time": "7PM",
+        "location": "Rock and Roll Hotel",
+        "price": "$30"
+    },
+    {
+        "artistName": "Parquet Courts",
+        "src": "http://www.undertheradarmag.com/uploads/article_images/PARQUET_COURTS_UNDER_THE_RADAR_IMG_7197_V1Gcmyk.jpg",
+        "genre": "rock",
+        "day": "1/20/2020",
+        "time": "7PM",
+        "location": "Rock and Roll Hotel",
+        "price": "$30"
     }
 
 ]
