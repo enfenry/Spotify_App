@@ -11,7 +11,11 @@ function Results({
     path,
     setPath,
     results,
-    setResults }) {
+    setResults,
+    modalShow,
+    setModalShow,
+    currentArtist,
+    setCurrentArtist }) {
 
     useEffect(() => {
         setPath("/results");
@@ -29,7 +33,7 @@ function Results({
                 </Col>
             </Row>
             <Row>
-                <ResultsBox results={results} setResults={setResults} />
+                <ResultsBox results={results} setResults={setResults} modalShow={modalShow} setModalShow={setModalShow} currentArtist={currentArtist} setCurrentArtist={setCurrentArtist} />
             </Row>
             <Footer />
         </div>
