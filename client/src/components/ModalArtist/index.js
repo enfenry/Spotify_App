@@ -10,7 +10,7 @@ import Col from 'react-bootstrap/Col';
 export default function ModalArtist({
     modalShow,
     setModalShow,
-    currentArtist
+    currentEvent
 }) {
 
     return (
@@ -24,7 +24,7 @@ export default function ModalArtist({
 
             <Modal.Header>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    {currentArtist.artistName}
+                    {currentEvent.artistName}
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -32,11 +32,14 @@ export default function ModalArtist({
                     <Row>
                         <Col md="6">
                             <div className="modal-image-container">
-                                <img className="modal-image" src={currentArtist.src} alt={currentArtist.artistName} key={"img-current"} />
+                                <img className="modal-image" src={currentEvent.src} alt={currentEvent.artistName} key={"img-current"} />
                             </div>
                         </Col>
                         <Col xs="auto">
-                            Info will go here!
+                            <Row>{currentEvent.day} {currentEvent.time}</Row>
+                            <Row>{currentEvent.location}</Row>
+                            <Row>{currentEvent.price}</Row>
+                            <Row>Genre: {currentEvent.genre}</Row>
                         </Col>
                     </Row>
                 </Container>

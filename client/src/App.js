@@ -10,14 +10,14 @@ export default function App() {
   const [path, setPath] = useState("/");
   const [results, setResults] = useState([]);
   const [modalShow, setModalShow] = useState(false);
-  const [currentArtist, setCurrentArtist] = useState({src: "", artistName: ""});
+  const [currentEvent, setCurrentEvent] = useState({src: "", artistName: ""});
 
   const renderSwitch = (path) => {
     switch (path) {
       case "/":
         return <Login path={path} setPath={setPath} results={results} setResults={setResults} />;
       case "/results":
-        return <Results path={path} setPath={setPath} results={results} setResults={setResults} modalShow={modalShow} setModalShow={setModalShow} currentArtist={currentArtist} setCurrentArtist={setCurrentArtist} />;
+        return <Results path={path} setPath={setPath} results={results} setResults={setResults} modalShow={modalShow} setModalShow={setModalShow} currentEvent={currentEvent} setCurrentEvent={setCurrentEvent} />;
       default:
         return <Login path={path} setPath={setPath} results={results} setResults={setResults} />;
     }

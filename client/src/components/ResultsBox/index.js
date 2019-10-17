@@ -9,15 +9,15 @@ export default function ResultsBox({
     setResults,
     modalShow,
     setModalShow,
-    currentArtist,
-    setCurrentArtist }) {
+    currentEvent,
+    setCurrentEvent }) {
 
     useEffect(() => {
         setResults(results);
     })
 
     const handleModal = (artist) => {
-        setCurrentArtist(artist);
+        setCurrentEvent(artist);
         setModalShow(true);
     }
 
@@ -40,7 +40,7 @@ export default function ResultsBox({
         <>
             {renderResults(results)}
 
-            <ModalArtist id="modal-artist" modalShow={modalShow} setModalShow={setModalShow} currentArtist={currentArtist} />
+            <ModalArtist id="modal-artist" modalShow={modalShow} setModalShow={setModalShow} currentEvent={currentEvent} />
         </>
     )
 };
