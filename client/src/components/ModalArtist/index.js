@@ -30,17 +30,25 @@ export default function ModalArtist({
             <Modal.Body>
                 <Container>
                     <Row>
-                        <Col md="6">
-                            <div className="modal-image-container">
+                        {/* <Col md="6"> */}
+                        <Col>
+                            <div className="modal-image-container view view-first">
                                 <img className="modal-image" src={currentEvent.src} alt={currentEvent.artistName} key={"img-current"} />
+                                <div className="mask">
+                                    {currentEvent.price}
+                                    <h2>{currentEvent.day} {currentEvent.time}</h2>
+                                    <p>{currentEvent.location}</p>
+                                    {currentEvent.price}
+                                    <a href="#" className="info">Genre: {currentEvent.genre}</a>
+                                </div>
                             </div>
                         </Col>
-                        <Col xs="auto">
+                        {/* <Col xs="auto">
                             <Row>{currentEvent.day} {currentEvent.time}</Row>
                             <Row>{currentEvent.location}</Row>
                             <Row>{currentEvent.price}</Row>
                             <Row>Genre: {currentEvent.genre}</Row>
-                        </Col>
+                        </Col> */}
                     </Row>
                 </Container>
             </Modal.Body>

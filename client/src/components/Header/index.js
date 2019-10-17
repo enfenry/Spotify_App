@@ -10,7 +10,7 @@ export default function Header({ path, setPath }) {
         if (path === "/") {
             return (
                 <>
-                <small>Log in to </small> <Button variant="success" className="spotify-login"><img id="spotify-logo-header" alt="Spotify-Login" src={process.env.PUBLIC_URL + '/static/img/spotify_logo_with_text_black.svg'} /></Button>
+                <small>Log in to </small> <Button variant="success" className="btn-spotify"><img id="spotify-logo-header" alt="Spotify-Login" src={process.env.PUBLIC_URL + '/static/img/spotify_logo_with_text_black.svg'} /></Button>
                 </>
             );
         }
