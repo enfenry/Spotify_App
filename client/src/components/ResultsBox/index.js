@@ -2,8 +2,7 @@ import React, { useEffect } from 'react';
 import './ResultsBox.css';
 // import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
+import ModalArtist from '../ModalArtist'
 
 export default function ResultsBox({
     results,
@@ -14,13 +13,12 @@ export default function ResultsBox({
     setCurrentArtist }) {
 
     useEffect(() => {
-        setCurrentArtist(currentArtist)
         setResults(results);
     })
 
     const handleModal = (artist) => {
-        setModalShow(true);
         setCurrentArtist(artist);
+        setModalShow(true);
     }
 
     const renderResults = (results) => {
@@ -42,25 +40,7 @@ export default function ResultsBox({
         <>
             {renderResults(results)}
 
-            <Modal
-                size="lg"
-                aria-labelledby="contained-modal-title-vcenter"
-                centered
-                show={modalShow}
-                onHide={() => setModalShow(false)}>
-
-                <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-vcenter">
-                        {currentArtist.artistName}
-                    </Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <img className="modal-image" src={currentArtist.src} alt={currentArtist.artistName} key={"img-current"} />
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button onClick={() => setModalShow(false)}>Close</Button>
-                </Modal.Footer>
-            </Modal>
+            <ModalArtist modalShow={modalShow} setModalShow={setModalShow} currentArtist={currentArtist} />
         </>
     )
 };

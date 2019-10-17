@@ -1,31 +1,33 @@
-import React, { useEffect } from 'react';
-import Modal from 'react-bootstrap/Modal';
+import React from 'react';
 import './ModalArtist.css';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button'
 
-export default function ModalArtist(props) {
-
-
+export default function ModalArtist({
+    modalShow,
+    setModalShow,
+    currentArtist
+}) {
 
     return (
         <Modal
-        {...props}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-        show={modalShow}
-        onHide={() => setModalShow(false)}>
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            show={modalShow}
+            onHide={() => { setModalShow(false) }}>
 
-        <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-vcenter">
-                {result.artistName}
-            </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-            <img className="result-image" src={result.src} alt={result.artistName} key={"img-" + index} />
-        </Modal.Body>
-        <Modal.Footer>
-            <Button onClick={() => setModalShow(false)}>Close</Button>
-        </Modal.Footer>
-    </Modal>
+            <Modal.Header closeButton>
+                <Modal.Title id="contained-modal-title-vcenter">
+                    {currentArtist.artistName}
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <img className="modal-image" src={currentArtist.src} alt={currentArtist.artistName} key={"img-current"} />
+            </Modal.Body>
+            <Modal.Footer>
+                <Button onClick={() => { setModalShow(false) }}>Close</Button>
+            </Modal.Footer>
+        </Modal>
     );
-  }
+}
