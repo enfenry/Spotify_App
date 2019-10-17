@@ -35,6 +35,8 @@ function Results({
             <Row>
                 <ResultsBox results={results} setResults={setResults} modalShow={modalShow} setModalShow={setModalShow} currentEvent={currentEvent} setCurrentEvent={setCurrentEvent} />
             </Row>
+            <Row className="padded">
+            </Row>
             <Footer />
         </div>
     );

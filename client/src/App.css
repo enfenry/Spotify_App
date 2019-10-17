@@ -6,12 +6,16 @@
   flex-direction: column;
   /* align-items: center; */
   /* justify-content: center; */
-  font-size: 3vmin;
+  font-size: calc(2px + 2vmin);
   color: white;
 }
 
 .row.centered {
     justify-content: center;
+}
+
+.padded {
+  padding: 15px !important;
 }
 
 .btn-default {

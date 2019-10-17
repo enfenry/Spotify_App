@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import './ResultsBox.css';
-// import Row from 'react-bootstrap/Row'
+import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import ModalArtist from '../ModalArtist'
 
@@ -25,10 +25,45 @@ export default function ResultsBox({
         var mapResults = [];
         mapResults = results.map((result, index) => {
             return (
-                <Col key={index} sm="auto">
-                    {result.artistName}
-                    <div className="image-container">
-                        <img className="result-image" src={result.src} alt={result.artistName} key={"img-" + index} onClick={() => handleModal(result)} data-toggle="modal" data-target="#modal-artist" />
+                <Col className="padded" key={index} sm="auto">
+                    <div className="image-container view-container">
+                        <img className="result-image" src={result.src} alt={result.artistName} key={"img-" + index} data-toggle="modal" data-target="#modal-artist" />
+
+                        <div className="mask" onClick={() => handleModal(result)}>
+                            <Row>
+                                <Col>
+                                    {result.artistName}
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <Row>
+                                        <Col>
+                                            <span>{result.day} {result.time}</span>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col>
+                                            <span>{result.location}</span>
+                                        </Col>
+                                    </Row>
+
+                                    <Row>
+                                        <Col>
+                                            <span>{result.price}</span>
+                                        </Col>
+                                    </Row>
+
+                                    <Row>
+                                        <Col>
+                                            <span> Genre: {result.genre}</span>
+                                        </Col>
+                                    </Row>
+                                </Col>
+                            </Row>
+                            <Row>
+                            </Row>
+                        </div>
                     </div>
                 </Col>
             )
