@@ -35,7 +35,9 @@ export default function ModalArtist({
                                 <img className="modal-image" src={currentEvent.src} alt={currentEvent.artistName} key={"img-current"} />
                             </div>
                         </Col>
-                        <Col xs="auto">
+                        <Col md="6">
+                            <Row><p className="text-left"><small>{currentEvent.bio}</small></p></Row>
+                            <Row></Row>
                             <Row>{currentEvent.day} {currentEvent.time}</Row>
                             <Row>{currentEvent.location}</Row>
                             <Row>{currentEvent.price}</Row>
