@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './SearchBar.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-export default function SearchBar({ path, setPath }) {
+export default function SearchBar({ path, setPath , results, setResults}) {
 
     const renderLabel = (path) => {
         if (path === "/") {
@@ -34,6 +34,23 @@ export default function SearchBar({ path, setPath }) {
         }
     };
 
+    const handleSearch = () => {
+
+        setPath("/results")
+
+        let resultsURL = process.env.PUBLIC_URL + 'exampleResults.json';
+
+        fetch(resultsURL)
+            .then(response => response.json())
+            .then((jsonData) => {
+                results = jsonData;
+                setResults(results);
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+    }
+
     return (
         <div className="SearchBar">
             <Container>
@@ -47,11 +64,9 @@ export default function SearchBar({ path, setPath }) {
                                 <Form.Row>
                                     <Col>
                                         <Form.Control type="location" placeholder="Enter location" />
-                                        {/* <Form.Control type="email" placeholder="Enter location" style={{ height: "100%" }, { border: "0px" }} /> */}
                                     </Col>
                                     <Col sm="auto">
-                                        <Button variant="primary" type="submit" className="btn-search" onClick={() => setPath("/results")}>
-                                            {/* <Button variant="success" type="submit" style={{ height: "100%" }}> */}
+                                        <Button variant="primary" type="submit" className="btn-default" onClick={() => handleSearch()}>
                                             Search
                                         </Button>
                                     </Col>

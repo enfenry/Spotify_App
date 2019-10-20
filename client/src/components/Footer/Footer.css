@@ -1,5 +1,5 @@
 .footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left:0;
     width: 100%;
@@ -32,13 +32,14 @@ a {
 }
 
 a:hover {
-    opacity: .8;
+    opacity: .7;
+    transition: .3s ease;
 }
 
 .spaced {
     justify-content: space-between;
 }
 
-.centered {
+/* .centered {
     justify-content: center;
-}
+} */

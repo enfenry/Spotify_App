@@ -1,17 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 // import './Login.css';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import SearchBar from '../../components/SearchBar';
 
-export default function Login({path,setPath}) {
-
-    // const [path, setPath] = useState("/");
-
-    // {console.log(path)}
+export default function Login({
+    path,
+    setPath,
+    results,
+    setResults}) {
 
     useEffect(() => {
-        console.log({setPath})
         setPath("/")
     })
 
@@ -23,7 +22,7 @@ export default function Login({path,setPath}) {
             <br />
 
             <main>
-                <SearchBar path={path} setPath={setPath} />
+                <SearchBar path={path} setPath={setPath} results={results} setResults={setResults} />
             </main>
 
             <Footer />

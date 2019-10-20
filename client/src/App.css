@@ -10,3 +10,29 @@
   color: white;
 }
 
+main {
+  margin-bottom: 70px;
+}
+
+.row.centered {
+    justify-content: center;
+}
+
+.padded {
+  padding: 15px !important;
+}
+
+.btn-default {
+  background-color: rgb(52, 55, 209) !important;
+  border-color: rgb(36, 38, 148) !important;
+  height: calc(1.5em + .75rem + 2px) !important;
+}
+
+.btn-default:hover {
+  opacity: .7;
+  transition: .3s ease;
+}
+
+.btn-default:focus {
+  box-shadow: 0 0 0 0.2rem rgb(36, 38, 148) !important;
+}
