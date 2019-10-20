@@ -34,7 +34,12 @@ function Results({
             </Row>
             <main>
                 <Row className="centered">
-                    <ResultsBox results={results} setResults={setResults} modalShow={modalShow} setModalShow={setModalShow} currentEvent={currentEvent} setCurrentEvent={setCurrentEvent} />
+                    <Col xs="auto" className="padded">
+                        <iframe src="https://open.spotify.com/embed/album/0aA9rYw8PEv9G7tVIJ9dKg?si=0CkfQ3A3RMOrt4vjMdvq7g" width="300" height="540" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                    </Col>
+                    <Col>
+                        <ResultsBox results={results} setResults={setResults} modalShow={modalShow} setModalShow={setModalShow} currentEvent={currentEvent} setCurrentEvent={setCurrentEvent} />
+                    </Col>
                 </Row>
             </main>
             <Row className="padded">
