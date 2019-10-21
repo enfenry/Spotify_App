@@ -68,7 +68,11 @@ export default function ResultsBox({
                 </Col>
             )
         })
-        return mapResults;
+        return (
+            <Row>
+                {mapResults}
+            </Row>
+        );
     }
 
     return (

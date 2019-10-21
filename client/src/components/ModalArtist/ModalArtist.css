@@ -25,13 +25,31 @@
 }
 
 .modal-image-container {
-    border-radius: 10px;
-    height: 20rem;
-    width: 20rem;
+    /* border-radius: 10px; */
+    height: 300px;
+    width: 300px;
     overflow: hidden;
     text-align: center;
     margin: 0 auto;
 }
+.modal-image-container .mask {
+    position: relative;
+    bottom:80px;
+    left:220px;
+    height:100%;
+    opacity: .95;
+    background-color: rgba(0, 0, 0, 1); 
+    transition: all .2s ease-in-out;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* outline: 1px solid black; */
+}
 
+.modal-image-container:hover .mask { 
+    bottom: 300px;
+    left:0px;
+	opacity: 0.9;
+}
 
 

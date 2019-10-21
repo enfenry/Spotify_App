@@ -31,9 +31,17 @@ export default function ModalArtist({
                 <Container>
                     <Row>
                         <Col md="6">
-                            <div className="modal-image-container">
-                                <img className="modal-image" src={currentEvent.src} alt={currentEvent.artistName} key={"img-current"} />
-                            </div>
+                            <Row>
+                                <Col>
+                                    <div className="modal-image-container">
+                                        <img className="modal-image" src={currentEvent.src} alt={currentEvent.artistName} key={"img-current"} />
+
+                                        <div className="mask">
+                                            <iframe title="topTracks" src={"https://open.spotify.com/embed/artist/" + currentEvent.topTracks} width="300" height="300" frameBorder="0" allowtransparency="true" allow="encrypted-media" />
+                                        </div>
+                                    </div>
+                                </Col>
+                            </Row>
                         </Col>
                         <Col md="6">
                             <Row><p className="text-left"><small>{currentEvent.bio}</small></p></Row>

@@ -11,7 +11,8 @@
     overflow: hidden;
     text-align: center;
     margin: 0 auto;
-    font-size: calc(2px + 2vmin)
+    font-size: calc(2px + 2vmin);
+    /* outline: 1px solid black; */
 }
 
 
@@ -41,7 +42,7 @@
 }
 
 .view-container img { 
-    transition: all .3s linear;
+    transition: all .2s linear;
 }
 
 .view-container .mask {
@@ -53,7 +54,7 @@
     opacity: .9;
     background-color: rgba(0, 0, 0, 1); 
     /* background-color: rgba(52, 55, 209, .7);  */
-    transition: all .3s ease-in-out;
+    transition: all .2s ease-in-out;
     display:flex;
     flex-direction: column;
     justify-content: space-between;
@@ -62,7 +63,7 @@
 .view-container span {
     /* transform: translateY(0px); */
     opacity: 0;
-    transition: all .3s ease-in-out;
+    transition: all .2s ease-in-out;
 }
 
 
