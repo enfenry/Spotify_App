@@ -11,7 +11,8 @@
     overflow: hidden;
     text-align: center;
     margin: 0 auto;
-    font-size: calc(2px + 2vmin)
+    font-size: calc(2px + 2vmin);
+    /* outline: 1px solid black; */
 }
 
 
