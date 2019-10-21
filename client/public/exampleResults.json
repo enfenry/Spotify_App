@@ -20,6 +20,36 @@
         "price": "$30"
     },
     {
+        "artistName": "Tame Impala",
+        "src": "https://ksassets.timeincuk.net/wp/uploads/sites/55/2019/06/GettyImages-1154682498-920x584.jpg",
+        "genre": "rock",
+        "day": "1/20/2020",
+        "time": "7PM",
+        "location": "Rock and Roll Hotel",
+        "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "price": "$30"
+    },
+    {
+        "artistName": "Arctic Monkeys",
+        "src": "https://www.coupdemainmagazine.com/sites/default/files/styles/full_width/public/article/14355/hero-14355-1316021305.jpg?itok=Gb7NYGzA",
+        "genre": "rock",
+        "day": "1/20/2020",
+        "time": "7PM",
+        "location": "Rock and Roll Hotel",
+        "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "price": "$30"
+    },
+    {
+        "artistName": "Alabama Shakes",
+        "src": "http://s3-eu-west-1.amazonaws.com/diy-magazine//diy/Artists/A/Alabama-Shakes/alabamashakes_20150424_2047x1365_4.jpg",
+        "genre": "rock",
+        "day": "1/20/2020",
+        "time": "7PM",
+        "location": "Rock and Roll Hotel",
+        "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "price": "$30"
+    },
+    {
         "artistName": "The Red Elvises",
         "src": "https://i2.wp.com/redelvises.com/wp-content/uploads/2019/02/RedElvises-1-Logo-1024x731.jpg?resize=1024%2C731&ssl=1",
         "genre": "rock",

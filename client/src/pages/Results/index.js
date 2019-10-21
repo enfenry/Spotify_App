@@ -35,7 +35,7 @@ function Results({
             <main>
                 <Row className="centered">
                     <Col xs="auto" className="padded">
-                        <iframe src="https://open.spotify.com/embed/album/0aA9rYw8PEv9G7tVIJ9dKg?si=0CkfQ3A3RMOrt4vjMdvq7g" width="300" height="540" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                        <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DX2Nc3B70tvx0?si=_AMfZgVbQsW4IeD6gwpB5w" width="300" height="540" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                     </Col>
                     <Col>
                         <ResultsBox results={results} setResults={setResults} modalShow={modalShow} setModalShow={setModalShow} currentEvent={currentEvent} setCurrentEvent={setCurrentEvent} />
