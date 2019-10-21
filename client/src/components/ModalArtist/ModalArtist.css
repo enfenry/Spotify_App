@@ -25,9 +25,9 @@
 }
 
 .modal-image-container {
-    border-radius: 10px;
-    height: 20rem;
-    width: 20rem;
+    /* border-radius: 10px; */
+    height: 300px;
+    width: 300px;
     overflow: hidden;
     text-align: center;
     margin: 0 auto;
