@@ -34,8 +34,8 @@ export default function SearchBar({ path, setPath , results, setResults}) {
         }
     };
 
-    const handleSearch = () => {
-
+    const handleSearch = (event) => {
+        event.preventDefault();
         setPath("/results")
 
         let resultsURL = process.env.PUBLIC_URL + 'exampleResults.json';
@@ -51,6 +51,10 @@ export default function SearchBar({ path, setPath , results, setResults}) {
             })
     }
 
+    const handleChange = (event) => {
+        console.log(event.target);
+    }
+
     return (
         <div className="SearchBar">
             <Container>
@@ -63,10 +67,10 @@ export default function SearchBar({ path, setPath , results, setResults}) {
 
                                 <Form.Row>
                                     <Col>
-                                        <Form.Control type="location" placeholder="Enter location" />
+                                        <Form.Control type="location" placeholder="Enter location" autocomplete="off" onChange={(event) => handleChange(event)} />
                                     </Col>
                                     <Col sm="auto">
-                                        <Button variant="primary" type="submit" className="btn-default" onClick={() => handleSearch()}>
+                                        <Button variant="primary" type="submit" className="btn-default" onClick={(event) => handleSearch(event)}>
                                             Search
                                         </Button>
                                     </Col>
