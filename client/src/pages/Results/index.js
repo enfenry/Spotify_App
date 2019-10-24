@@ -15,7 +15,11 @@ function Results({
     modalShow,
     setModalShow,
     currentEvent,
-    setCurrentEvent }) {
+    setCurrentEvent,
+    query,
+    setQuery,
+    data,
+    setData }) {
 
     useEffect(() => {
         setPath("/results");
@@ -29,7 +33,7 @@ function Results({
                     <Header />
                 </Col>
                 <Col className="centered">
-                    <SearchBar path={path} setPath={setPath} results={results} setResults={setResults} />
+                    <SearchBar path={path} setPath={setPath} results={results} setResults={setResults} query={query} setQuery={setQuery} data={data} setData={setData} />
                 </Col>
             </Row>
             <main>
@@ -38,7 +42,7 @@ function Results({
                         <iframe title="playlist" src="https://open.spotify.com/embed/playlist/37i9dQZF1DX2Nc3B70tvx0?si=_AMfZgVbQsW4IeD6gwpB5w" width="300" height="540" frameBorder="0" allowtransparency="true" allow="encrypted-media" />
                     </Col>
                     <Col>
-                        <ResultsBox results={results} setResults={setResults} modalShow={modalShow} setModalShow={setModalShow} currentEvent={currentEvent} setCurrentEvent={setCurrentEvent} />
+                        <ResultsBox results={results} setResults={setResults} modalShow={modalShow} setModalShow={setModalShow} currentEvent={currentEvent} setCurrentEvent={setCurrentEvent}/>
                     </Col>
                 </Row>
             </main>

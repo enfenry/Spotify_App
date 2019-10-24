@@ -6,7 +6,17 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-export default function SearchBar({ path, setPath , results, setResults}) {
+export default function SearchBar({ 
+    path, 
+    setPath, 
+    results, 
+    setResults,
+    query,
+    setQuery,
+    data,
+    setData}) {
+
+    
 
     const renderLabel = (path) => {
         if (path === "/") {
@@ -52,7 +62,9 @@ export default function SearchBar({ path, setPath , results, setResults}) {
     }
 
     const handleChange = (event) => {
-        console.log(event.target);
+        setQuery(event.target.value);
+        console.log('query',query);
+        console.log('data',data);
     }
 
     return (
@@ -67,7 +79,7 @@ export default function SearchBar({ path, setPath , results, setResults}) {
 
                                 <Form.Row>
                                     <Col>
-                                        <Form.Control type="location" placeholder="Enter location" autocomplete="off" onChange={(event) => handleChange(event)} />
+                                        <Form.Control type="location" placeholder="Enter location" autoComplete="off" onChange={(event) => handleChange(event)} />
                                     </Col>
                                     <Col sm="auto">
                                         <Button variant="primary" type="submit" className="btn-default" onClick={(event) => handleSearch(event)}>
