@@ -6,7 +6,7 @@
 //     // awsREGION: process.env.AWS_DEFAULT_REGION
 // }
 
-console.log("Keys loaded");
+// console.log("Keys loaded");
 
 module.exports = {
     keys: {

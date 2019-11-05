@@ -1,5 +1,3 @@
-console.log("Keys loaded");
-
 module.exports = {
     keys: {
         google: process.env.REACT_APP_GOOGLE_KEY,

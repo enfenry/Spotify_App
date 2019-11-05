@@ -11,26 +11,36 @@ export default function App() {
   const [path, setPath] = useState("/");
   const [results, setResults] = useState([]);
   const [modalShow, setModalShow] = useState(false);
-  const [currentEvent, setCurrentEvent] = useState({src: "", artistName: ""});
+  const [currentEvent, setCurrentEvent] = useState({ src: "", artistName: "" });
   const [query, setQuery] = useState('');
   const [data, setData] = useState({ hits: [] });
 
-  // const envs = require("dotenv").config();
-  // console.log('envs',envs);
-  
-  console.log('google key',process.env.REACT_APP_GOOGLE_KEY);
+  const keys = {
+    google: process.env.REACT_APP_GOOGLE_KEY,
+    spotify: {
+      id: process.env.REACT_APP_SPOTIFY_ID,
+      secret: process.env.REACT_APP_SPOTIFY_SECRET
+    },
+    ticketmaster: process.env.REACT_APP_TICKETMASTER_KEY
+  }
+
+  console.log('keys', keys);
 
   useEffect(() => {
     const fetchData = async () => {
       let res = await fetch('/api/places');
-      console.log('res',res);
+      console.log('res', res);
+      // let data = await res.json();
+      // console.log('data',data);
 
       const result = await axios(
         `http://hn.algolia.com/api/v1/search?query=${query}`,
       );
       setData(result.data);
     };
+
     fetchData();
+
   }, [query]);
 
 
