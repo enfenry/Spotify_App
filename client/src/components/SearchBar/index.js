@@ -5,18 +5,19 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Autocomplete from 'react-google-autocomplete';
 
-export default function SearchBar({ 
-    path, 
-    setPath, 
-    results, 
+export default function SearchBar({
+    path,
+    setPath,
+    results,
     setResults,
     query,
     setQuery,
     data,
-    setData}) {
+    setData }) {
 
-    
+
 
     const renderLabel = (path) => {
         if (path === "/") {
@@ -63,8 +64,8 @@ export default function SearchBar({
 
     const handleChange = (event) => {
         setQuery(event.target.value);
-        console.log('query',query);
-        console.log('data',data);
+        console.log('query', query);
+        console.log('data', data);
     }
 
     return (
@@ -79,7 +80,12 @@ export default function SearchBar({
 
                                 <Form.Row>
                                     <Col>
-                                        <Form.Control type="location" placeholder="Enter location" autoComplete="off" onChange={(event) => handleChange(event)} />
+                                        <Autocomplete onPlaceSelected={(place) => { }}
+                                            types={['geocode']} placeholder="Enter location" type="location"
+                                            id="formLocation" className="form-control form-control-default" onChange={(event) => handleChange(event)}
+                                        />
+
+                                        {/* <Form.Control type="location" placeholder="Enter location" autoComplete="off" onChange={(event) => handleChange(event)} /> */}
                                     </Col>
                                     <Col sm="auto">
                                         <Button variant="primary" type="submit" className="btn-default" onClick={(event) => handleSearch(event)}>

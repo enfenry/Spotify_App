@@ -6,6 +6,7 @@ import Login from './pages/Login'
 import Results from './pages/Results'
 import Container from 'react-bootstrap/Container';
 
+
 export default function App() {
 
   const [path, setPath] = useState("/");
@@ -14,6 +15,7 @@ export default function App() {
   const [currentEvent, setCurrentEvent] = useState({ src: "", artistName: "" });
   const [query, setQuery] = useState('');
   const [data, setData] = useState({ hits: [] });
+  var autocomplete;
 
   const keys = {
     google: process.env.REACT_APP_GOOGLE_KEY,
@@ -24,24 +26,23 @@ export default function App() {
     ticketmaster: process.env.REACT_APP_TICKETMASTER_KEY
   }
 
-  console.log('keys', keys);
+  // -----------------------------------------------------------------------------------------------
 
-  useEffect(() => {
-    const fetchData = async () => {
-      let res = await fetch('/api/places');
-      console.log('res', res);
-      // let data = await res.json();
-      // console.log('data',data);
+  // useEffect(() => {
+  //   const fetchData = async () => {
 
-      const result = await axios(
-        `http://hn.algolia.com/api/v1/search?query=${query}`,
-      );
-      setData(result.data);
-    };
+  //   var options = {
+  //     // bounds: defaultBounds,
+  //     types: ['geocode']
+  //   };
 
-    fetchData();
+  //   autocomplete = await new google.maps.places.Autocomplete(query, options);
 
-  }, [query]);
+  //   };
+
+  //   fetchData();
+
+  // }, [query, keys.google]);
 
 
   const renderSwitch = (path) => {
