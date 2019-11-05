@@ -1,10 +1,8 @@
-console.log("Keys loaded");
-
 module.exports = {
-    google : process.env.GOOGLE_KEY,
+    google: process.env.REACT_APP_GOOGLE_KEY,
     spotify: {
-        id: process.env.SPOTIFY_ID,
-        secret: process.env.SPOTIFY_SECRET
+      id: process.env.REACT_APP_SPOTIFY_ID,
+      secret: process.env.REACT_APP_SPOTIFY_SECRET
     },
-    ticketmaster: process.env.TICKETMASTER_KEY
-};
+    ticketmaster: process.env.REACT_APP_TICKETMASTER_KEY
+  };

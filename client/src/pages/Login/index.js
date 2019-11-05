@@ -8,7 +8,11 @@ export default function Login({
     path,
     setPath,
     results,
-    setResults}) {
+    setResults,
+    query,
+    setQuery,
+    data,
+    setData }) {
 
     useEffect(() => {
         setPath("/")
@@ -22,7 +26,7 @@ export default function Login({
             <br />
 
             <main>
-                <SearchBar path={path} setPath={setPath} results={results} setResults={setResults} />
+                <SearchBar path={path} setPath={setPath} results={results} setResults={setResults} query={query} setQuery={setQuery} data={data} setData={setData} />
             </main>
 
             <Footer />

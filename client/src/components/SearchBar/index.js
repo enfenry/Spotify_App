@@ -5,8 +5,19 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Autocomplete from 'react-google-autocomplete';
 
-export default function SearchBar({ path, setPath , results, setResults}) {
+export default function SearchBar({
+    path,
+    setPath,
+    results,
+    setResults,
+    query,
+    setQuery,
+    data,
+    setData }) {
+
+
 
     const renderLabel = (path) => {
         if (path === "/") {
@@ -34,8 +45,8 @@ export default function SearchBar({ path, setPath , results, setResults}) {
         }
     };
 
-    const handleSearch = () => {
-
+    const handleSearch = (event) => {
+        event.preventDefault();
         setPath("/results")
 
         let resultsURL = process.env.PUBLIC_URL + 'exampleResults.json';
@@ -51,6 +62,12 @@ export default function SearchBar({ path, setPath , results, setResults}) {
             })
     }
 
+    const handleChange = (event) => {
+        setQuery(event.target.value);
+        console.log('query', query);
+        console.log('data', data);
+    }
+
     return (
         <div className="SearchBar">
             <Container>
@@ -63,10 +80,15 @@ export default function SearchBar({ path, setPath , results, setResults}) {
 
                                 <Form.Row>
                                     <Col>
-                                        <Form.Control type="location" placeholder="Enter location" />
+                                        <Autocomplete onPlaceSelected={(place) => { }}
+                                            types={['geocode']} placeholder="Enter location" type="location"
+                                            id="formLocation" className="form-control form-control-default" onChange={(event) => handleChange(event)}
+                                        />
+
+                                        {/* <Form.Control type="location" placeholder="Enter location" autoComplete="off" onChange={(event) => handleChange(event)} /> */}
                                     </Col>
                                     <Col sm="auto">
-                                        <Button variant="primary" type="submit" className="btn-default" onClick={() => handleSearch()}>
+                                        <Button variant="primary" type="submit" className="btn-default" onClick={(event) => handleSearch(event)}>
                                             Search
                                         </Button>
                                     </Col>
