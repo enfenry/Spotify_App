@@ -17,7 +17,9 @@ export default function SearchBar({
     data,
     setData }) {
 
+    // useEffect(() => {
 
+    // })
 
     const renderLabel = (path) => {
         if (path === "/") {
@@ -47,8 +49,17 @@ export default function SearchBar({
 
     const handleSearch = (event) => {
         event.preventDefault();
-        setPath("/results")
+        setPath("/results");
 
+        if (query.geometry) {
+            let lat = query.geometry.location.lat();
+            let lng = query.geometry.location.lng();
+            console.log(lat,lng);
+        }
+        else {
+            let geoURL = `https://maps.googleapis.com/maps/api/geocode/json?address= ${queri} + googleKey`;
+        }
+        console.log('query', query);
         let resultsURL = process.env.PUBLIC_URL + 'exampleResults.json';
 
         fetch(resultsURL)
@@ -62,11 +73,6 @@ export default function SearchBar({
             })
     }
 
-    const handleChange = (event) => {
-        setQuery(event.target.value);
-        console.log('query', query);
-        console.log('data', data);
-    }
 
     return (
         <div className="SearchBar">
@@ -80,12 +86,11 @@ export default function SearchBar({
 
                                 <Form.Row>
                                     <Col>
-                                        <Autocomplete onPlaceSelected={(place) => { }}
+                                        <Autocomplete onPlaceSelected={(place) => setQuery(place)}
                                             types={['geocode']} placeholder="Enter location" type="location"
-                                            id="formLocation" className="form-control form-control-default" onChange={(event) => handleChange(event)}
-                                        />
-
-                                        {/* <Form.Control type="location" placeholder="Enter location" autoComplete="off" onChange={(event) => handleChange(event)} /> */}
+                                            id="formLocation" className="form-control form-control-default" 
+                                            onChange={(event) => setQuery(event.target.value)}
+                                            onClick={(event) => setQuery(event.target.value)}/>
                                     </Col>
                                     <Col sm="auto">
                                         <Button variant="primary" type="submit" className="btn-default" onClick={(event) => handleSearch(event)}>
