@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import axios from 'axios';
+// import axios from 'axios';
 // import { BrowserRouter, Route } from 'react-router-dom';
 import Login from './pages/Login'
 import Results from './pages/Results'
@@ -15,7 +15,7 @@ export default function App() {
   const [query, setQuery] = useState('');
   const [data, setData] = useState({ hits: [] });
 
-  const [keys, setKeys] = useState({
+  const [keys] = useState({
     google: process.env.REACT_APP_GOOGLE_KEY,
     spotify: {
       id: process.env.REACT_APP_SPOTIFY_ID,

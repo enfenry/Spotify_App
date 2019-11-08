@@ -17,18 +17,25 @@ export default function ModalArtist({
         if (otherArtists) {
             var mapOtherArtists = [];
             mapOtherArtists = otherArtists.map((artist, index) => {
-                console.log('artist', artist);
                 return (
-                    <span key={`artist-${index}`}>
+                    <Row key={`artist-${index}`}>
                         {artist}
-                    </span>
+                    </Row>
                 )
             });
 
             return (
-                <span>
-                    {mapOtherArtists}
-                </span>
+                <Col>
+                    <Row>
+                        Playing with:
+                        </Row>
+                    <Row>
+                        <Col>
+                            {mapOtherArtists}
+                        </Col>
+                    </Row>
+                </Col>
+
             );
         }
     }
@@ -70,7 +77,7 @@ export default function ModalArtist({
                             <Row>{currentEvent.location}</Row>
                             <Row>{currentEvent.price}</Row>
                             <Row>Genre: {currentEvent.genre}</Row>
-                            <Row>Other acts: {renderOtherArtists(currentEvent.otherArtists)}</Row>
+                            <Row>{renderOtherArtists(currentEvent.otherArtists)}</Row>
                         </Col>
                     </Row>
                 </Container>
