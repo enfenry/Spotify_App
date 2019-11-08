@@ -15,11 +15,8 @@ export default function SearchBar({
     query,
     setQuery,
     data,
-    setData }) {
-
-    // useEffect(() => {
-
-    // })
+    setData,
+    keys }) {
 
     const renderLabel = (path) => {
         if (path === "/") {
@@ -47,17 +44,34 @@ export default function SearchBar({
         }
     };
 
-    const handleSearch = (event) => {
+    const handleSearch = async (event) => {
         event.preventDefault();
         setPath("/results");
+        let coords = {};
+        let location;
 
         if (query.geometry) {
-            let lat = query.geometry.location.lat();
-            let lng = query.geometry.location.lng();
-            console.log(lat,lng);
+            location = query.geometry.location
+            coords = {
+                lat: location.lat(),
+                lng: location.lng()
+            }
         }
         else {
-            let geoURL = `https://maps.googleapis.com/maps/api/geocode/json?address= ${queri} + googleKey`;
+            let geoURL = `https://maps.googleapis.com/maps/api/geocode/json?address=${query}&key=${keys.google}`;
+            fetch(geoURL)
+                .then(response => response.json())
+                .then((jsonData) => {
+                    location = jsonData.results[0].geometry.location
+                    coords = {
+                        lat: location.lat,
+                        lng: location.lng
+                    };
+                    console.log(coords);
+                })
+                .catch((error) => {
+                    console.error(error)
+                })
         }
         console.log('query', query);
         let resultsURL = process.env.PUBLIC_URL + 'exampleResults.json';
@@ -88,12 +102,13 @@ export default function SearchBar({
                                     <Col>
                                         <Autocomplete onPlaceSelected={(place) => setQuery(place)}
                                             types={['geocode']} placeholder="Enter location" type="location"
-                                            id="formLocation" className="form-control form-control-default" 
+                                            id="formLocation" className="form-control form-control-default"
                                             onChange={(event) => setQuery(event.target.value)}
-                                            onClick={(event) => setQuery(event.target.value)}/>
+                                            onClick={(event) => setQuery(event.target.value)} />
                                     </Col>
                                     <Col sm="auto">
-                                        <Button variant="primary" type="submit" className="btn-default" onClick={(event) => handleSearch(event)}>
+                                        <Button variant="primary" type="submit" className="btn-default"
+                                            onClick={(event) => handleSearch(event)}>
                                             Search
                                         </Button>
                                     </Col>
