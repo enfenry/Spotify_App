@@ -24,7 +24,6 @@ export default function App() {
     ticketmaster: process.env.REACT_APP_TICKETMASTER_KEY
   })
 
-
   const renderSwitch = (path) => {
     switch (path) {
       case "/":

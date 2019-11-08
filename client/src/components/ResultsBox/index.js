@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+// import React, { useEffect } from 'react';
+import React from 'react';
 import './ResultsBox.css';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -12,27 +13,39 @@ export default function ResultsBox({
     currentEvent,
     setCurrentEvent }) {
 
-    useEffect(() => {
-        setResults(results);
-    })
+    // useEffect(() => {
+    //     setResults(results);
+    // })
 
     const handleModal = (artist) => {
         setCurrentEvent(artist);
         setModalShow(true);
     }
 
+    const renderGenre = (result) => {
+        let genre = result.classifications[0].genre;
+        if (genre) {
+            return (
+                <span> Genre: {genre.name}</span>
+            )
+        }
+    }
+
     const renderResults = (results) => {
         var mapResults = [];
         mapResults = results.map((result, index) => {
+            // console.log(result.classifications[0].genre.name);
+            console.log(result._embedded.attractions[0].images[0].url);
+            console.log(result._embedded.attractions[0]);
             return (
                 <Col className="padded" key={index} sm="auto">
                     <div className="image-container view-container">
-                        <img className="result-image" src={result.src} alt={result.artistName} key={"img-" + index} data-toggle="modal" data-target="#modal-artist" />
-
+                        {/* <img className="result-image" src={result.src} alt={result.artistName} key={"img-" + index} data-toggle="modal" data-target="#modal-artist" /> */}
+                        <img className="result-image" src={result._embedded.attractions[0].images[0].url} alt={result._embedded.attractions[0].name} key={"img-" + index} data-toggle="modal" data-target="#modal-artist" />
                         <div className="mask" onClick={() => handleModal(result)}>
                             <Row>
                                 <Col>
-                                    {result.artistName}
+                                    {result._embedded.attractions[0].name}
                                 </Col>
                             </Row>
                             <Row>
@@ -56,7 +69,7 @@ export default function ResultsBox({
 
                                     <Row>
                                         <Col>
-                                            <span> Genre: {result.genre}</span>
+                                            {renderGenre(result)}
                                         </Col>
                                     </Row>
                                 </Col>

@@ -13,6 +13,17 @@ export default function ModalArtist({
     currentEvent
 }) {
 
+    console.log(currentEvent);
+
+    const renderGenre = (currentEvent) => {
+        let genre = currentEvent.classifications[0].genre;
+        if (genre) {
+            return (
+                <span> Genre: {genre.name}</span>
+            )
+        }
+    }
+
     const renderOtherArtists = (otherArtists) => {
         if (otherArtists) {
             var mapOtherArtists = [];
@@ -76,7 +87,7 @@ export default function ModalArtist({
                             <Row>{currentEvent.day} {currentEvent.time}</Row>
                             <Row>{currentEvent.location}</Row>
                             <Row>{currentEvent.price}</Row>
-                            <Row>Genre: {currentEvent.genre}</Row>
+                            <Row>{renderGenre(currentEvent)}</Row>
                             <Row>{renderOtherArtists(currentEvent.otherArtists)}</Row>
                         </Col>
                     </Row>

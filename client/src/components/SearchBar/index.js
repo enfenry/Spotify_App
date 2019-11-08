@@ -80,7 +80,7 @@ export default function SearchBar({
             .then(response => response.json())
             .then((jsonData) => {
                 console.log('exampleResults',jsonData)
-                setResults(jsonData);
+                // setResults(jsonData);
             })
             .catch((error) => {
                 console.error(error)
@@ -92,7 +92,7 @@ export default function SearchBar({
         .then(response => response.json())
         .then((jsonData) => {
             console.log('realResults',jsonData._embedded.events);
-
+            setResults(jsonData._embedded.events);
         })
         .catch((error) => {
             console.error(error)
