@@ -23,8 +23,8 @@ main {
 }
 
 .btn-default {
-  background-color: rgb(99, 52, 209) !important;
-  border-color: rgb(79, 36, 148) !important;
+  background-color: rgb(108, 13, 172) !important;
+  border-color: rgb(80, 27, 110) !important;
   height: calc(1.5em + .75rem + 2px) !important;
 }
 
@@ -34,5 +34,5 @@ main {
 }
 
 .btn-default:focus {
-  box-shadow: 0 0 0 0.2rem rgb(79, 36, 148) !important;
+  box-shadow: 0 0 0 0.2rem rgb(80, 27, 110) !important;
 }

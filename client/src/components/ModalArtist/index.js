@@ -13,6 +13,26 @@ export default function ModalArtist({
     currentEvent
 }) {
 
+    const renderOtherArtists = (otherArtists) => {
+        if (otherArtists) {
+            var mapOtherArtists = [];
+            mapOtherArtists = otherArtists.map((artist, index) => {
+                console.log('artist', artist);
+                return (
+                    <span key={`artist-${index}`}>
+                        {artist}
+                    </span>
+                )
+            });
+
+            return (
+                <span>
+                    {mapOtherArtists}
+                </span>
+            );
+        }
+    }
+
     return (
         <Modal
             className="modal-artist"
@@ -50,6 +70,7 @@ export default function ModalArtist({
                             <Row>{currentEvent.location}</Row>
                             <Row>{currentEvent.price}</Row>
                             <Row>Genre: {currentEvent.genre}</Row>
+                            <Row>Other acts: {renderOtherArtists(currentEvent.otherArtists)}</Row>
                         </Col>
                     </Row>
                 </Container>
