@@ -15,9 +15,8 @@ export default function SearchBar({
     query,
     setQuery,
     data,
-    setData }) {
-
-
+    setData,
+    keys }) {
 
     const renderLabel = (path) => {
         if (path === "/") {
@@ -45,28 +44,76 @@ export default function SearchBar({
         }
     };
 
-    const handleSearch = (event) => {
-        event.preventDefault();
-        setPath("/results")
+    const getCoords = async () => {
+        let coords = {};
+        let location;
 
+        if (query.geometry) {
+            location = query.geometry.location
+            coords = {
+                lat: location.lat(),
+                lng: location.lng()
+            }
+        }
+        else {
+            let geoURL = `https://maps.googleapis.com/maps/api/geocode/json?address=${query}&key=${keys.google}`;
+            await fetch(geoURL)
+                .then(response => response.json())
+                .then((jsonData) => {
+                    location = jsonData.results[0].geometry.location
+                    coords = {
+                        lat: location.lat,
+                        lng: location.lng
+                    };
+                })
+                .catch((error) => {
+                    console.error(error)
+                })
+        }
+        return coords;
+    }
+
+    const searchTicketmaster = async (latLng) => {
         let resultsURL = process.env.PUBLIC_URL + 'exampleResults.json';
 
         fetch(resultsURL)
             .then(response => response.json())
             .then((jsonData) => {
-                results = jsonData;
-                setResults(results);
+                // console.log('exampleResults',jsonData)
+                // setResults(jsonData);
             })
             .catch((error) => {
                 console.error(error)
             })
+
+        let ticketURL = `https://app.ticketmaster.com/discovery/v2/events.json?latlong=${latLng.lat},${latLng.lng}&radius=25&unit=miles&size=15&classificationName=music&sort=date,asc&apikey=${keys.ticketmaster}`;
+            console.log(ticketURL);
+        fetch(ticketURL)
+        .then(response => response.json())
+        .then((jsonData) => {
+            // console.log('realResults',jsonData._embedded.events);
+            setResults(jsonData._embedded.events);
+        })
+        .catch((error) => {
+            console.error(error)
+        })
     }
 
-    const handleChange = (event) => {
-        setQuery(event.target.value);
-        console.log('query', query);
-        console.log('data', data);
+    const handleSearch = async (event) => {
+        event.preventDefault();
+        setPath("/results");
+        let coords;
+
+        getCoords()
+            .then((response) => {
+                coords = response
+
+                searchTicketmaster(coords)
+            })
+
+
     }
+
 
     return (
         <div className="SearchBar">
@@ -80,15 +127,14 @@ export default function SearchBar({
 
                                 <Form.Row>
                                     <Col>
-                                        <Autocomplete onPlaceSelected={(place) => { }}
+                                        <Autocomplete onPlaceSelected={(place) => setQuery(place)}
                                             types={['geocode']} placeholder="Enter location" type="location"
-                                            id="formLocation" className="form-control form-control-default" onChange={(event) => handleChange(event)}
-                                        />
-
-                                        {/* <Form.Control type="location" placeholder="Enter location" autoComplete="off" onChange={(event) => handleChange(event)} /> */}
+                                            id="formLocation" className="form-control form-control-default"
+                                            onChange={(event) => setQuery(event.target.value)} />
                                     </Col>
                                     <Col sm="auto">
-                                        <Button variant="primary" type="submit" className="btn-default" onClick={(event) => handleSearch(event)}>
+                                        <Button variant="primary" type="submit" className="btn-default"
+                                            onClick={(event) => handleSearch(event)}>
                                             Search
                                         </Button>
                                     </Col>

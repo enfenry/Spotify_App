@@ -8,7 +8,8 @@
         "time": "7PM",
         "location": "Rock and Roll Hotel",
         "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "price": "$30"
+        "price": "$30",
+        "otherArtists": ["some local band" ,"your cool uncle"]
     },
     {
         "artistName": "The White Stripes",
@@ -19,7 +20,8 @@
         "time": "7PM",
         "location": "Rock and Roll Hotel",
         "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "price": "$30"
+        "price": "$30",
+        "otherArtists": ["some local band" ,"your cool uncle"]
     },
     {
         "artistName": "Tame Impala",
@@ -30,7 +32,8 @@
         "time": "7PM",
         "location": "Rock and Roll Hotel",
         "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "price": "$30"
+        "price": "$30",
+        "otherArtists": ["some local band" ,"your cool uncle"]
     },
     {
         "artistName": "Arctic Monkeys",
@@ -41,7 +44,8 @@
         "time": "7PM",
         "location": "Rock and Roll Hotel",
         "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "price": "$30"
+        "price": "$30",
+        "otherArtists": ["some local band" ,"your cool uncle"]
     },
     {
         "artistName": "Alabama Shakes",
@@ -52,7 +56,8 @@
         "time": "7PM",
         "location": "Rock and Roll Hotel",
         "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "price": "$30"
+        "price": "$30",
+        "otherArtists": ["some local band" ,"your cool uncle"]
     },
     {
         "artistName": "The Red Elvises",
@@ -63,7 +68,8 @@
         "time": "7PM",
         "location": "Rock and Roll Hotel",
         "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "price": "$30"
+        "price": "$30",
+        "otherArtists": ["some local band" ,"your cool uncle"]
     },
     {
         "artistName": "The Greenhornes",
@@ -74,7 +80,8 @@
         "time": "7PM",
         "location": "Rock and Roll Hotel",
         "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "price": "$30"
+        "price": "$30",
+        "otherArtists": ["some local band" ,"your cool uncle"]
     },
     {
         "artistName": "Peter Bjorn and John",
@@ -85,7 +92,8 @@
         "time": "7PM",
         "location": "Rock and Roll Hotel",
         "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "price": "$30"
+        "price": "$30",
+        "otherArtists": ["some local band" ,"your cool uncle"]
     },
     {
         "artistName": "Angel Olsen",
@@ -96,7 +104,8 @@
         "time": "7PM",
         "location": "Rock and Roll Hotel",
         "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "price": "$30"
+        "price": "$30",
+        "otherArtists": ["some local band" ,"your cool uncle"]
     },
     {
         "artistName": "Big Thief",
@@ -107,7 +116,8 @@
         "time": "7PM",
         "location": "Rock and Roll Hotel",
         "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "price": "$30"
+        "price": "$30",
+        "otherArtists": ["some local band" ,"your cool uncle"]
     },
     {
         "artistName": "Japanese Breakfast",
@@ -118,7 +128,8 @@
         "time": "7PM",
         "location": "Rock and Roll Hotel",
         "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "price": "$30"
+        "price": "$30",
+        "otherArtists": ["some local band" ,"your cool uncle"]
     },
     {
         "artistName": "Better Oblivion Community Center",
@@ -129,7 +140,8 @@
         "time": "7PM",
         "location": "Rock and Roll Hotel",
         "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "price": "$30"
+        "price": "$30",
+        "otherArtists": ["some local band" ,"your cool uncle"]
     },
     {
         "artistName": "The Eagles of Death Metal",
@@ -140,7 +152,8 @@
         "time": "7PM",
         "location": "Rock and Roll Hotel",
         "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "price": "$30"
+        "price": "$30",
+        "otherArtists": ["some local band" ,"your cool uncle"]
     },
     {
         "artistName": "Bon Iver",
@@ -151,7 +164,8 @@
         "time": "7PM",
         "location": "Rock and Roll Hotel",
         "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "price": "$30"
+        "price": "$30",
+        "otherArtists": ["some local band" ,"your cool uncle"]
     },
     {
         "artistName": "Parquet Courts",
@@ -162,7 +176,8 @@
         "time": "7PM",
         "location": "Rock and Roll Hotel",
         "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "price": "$30"
+        "price": "$30",
+        "otherArtists": ["some local band" ,"your cool uncle"]
     }
 
 ]
