@@ -11,7 +11,7 @@ export default function App() {
   const [path, setPath] = useState("/");
   const [results, setResults] = useState([]);
   const [modalShow, setModalShow] = useState(false);
-  const [currentEvent, setCurrentEvent] = useState({ src: "", artistName: "" });
+  const [currentEvent, setCurrentEvent] = useState({});
   const [query, setQuery] = useState('');
   const [data, setData] = useState({ hits: [] });
 

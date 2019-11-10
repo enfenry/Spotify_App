@@ -9,12 +9,12 @@
 .modal-body, .modal-content {
     text-align: center;
     background-color: rgb(32, 32, 34);
-    border:0px !important;
+    border: 0px !important;
     color: white;
 }
 
 .modal-artist {
-    color:white;
+    color: white;
 }
 
 .modal-image {
@@ -32,24 +32,47 @@
     text-align: center;
     margin: 0 auto;
 }
+
 .modal-image-container .mask {
     position: relative;
-    bottom:80px;
-    left:220px;
-    height:100%;
+    bottom: 80px;
+    left: 220px;
+    height: 100%;
     opacity: .95;
-    background-color: rgba(0, 0, 0, 1); 
+    background-color: rgba(0, 0, 0, 1);
     transition: all .2s ease-in-out;
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
     /* outline: 1px solid black; */
 }
 
-.modal-image-container:hover .mask { 
+.modal-image-container:hover .mask {
     bottom: 300px;
-    left:0px;
-	opacity: 0.9;
+    left: 0px;
+    opacity: 0.9;
 }
 
+/* #iframe-modal:hover { 
+    transform: scale(1.1);
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    -webkit-filter: blur(2px);
+    filter: blur(2px);
+} */
 
+/* #iframe-modal {
+    animation: rotate 1s, spin 3s;
+}
+
+@-webkit-keyframes translate {
+    100% {
+         transform: scaleX(2) scaleY(2);
+    }
+}
+
+@-webkit-keyframes translate {
+    100% {
+         transform: scaleX(2) scaleY(2);
+    }
+} */
