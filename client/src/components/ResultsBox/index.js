@@ -51,7 +51,7 @@ export default function ResultsBox({
             )
         }
         return (
-            <span>{`${venue.name.substring(0,19)}...`}</span>
+            <span>{`${venue.name.substring(0, 19)}...`}</span>
         )
     }
 
@@ -112,66 +112,64 @@ export default function ResultsBox({
     const renderResults = (results) => {
         var mapResults = [];
         mapResults = results.map((result, index) => {
-            // console.log(result);
+            if (result._embedded.attractions) {
 
-            return (
-                <Col className="padded" key={index} sm="auto">
-                    <div className="image-container view-container">
-                        <img className="result-image" src={result._embedded.attractions[0].images[0].url}
-                            alt={result._embedded.attractions[0].name} key={"img-" + index} data-toggle="modal"
-                            data-target="#modal-artist" />
-                        <div className="mask" onClick={() => handleModal(result)}>
-                            <Row>
-                                <Col>
-                                    {result._embedded.attractions[0].name}
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <Row>
-                                        <Col>
-                                            {renderGenre(result)}
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col>
-                                            {renderVenue(result)}
+                return (
+                    <Col className="padded" key={index} sm="auto">
+                        <div className="image-container view-container">
+                            <img className="result-image" src={result._embedded.attractions[0].images[0].url}
+                                alt={result._embedded.attractions[0].name} key={"img-" + index} data-toggle="modal"
+                                data-target="#modal-artist" />
+                            <div className="mask" onClick={() => handleModal(result)}>
+                                <Row>
+                                    <Col>
+                                        {result._embedded.attractions[0].name}
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        <Row>
+                                            <Col>
+                                                {renderGenre(result)}
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col>
+                                                {renderVenue(result)}
 
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col>
-                                            {/* <span>{result.location}</span> */}
-                                            {renderLocation(result)}
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col>
-                                            {/* <span>{result.day} {result.time}</span> */}
-                                            {/* {console.log(result.dates.start)} */}
-                                            {/* <span>{result.dates.start.dateTime}</span> */}
-                                            {renderDate(result)}
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col>
-                                            {renderTime(result)}
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col>
-                                            {/* <span>{result.price}</span> */}
-                                            {renderPrices(result)}
-                                        </Col>
-                                    </Row>
-                                </Col>
-                            </Row>
-                            <Row>
-                            </Row>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col>
+                                                {renderLocation(result)}
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col>
+                                                {renderDate(result)}
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col>
+                                                {renderTime(result)}
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col>
+                                                {renderPrices(result)}
+                                            </Col>
+                                        </Row>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                </Row>
+                            </div>
                         </div>
-                    </div>
-                </Col>
-            )
+                    </Col>
+                )
+            };
+
+            console.log(result);
         })
         return (
             <Row>

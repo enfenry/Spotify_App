@@ -7,6 +7,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Autocomplete from 'react-google-autocomplete';
 
+
 export default function SearchBar({
     path,
     setPath,
@@ -120,8 +121,8 @@ export default function SearchBar({
             <Container>
                 <Row>
                     <Col xs="12">
-                        <Form>
-                            <Form.Group controlId="formLocation">
+                        <Form id="form-location">
+                            <Form.Group controlId="input-location">
 
                                 {renderLabel(path)}
 
@@ -129,11 +130,11 @@ export default function SearchBar({
                                     <Col>
                                         <Autocomplete onPlaceSelected={(place) => setQuery(place)}
                                             types={['geocode']} placeholder="Enter location" type="location"
-                                            id="formLocation" className="form-control form-control-default"
+                                            id="input-location" className="form-control form-control-default"
                                             onChange={(event) => setQuery(event.target.value)} />
                                     </Col>
                                     <Col sm="auto">
-                                        <Button variant="primary" type="submit" className="btn-default"
+                                        <Button id="btn-location" variant="primary" type="submit" className="btn-default"
                                             onClick={(event) => handleSearch(event)}>
                                             Search
                                         </Button>
