@@ -76,20 +76,8 @@ export default function SearchBar({
     }
 
     const searchTicketmaster = async (latLng) => {
-        let resultsURL = process.env.PUBLIC_URL + 'exampleResults.json';
-
-        fetch(resultsURL)
-            .then(response => response.json())
-            .then((jsonData) => {
-                // console.log('exampleResults',jsonData)
-                // setResults(jsonData);
-            })
-            .catch((error) => {
-                console.error(error)
-            })
-
-        let ticketURL = `https://app.ticketmaster.com/discovery/v2/events.json?latlong=${latLng.lat},${latLng.lng}&radius=25&unit=miles&size=15&classificationName=music&sort=date,asc&apikey=${keys.ticketmaster}`;
-            console.log(ticketURL);
+        const ticketURL = `https://app.ticketmaster.com/discovery/v2/events.json?latlong=${latLng.lat},${latLng.lng}&radius=25&unit=miles&size=15&classificationName=music&sort=date,asc&apikey=${keys.ticketmaster}`;
+            // console.log(ticketURL);
         fetch(ticketURL)
         .then(response => response.json())
         .then((jsonData) => {

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import './App.css';
 // import axios from 'axios';
-// import { BrowserRouter, Route } from 'react-router-dom';
 import { useRoutes } from 'hookrouter';
 import Login from './pages/Login'
 import Results from './pages/Results'
 import Container from 'react-bootstrap/Container';
+import Footer from './components/Footer';
 
 export default function App() {
 
@@ -42,7 +42,8 @@ export default function App() {
   return (
     <div className="App">
       <Container fluid>
-          {MyApp()}
+        {MyApp()}
+        <Footer />
       </Container>
     </div>
   );

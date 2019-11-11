@@ -14,8 +14,7 @@ export default function ModalArtist({
     currentEvent
 }) {
 
-    console.log(currentEvent);
-
+    // console.log(currentEvent);
     const renderName = (currentEvent) => {
         if (currentEvent._embedded) {
             return currentEvent._embedded.attractions[0].name;

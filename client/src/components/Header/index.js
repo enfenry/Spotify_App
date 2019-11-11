@@ -1,8 +1,7 @@
 import React from 'react';
 import './Header.css'
 import Button from 'react-bootstrap/Button'
-// import Row from 'react-bootstrap/Row'
-// import Col from 'react-bootstrap/Col'
+import {A} from 'hookrouter'
 
 export default function Header({ path, setPath }) {
 
@@ -18,7 +17,7 @@ export default function Header({ path, setPath }) {
 
     return (
         <header>
-            <a href="/" onClick={()=>setPath("/")}><h1><span className="emphasis">This</span>Weekend</h1></a>
+            <A href="/"><h1><span className="emphasis">This</span>Weekend</h1></A>
             {renderLogin(path)}
         </header>
     )
