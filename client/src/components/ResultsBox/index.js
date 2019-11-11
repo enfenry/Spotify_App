@@ -44,15 +44,17 @@ export default function ResultsBox({
     }
 
     const renderVenue = (result) => {
-        const venue = result._embedded.venues[0]
-        if (venue.name.length < 20) {
+        const venue = result._embedded.venues[0];
+        if (venue.name) {
+            if (venue.name.length < 20) {
+                return (
+                    <span>{venue.name}</span>
+                )
+            }
             return (
-                <span>{venue.name}</span>
+                <span>{`${venue.name.substring(0, 19)}...`}</span>
             )
         }
-        return (
-            <span>{`${venue.name.substring(0, 19)}...`}</span>
-        )
     }
 
     const renderDate = (result) => {
