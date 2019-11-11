@@ -115,7 +115,6 @@ export default function ResultsBox({
         var mapResults = [];
         mapResults = results.map((result, index) => {
             if (result._embedded.attractions) {
-
                 return (
                     <Col className="padded" key={index} sm="auto">
                         <div className="image-container view-container">
@@ -170,8 +169,8 @@ export default function ResultsBox({
                     </Col>
                 )
             };
-
             console.log(result);
+            return null;
         })
         return (
             <Row>
