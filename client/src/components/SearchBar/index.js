@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Autocomplete from 'react-google-autocomplete';
+import {navigate} from 'hookrouter';
 
 
 export default function SearchBar({
@@ -108,11 +109,9 @@ export default function SearchBar({
         getCoords()
             .then((response) => {
                 coords = response
-
                 searchTicketmaster(coords)
+                navigate("/results");
             })
-
-
     }
 
 

@@ -44,15 +44,17 @@ export default function ResultsBox({
     }
 
     const renderVenue = (result) => {
-        const venue = result._embedded.venues[0]
-        if (venue.name.length < 20) {
+        const venue = result._embedded.venues[0];
+        if (venue.name) {
+            if (venue.name.length < 20) {
+                return (
+                    <span>{venue.name}</span>
+                )
+            }
             return (
-                <span>{venue.name}</span>
+                <span>{`${venue.name.substring(0, 19)}...`}</span>
             )
         }
-        return (
-            <span>{`${venue.name.substring(0, 19)}...`}</span>
-        )
     }
 
     const renderDate = (result) => {
@@ -113,7 +115,6 @@ export default function ResultsBox({
         var mapResults = [];
         mapResults = results.map((result, index) => {
             if (result._embedded.attractions) {
-
                 return (
                     <Col className="padded" key={index} sm="auto">
                         <div className="image-container view-container">
@@ -168,8 +169,8 @@ export default function ResultsBox({
                     </Col>
                 )
             };
-
             console.log(result);
+            return null;
         })
         return (
             <Row>

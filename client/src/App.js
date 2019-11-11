@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 // import axios from 'axios';
 // import { BrowserRouter, Route } from 'react-router-dom';
+import { useRoutes } from 'hookrouter';
 import Login from './pages/Login'
 import Results from './pages/Results'
 import Container from 'react-bootstrap/Container';
@@ -24,37 +25,26 @@ export default function App() {
     ticketmaster: process.env.REACT_APP_TICKETMASTER_KEY
   })
 
-  const renderSwitch = (path) => {
-    switch (path) {
-      case "/":
-        return <Login path={path} setPath={setPath} results={results} setResults={setResults}
-          query={query} setQuery={setQuery} data={data} setData={setData} keys={keys} />;
-      case "/results":
-        return <Results path={path} setPath={setPath} results={results} setResults={setResults}
-          modalShow={modalShow} setModalShow={setModalShow} currentEvent={currentEvent} setCurrentEvent={setCurrentEvent}
-          query={query} setQuery={setQuery} data={data} setData={setData} keys={keys} />;
-      default:
-        return <Login path={path} setPath={setPath} results={results} setResults={setResults}
-          query={query} setQuery={setQuery} data={data} setData={setData} keys={keys} />;
-    }
+  const routes = {
+    '/': () => <Login path={path} setPath={setPath} results={results} setResults={setResults}
+      query={query} setQuery={setQuery} data={data} setData={setData} keys={keys} />,
+    '/results': () => <Results path={path} setPath={setPath} results={results} setResults={setResults}
+      modalShow={modalShow} setModalShow={setModalShow} currentEvent={currentEvent} setCurrentEvent={setCurrentEvent}
+      query={query} setQuery={setQuery} data={data} setData={setData} keys={keys} />
   };
+
+  const MyApp = () => {
+    const routeResult = useRoutes(routes);
+    return routeResult;
+    // return routeResult || <NotFoundPage />;
+  }
 
   return (
     <div className="App">
       <Container fluid>
-        {renderSwitch(path)}
+          {MyApp()}
       </Container>
     </div>
   );
 
-  // return (
-  //   <div className="App">
-  //     <BrowserRouter>
-  //       <Container fluid>
-  //         <Route exact path="/" component={Login} />
-  //         <Route exact path="/results" component={Results} />
-  //       </Container>
-  //     </BrowserRouter>
-  //   </div>
-  // );
 }
