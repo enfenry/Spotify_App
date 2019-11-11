@@ -1,6 +1,8 @@
 .App {
   text-align: center;
-  background-color: rgb(32, 32, 34);
+  /* background-color: rgb(32, 32, 34); */
+  background: rgb(32, 32, 34);
+  background: linear-gradient(0deg, rgba(10, 10, 10,1) 0%, rgba(32, 32, 34, 1) 50%);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -15,7 +17,7 @@ main {
 }
 
 .row.centered {
-    justify-content: center;
+  justify-content: center;
 }
 
 .padded {
