@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 // import './Results.css';
 import Header from '../../components/Header';
-import Footer from '../../components/Footer';
 import SearchBar from '../../components/SearchBar';
 import ResultsBox from '../../components/ResultsBox';
 import Row from 'react-bootstrap/Row';
@@ -51,7 +50,6 @@ function Results({
             </main>
             <Row className="padded">
             </Row>
-            <Footer />
         </div>
     );
 }

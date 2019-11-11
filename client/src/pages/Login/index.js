@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 // import './Login.css';
 import Header from '../../components/Header';
-import Footer from '../../components/Footer';
 import SearchBar from '../../components/SearchBar';
 
 export default function Login({
@@ -30,8 +29,6 @@ export default function Login({
                 <SearchBar path={path} setPath={setPath} results={results} setResults={setResults}
                     query={query} setQuery={setQuery} data={data} setData={setData} keys={keys} />
             </main>
-
-            <Footer />
         </div>
     );
 }
