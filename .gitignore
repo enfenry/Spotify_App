@@ -65,7 +65,7 @@ typings/
 # next.js build output
 .next
 
-dev.js
+# dev.js
 
 /scratchpad
 scratchpad

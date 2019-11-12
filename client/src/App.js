@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import './App.css';
 // import axios from 'axios';
 import { useRoutes } from 'hookrouter';
-import Login from './pages/Login'
+import Main from './pages/Main'
+// import Login from './pages/Login';
 import Results from './pages/Results'
 import Container from 'react-bootstrap/Container';
 import Footer from './components/Footer';
@@ -26,11 +27,14 @@ export default function App() {
   })
 
   const routes = {
-    '/': () => <Login path={path} setPath={setPath} results={results} setResults={setResults}
+    '/': () => <Main path={path} setPath={setPath} results={results} setResults={setResults}
       query={query} setQuery={setQuery} data={data} setData={setData} keys={keys} />,
     '/results': () => <Results path={path} setPath={setPath} results={results} setResults={setResults}
       modalShow={modalShow} setModalShow={setModalShow} currentEvent={currentEvent} setCurrentEvent={setCurrentEvent}
       query={query} setQuery={setQuery} data={data} setData={setData} keys={keys} />
+    // ,
+    // '/login' : () => <Login path={path} setPath={setPath} results={results} setResults={setResults}
+    // query={query} setQuery={setQuery} data={data} setData={setData} keys={keys} />
   };
 
   const MyApp = () => {

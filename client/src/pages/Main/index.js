@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 // import './Main.css';
 import Header from '../../components/Header';
 import SearchBar from '../../components/SearchBar';
-// import {useRedirect} from 'hookrouter';
 
 export default function Login({
     path,
@@ -15,10 +14,8 @@ export default function Login({
     setData,
     keys }) {
 
-    // useRedirect('/login', "https://api.spotify.com/v1/me");
-
     useEffect(() => {
-        setPath("/login");
+        setPath("/");
     })
 
     return (
