@@ -12,6 +12,10 @@ export default function Login({
     setQuery,
     data,
     setData,
+    auth,
+    setAuth,
+    user,
+    setUser,
     keys }) {
 
     useEffect(() => {
@@ -19,9 +23,10 @@ export default function Login({
     })
 
     return (
-        <div className="Login">
+        <div className="Main">
             <br />
-            <Header path={path} setPath={setPath} />
+            <Header path={path} setPath={setPath} keys={keys} auth={auth} setAuth={setAuth} 
+            user={user} setUser={setUser}/>
             <br />
             <br />
 

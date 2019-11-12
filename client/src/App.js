@@ -16,6 +16,8 @@ export default function App() {
   const [currentEvent, setCurrentEvent] = useState({});
   const [query, setQuery] = useState('');
   const [data, setData] = useState({ hits: [] });
+  const [auth,setAuth] = useState(false);
+  const [user,setUser] = useState({});
 
   const [keys] = useState({
     google: process.env.REACT_APP_GOOGLE_KEY,
@@ -26,16 +28,22 @@ export default function App() {
     ticketmaster: process.env.REACT_APP_TICKETMASTER_KEY
   })
 
+  
+
   const routes = {
     '/': () => <Main path={path} setPath={setPath} results={results} setResults={setResults}
-      query={query} setQuery={setQuery} data={data} setData={setData} keys={keys} />,
+      query={query} setQuery={setQuery} data={data} setData={setData} keys={keys} auth={auth} setAuth={setAuth}
+      user={user} setUser={setUser} />,
     '/callback': () => <Main path={path} setPath={setPath} results={results} setResults={setResults}
-      query={query} setQuery={setQuery} data={data} setData={setData} keys={keys} />,
+      query={query} setQuery={setQuery} data={data} setData={setData} keys={keys} auth={auth} setAuth={setAuth} 
+      user={user} setUser={setUser} />,
     '/results': () => <Results path={path} setPath={setPath} results={results} setResults={setResults}
       modalShow={modalShow} setModalShow={setModalShow} currentEvent={currentEvent} setCurrentEvent={setCurrentEvent}
-      query={query} setQuery={setQuery} data={data} setData={setData} keys={keys} />,
+      query={query} setQuery={setQuery} data={data} setData={setData} keys={keys} auth={auth} setAuth={setAuth}
+      user={user} setUser={setUser} />,
     '/login': () => <Login path={path} setPath={setPath} results={results} setResults={setResults}
-      query={query} setQuery={setQuery} data={data} setData={setData} keys={keys} />
+      query={query} setQuery={setQuery} data={data} setData={setData} keys={keys} auth={auth} setAuth={setAuth}
+      user={user} setUser={setUser} />
   };
 
   const MyApp = () => {

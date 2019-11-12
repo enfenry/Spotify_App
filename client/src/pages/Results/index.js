@@ -19,6 +19,10 @@ function Results({
     setQuery,
     data,
     setData,
+    auth,
+    setAuth,
+    user,
+    setUser,
     keys }) {
 
     useEffect(() => {
@@ -30,7 +34,7 @@ function Results({
             <br />
             <Row className="centered">
                 <Col xs="auto">
-                    <Header />
+                    <Header keys={keys} auth={auth} setAuth={setAuth} user={user} setUser={setUser}/>
                 </Col>
                 <Col className="centered">
                     <SearchBar path={path} setPath={setPath} results={results} setResults={setResults}
