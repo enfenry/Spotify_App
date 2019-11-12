@@ -135,6 +135,7 @@
               'Authorization': 'Bearer ' + access_token
             },
             success: function (response) {
+              console.log(response);
               userProfilePlaceholder.innerHTML = userProfileTemplate(response);
 
               $('#login').hide();
@@ -153,9 +154,6 @@
           var redirect_uri = 'http://localhost:3000/callback'; // Your redirect uri   
           // THE BELOW DOESN'T WORK
           // var redirect_uri = '%PUBLIC_URL%/callback'; // Your redirect uri
-
-
-
 
           var state = generateRandomString(16);
 
