@@ -2,7 +2,9 @@ import React, { useEffect } from 'react';
 // import React from 'react';
 import './Header.css';
 import Button from 'react-bootstrap/Button';
-import { A } from 'hookrouter';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Popover from 'react-bootstrap/Popover';
+import { A, navigate, useRedirect } from 'hookrouter';
 import axios from 'axios';
 
 export default function Header({
@@ -59,7 +61,7 @@ export default function Header({
                     }
                 }).then((response) => {
                     console.log(response);
-                    
+
                     setAuth(true);
                     localStorage.setItem('auth', true);
                     setUser(response);
@@ -71,7 +73,6 @@ export default function Header({
             }
         }
     }, [auth])
-
 
     const handleLogin = (event) => {
         event.preventDefault();
@@ -106,7 +107,17 @@ export default function Header({
         window.location = url;
     };
 
-    const renderLogin = (auth, path) => {
+    // TODO: HANDLE THIS THE REACT OR HOOKROUTER WAY
+    // THIS METHOD SUCKS
+    const handleSignOut = (path) => {
+        localStorage.clear();
+        navigate(path);
+        window.location.reload();
+    }
+
+    const renderLogin = (path) => {
+        console.log('path at renderLogin', path);
+
         if (path === "/") {
             if (!(localStorage.getItem('user'))) {
                 return (
@@ -120,10 +131,22 @@ export default function Header({
                 );
             }
             else {
+                const popover = (
+                    <Popover id="popover-basic">
+                        <Popover.Title as="h3">Logged in as {user.data.display_name}</Popover.Title>
+                        <Popover.Content>
+                            <Button id="btn-location" variant="primary" className="btn-default"
+                                onClick={() => handleSignOut(path)}>Sign Out</Button>
+                        </Popover.Content>
+                    </Popover>
+                );
+
                 return (
                     <>
-                        <small>Logged in </small> 
-                        <img className="img-header" id="user-profile-header" alt="User-Profile" src={user.data.images[0].url} />
+                        <small>Logged in </small>
+                        <OverlayTrigger rootClose trigger="click" placement="right" overlay={popover}>
+                            <img className="img-header" id="user-profile-header" alt="User-Profile" type="button" src={user.data.images[0].url} />
+                        </OverlayTrigger>
                     </>
                 )
             }
@@ -133,7 +156,7 @@ export default function Header({
     return (
         <header>
             <A href="/"><h1><span className="emphasis">This</span>Weekend</h1></A>
-            {renderLogin(auth, path)}
+            {renderLogin(path)}
         </header>
     )
 }
