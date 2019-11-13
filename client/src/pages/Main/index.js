@@ -3,20 +3,16 @@ import React, { useEffect } from 'react';
 import Header from '../../components/Header';
 import SearchBar from '../../components/SearchBar';
 
-export default function Login({
+export default function Main({
     path,
     setPath,
-    results,
     setResults,
     query,
     setQuery,
-    data,
-    setData,
     auth,
     setAuth,
     user,
     setUser,
-    accessToken,
     setAccessToken,
     keys }) {
 
@@ -27,14 +23,14 @@ export default function Login({
     return (
         <div className="Main">
             <br />
-            <Header path={path} setPath={setPath} keys={keys} auth={auth} setAuth={setAuth} 
-            user={user} setUser={setUser} accessToken={accessToken} setAccessToken ={setAccessToken}/>
+            <Header path={path} keys={keys} auth={auth} setAuth={setAuth} 
+            user={user} setUser={setUser} setAccessToken ={setAccessToken}/>
             <br />
             <br />
 
             <main>
-                <SearchBar path={path} setPath={setPath} results={results} setResults={setResults}
-                    query={query} setQuery={setQuery} data={data} setData={setData} keys={keys} />
+                <SearchBar path={path} setPath={setPath} setResults={setResults}
+                    query={query} setQuery={setQuery} keys={keys} />
             </main>
         </div>
     );

@@ -11,6 +11,7 @@ export default function Header({
     setAuth,
     user,
     setUser,
+    setAccessToken,
     keys }) {
 
     var stateKey = 'spotify_auth_state';
@@ -61,6 +62,7 @@ export default function Header({
                     localStorage.setItem('auth', true);
                     setUser(response);
                     localStorage.setItem('user', JSON.stringify(response));
+                    setAccessToken(access_token);
                     localStorage.setItem('access_token', access_token);
                 }, (error) => {
                     console.log(error);

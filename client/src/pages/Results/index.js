@@ -17,13 +17,10 @@ function Results({
     setCurrentEvent,
     query,
     setQuery,
-    data,
-    setData,
     auth,
     setAuth,
     user,
     setUser,
-    accessToken,
     setAccessToken,
     keys }) {
 
@@ -38,11 +35,11 @@ function Results({
             <Row className="centered">
                 <Col xs="auto">
                     <Header keys={keys} auth={auth} setAuth={setAuth} user={user} setUser={setUser}
-                        accessToken={accessToken} setAccessToken={setAccessToken} />
+                        setAccessToken={setAccessToken} />
                 </Col>
                 <Col className="centered">
-                    <SearchBar path={path} setPath={setPath} results={results} setResults={setResults}
-                        query={query} setQuery={setQuery} data={data} setData={setData} keys={keys} />
+                    <SearchBar path={path} setPath={setPath} setResults={setResults}
+                        query={query} setQuery={setQuery} keys={keys} />
                 </Col>
             </Row>
             <main>
@@ -51,7 +48,7 @@ function Results({
                         <iframe title="playlist" src="https://open.spotify.com/embed/playlist/37i9dQZF1DX2Nc3B70tvx0?si=_AMfZgVbQsW4IeD6gwpB5w" width="300" height="540" frameBorder="0" allowtransparency="true" allow="encrypted-media" />
                     </Col>
                     <Col>
-                        <ResultsBox results={results} setResults={setResults} modalShow={modalShow} setModalShow={setModalShow}
+                        <ResultsBox results={results} modalShow={modalShow} setModalShow={setModalShow}
                             currentEvent={currentEvent} setCurrentEvent={setCurrentEvent} />
                     </Col>
                 </Row>

@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-function Footer() {
+export default function Footer() {
 
     return (
         <div className="footer">
@@ -46,6 +46,4 @@ function Footer() {
         </div>
     )
 }
-
-export default Footer;
 

@@ -8,15 +8,10 @@ import moment from 'moment';
 
 export default function ResultsBox({
     results,
-    setResults,
     modalShow,
     setModalShow,
     currentEvent,
     setCurrentEvent }) {
-
-    // useEffect(() => {
-    //     setResults(results);
-    // })
 
     const handleModal = (result) => {
         setCurrentEvent(result);
