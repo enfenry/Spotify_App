@@ -1,12 +1,11 @@
 // module.exports = {
-//     // mongoURI: process.env.MONGODB_URI,
-//     // origin: process.env.ORIGIN,
-//     // s3_key: process.env.AWS_ACCESS_KEY_ID,
-//     // s3_secret: process.env.AWS_ACCESS_KEY_ID
-//     // awsREGION: process.env.AWS_DEFAULT_REGION
+//     // mongoURI: 'mongodb://username1:password1@ds055485.mlab.com:55485/project3',
+//     // origin: 'http://localhost:3000'
 // }
 
 // console.log("Keys loaded");
+// const envs = require("dotenv").config().parsed;
+// console.log('envs',envs);
 
 module.exports = {
     google: process.env.REACT_APP_GOOGLE_KEY,

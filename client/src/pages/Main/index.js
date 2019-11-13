@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-// import './Login.css';
+// import './Main.css';
 import Header from '../../components/Header';
 import SearchBar from '../../components/SearchBar';
 
@@ -12,6 +12,12 @@ export default function Login({
     setQuery,
     data,
     setData,
+    auth,
+    setAuth,
+    user,
+    setUser,
+    accessToken,
+    setAccessToken,
     keys }) {
 
     useEffect(() => {
@@ -19,9 +25,10 @@ export default function Login({
     })
 
     return (
-        <div className="Login">
+        <div className="Main">
             <br />
-            <Header path={path} setPath={setPath} />
+            <Header path={path} setPath={setPath} keys={keys} auth={auth} setAuth={setAuth} 
+            user={user} setUser={setUser} accessToken={accessToken} setAccessToken ={setAccessToken}/>
             <br />
             <br />
 

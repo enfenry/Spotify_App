@@ -19,10 +19,17 @@ function Results({
     setQuery,
     data,
     setData,
+    auth,
+    setAuth,
+    user,
+    setUser,
+    accessToken,
+    setAccessToken,
     keys }) {
 
     useEffect(() => {
         setPath("/results");
+        console.log(keys);
     })
 
     return (
@@ -30,11 +37,12 @@ function Results({
             <br />
             <Row className="centered">
                 <Col xs="auto">
-                    <Header />
+                    <Header keys={keys} auth={auth} setAuth={setAuth} user={user} setUser={setUser}
+                        accessToken={accessToken} setAccessToken={setAccessToken} />
                 </Col>
                 <Col className="centered">
                     <SearchBar path={path} setPath={setPath} results={results} setResults={setResults}
-                     query={query} setQuery={setQuery} data={data} setData={setData} keys={keys} />
+                        query={query} setQuery={setQuery} data={data} setData={setData} keys={keys} />
                 </Col>
             </Row>
             <main>
@@ -44,7 +52,7 @@ function Results({
                     </Col>
                     <Col>
                         <ResultsBox results={results} setResults={setResults} modalShow={modalShow} setModalShow={setModalShow}
-                         currentEvent={currentEvent} setCurrentEvent={setCurrentEvent} />
+                            currentEvent={currentEvent} setCurrentEvent={setCurrentEvent} />
                     </Col>
                 </Row>
             </main>

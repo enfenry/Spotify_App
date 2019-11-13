@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 // import axios from 'axios';
 import { useRoutes } from 'hookrouter';
-import Login from './pages/Login'
+import Main from './pages/Main'
 import Results from './pages/Results'
 import Container from 'react-bootstrap/Container';
 import Footer from './components/Footer';
@@ -15,7 +15,10 @@ export default function App() {
   const [currentEvent, setCurrentEvent] = useState({});
   const [query, setQuery] = useState('');
   const [data, setData] = useState({ hits: [] });
-
+  const [accessToken, setAccessToken] = useState(localStorage.getItem('access_token') || undefined);
+  const [user,setUser] = useState(JSON.parse(localStorage.getItem('user')) || {});
+  const [auth,setAuth] = useState(JSON.stringify(user) !== JSON.stringify({}));
+  
   const [keys] = useState({
     google: process.env.REACT_APP_GOOGLE_KEY,
     spotify: {
@@ -23,14 +26,20 @@ export default function App() {
       secret: process.env.REACT_APP_SPOTIFY_SECRET
     },
     ticketmaster: process.env.REACT_APP_TICKETMASTER_KEY
-  })
+  });
+
 
   const routes = {
-    '/': () => <Login path={path} setPath={setPath} results={results} setResults={setResults}
-      query={query} setQuery={setQuery} data={data} setData={setData} keys={keys} />,
+    '/': () => <Main path={path} setPath={setPath} results={results} setResults={setResults}
+      query={query} setQuery={setQuery} data={data} setData={setData} keys={keys} auth={auth} setAuth={setAuth}
+      user={user} setUser={setUser} accessToken={accessToken} setAccessToken ={setAccessToken}/>,
+    '/callback': () => <Main path={path} setPath={setPath} results={results} setResults={setResults}
+    query={query} setQuery={setQuery} data={data} setData={setData} keys={keys} auth={auth} setAuth={setAuth}
+    user={user} setUser={setUser} accessToken={accessToken} setAccessToken ={setAccessToken} />,
     '/results': () => <Results path={path} setPath={setPath} results={results} setResults={setResults}
       modalShow={modalShow} setModalShow={setModalShow} currentEvent={currentEvent} setCurrentEvent={setCurrentEvent}
-      query={query} setQuery={setQuery} data={data} setData={setData} keys={keys} />
+      query={query} setQuery={setQuery} data={data} setData={setData} keys={keys} auth={auth} setAuth={setAuth}
+      user={user} setUser={setUser} accessToken={accessToken} setAccessToken ={setAccessToken}/>
   };
 
   const MyApp = () => {

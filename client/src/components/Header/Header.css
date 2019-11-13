@@ -2,6 +2,7 @@
     color: white;
 }
 
+.img-header,
 #spotify-logo-header {
     max-width: 80%;
     height: 2rem;
@@ -19,4 +20,8 @@
 
 a:hover {
     text-decoration: none !important;
+}
+
+#popover-basic {
+    margin-top: 40px;
 }
