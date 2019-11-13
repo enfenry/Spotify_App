@@ -135,8 +135,7 @@ export default function Header({
                     <Popover id="popover-basic">
                         <Popover.Title as="h3">Logged in as {user.data.display_name}</Popover.Title>
                         <Popover.Content>
-                            <Button id="btn-location" variant="primary" className="btn-default"
-                                onClick={() => handleSignOut(path)}>Sign Out</Button>
+                            <a onClick={() => handleSignOut(path)}>Sign Out</a>
                         </Popover.Content>
                     </Popover>
                 );
