@@ -36,18 +36,18 @@ export default function Header({
         }
 
         var params = getHashParams();
-        console.log('params', params);
+        // console.log('params', params);
 
         var access_token = params.access_token,
             state = params.state,
             storedState = localStorage.getItem(stateKey);
 
         console.log('access_token', access_token)
-        console.log('state', state)
-        console.log('storedState', storedState);
+        // console.log('state', state)
+        // console.log('storedState', storedState);
 
-        console.log('state == null', state == null)
-        console.log('state !== storedState', state !== storedState);
+        // console.log('state == null', state == null)
+        // console.log('state !== storedState', state !== storedState);
 
         if (access_token && (state == null || state !== storedState) && !(auth)) {
             alert('There was an error during the authentication');
@@ -116,7 +116,6 @@ export default function Header({
     }
 
     const renderLogin = (path) => {
-        console.log('path at renderLogin', path);
 
         if (path === "/") {
             if (!(localStorage.getItem('user'))) {
