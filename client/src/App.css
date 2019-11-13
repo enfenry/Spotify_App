@@ -38,3 +38,8 @@ main {
 .btn-default:focus {
   box-shadow: 0 0 0 0.2rem rgb(80, 27, 110) !important;
 }
+
+.img-header {
+    max-width: 80%;
+    height: 2rem;
+}

@@ -1,21 +1,16 @@
 import React, { useEffect } from 'react';
-// import React from 'react';
 import './Header.css';
-import Button from 'react-bootstrap/Button';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Popover from 'react-bootstrap/Popover';
-import { A, navigate, useRedirect } from 'hookrouter';
+import { A } from 'hookrouter';
 import axios from 'axios';
+import LoginSpotify from '../LoginSpotify';
+import LogoutSpotify from '../LogoutSpotify';
 
 export default function Header({
     path,
-    setPath,
     auth,
     setAuth,
     user,
     setUser,
-    accessToken,
-    setAccessToken,
     keys }) {
 
     var stateKey = 'spotify_auth_state';
@@ -74,77 +69,17 @@ export default function Header({
         }
     }, [auth])
 
-    const handleLogin = (event) => {
-        event.preventDefault();
-        // TODO: SET REDIRECT URI TO BE DYNAMIC
-        var client_id = keys.spotify.id; // Your client id
-        var redirect_uri = 'http://localhost:3000/callback'; // Your redirect uri   
-        // THE BELOW DOESN'T WORK
-        // var redirect_uri = '%PUBLIC_URL%/callback'; // Your redirect uri
-
-        function generateRandomString(length) {
-            var text = '';
-            var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-
-            for (var i = 0; i < length; i++) {
-                text += possible.charAt(Math.floor(Math.random() * possible.length));
-            }
-            return text;
-        };
-
-        var state = generateRandomString(16);
-
-        localStorage.setItem(stateKey, state);
-        var scope = 'user-read-private user-read-email';
-
-        var url = 'https://accounts.spotify.com/authorize';
-        url += '?response_type=token';
-        url += '&client_id=' + encodeURIComponent(client_id);
-        url += '&scope=' + encodeURIComponent(scope);
-        url += '&redirect_uri=' + encodeURIComponent(redirect_uri);
-        url += '&state=' + encodeURIComponent(state);
-
-        window.location = url;
-    };
-
-    // TODO: HANDLE THIS THE REACT OR HOOKROUTER WAY
-    // THIS METHOD SUCKS
-    const handleSignOut = (path) => {
-        localStorage.clear();
-        navigate(path);
-        window.location.reload();
-    }
-
     const renderLogin = (path) => {
 
         if (path === "/") {
             if (!(localStorage.getItem('user'))) {
                 return (
-                    <>
-                        <small>Log in to </small><Button variant="success" id="btn-spotify-login"
-                            className="btn-spotify" onClick={(event) => handleLogin(event)}>
-                            <img className="img-header" id="spotify-logo-header" alt="Spotify-Login"
-                                src={process.env.PUBLIC_URL + '/static/img/spotify_logo_with_text_black.svg'} />
-                        </Button>
-                    </>
+                    <LoginSpotify keys={keys} stateKey={stateKey} />
                 );
             }
             else {
-                const popover = (
-                    <Popover id="popover-basic">
-                        <Popover.Title as="h3">Logged in as {user.data.display_name}</Popover.Title>
-                        <Popover.Content>
-                            <a onClick={() => handleSignOut(path)}>Sign Out</a>
-                        </Popover.Content>
-                    </Popover>
-                );
-
                 return (
-                    <>
-                        <OverlayTrigger rootClose trigger="click" placement="right" overlay={popover}>
-                            <img className="img-header" id="user-profile-header" alt="User-Profile" type="button" src={user.data.images[0].url} />
-                        </OverlayTrigger>
-                    </>
+                    <LogoutSpotify path={path} user={user} />
                 )
             }
         }
