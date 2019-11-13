@@ -5,7 +5,16 @@ import Button from 'react-bootstrap/Button';
 import { A } from 'hookrouter';
 import axios from 'axios';
 
-export default function Header({ path, setPath, auth, setAuth, user, setUser, keys }) {
+export default function Header({ 
+    path, 
+    setPath, 
+    auth, 
+    setAuth, 
+    user, 
+    setUser, 
+    accessToken,
+    setAccessToken,
+    keys }) {
 
     var stateKey = 'spotify_auth_state';
 
@@ -13,7 +22,6 @@ export default function Header({ path, setPath, auth, setAuth, user, setUser, ke
 
         console.log('auth', auth);
         console.log('user', user);
-
 
         function getHashParams() {
             var hashParams = {};
@@ -56,6 +64,7 @@ export default function Header({ path, setPath, auth, setAuth, user, setUser, ke
                     setUser(response);
                     console.log(response);
                     localStorage.setItem('user', JSON.stringify(response));
+                    localStorage.setItem('access_token',access_token);
                 }, (error) => {
                     console.log(error);
                 });

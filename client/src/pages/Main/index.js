@@ -16,6 +16,8 @@ export default function Login({
     setAuth,
     user,
     setUser,
+    accessToken,
+    setAccessToken,
     keys }) {
 
     useEffect(() => {
@@ -26,7 +28,7 @@ export default function Login({
         <div className="Main">
             <br />
             <Header path={path} setPath={setPath} keys={keys} auth={auth} setAuth={setAuth} 
-            user={user} setUser={setUser}/>
+            user={user} setUser={setUser} accessToken={accessToken} setAccessToken ={setAccessToken}/>
             <br />
             <br />
 

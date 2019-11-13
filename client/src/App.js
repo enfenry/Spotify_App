@@ -15,6 +15,7 @@ export default function App() {
   const [currentEvent, setCurrentEvent] = useState({});
   const [query, setQuery] = useState('');
   const [data, setData] = useState({ hits: [] });
+  const [accessToken, setAccessToken] = useState(localStorage.getItem('access_token') || undefined);
   const [user,setUser] = useState(JSON.parse(localStorage.getItem('user')) || {});
   const [auth,setAuth] = useState(user !== {});
 
@@ -31,14 +32,14 @@ export default function App() {
   const routes = {
     '/': () => <Main path={path} setPath={setPath} results={results} setResults={setResults}
       query={query} setQuery={setQuery} data={data} setData={setData} keys={keys} auth={auth} setAuth={setAuth}
-      user={user} setUser={setUser} />,
+      user={user} setUser={setUser} accessToken={accessToken} setAccessToken ={setAccessToken}/>,
     '/callback': () => <Main path={path} setPath={setPath} results={results} setResults={setResults}
     query={query} setQuery={setQuery} data={data} setData={setData} keys={keys} auth={auth} setAuth={setAuth}
-    user={user} setUser={setUser} />,
+    user={user} setUser={setUser} accessToken={accessToken} setAccessToken ={setAccessToken} />,
     '/results': () => <Results path={path} setPath={setPath} results={results} setResults={setResults}
       modalShow={modalShow} setModalShow={setModalShow} currentEvent={currentEvent} setCurrentEvent={setCurrentEvent}
       query={query} setQuery={setQuery} data={data} setData={setData} keys={keys} auth={auth} setAuth={setAuth}
-      user={user} setUser={setUser} />
+      user={user} setUser={setUser} accessToken={accessToken} setAccessToken ={setAccessToken}/>
   };
 
   const MyApp = () => {
