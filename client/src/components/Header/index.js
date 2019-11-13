@@ -5,13 +5,13 @@ import Button from 'react-bootstrap/Button';
 import { A } from 'hookrouter';
 import axios from 'axios';
 
-export default function Header({ 
-    path, 
-    setPath, 
-    auth, 
-    setAuth, 
-    user, 
-    setUser, 
+export default function Header({
+    path,
+    setPath,
+    auth,
+    setAuth,
+    user,
+    setUser,
     accessToken,
     setAccessToken,
     keys }) {
@@ -47,7 +47,6 @@ export default function Header({
         console.log('state == null', state == null)
         console.log('state !== storedState', state !== storedState);
 
-
         if (access_token && (state == null || state !== storedState) && !(auth)) {
             alert('There was an error during the authentication');
         }
@@ -59,12 +58,13 @@ export default function Header({
                         'Authorization': 'Bearer ' + access_token
                     }
                 }).then((response) => {
+                    console.log(response);
+                    
                     setAuth(true);
                     localStorage.setItem('auth', true);
                     setUser(response);
-                    console.log(response);
                     localStorage.setItem('user', JSON.stringify(response));
-                    localStorage.setItem('access_token',access_token);
+                    localStorage.setItem('access_token', access_token);
                 }, (error) => {
                     console.log(error);
                 });
@@ -73,7 +73,7 @@ export default function Header({
     }, [auth])
 
 
-    const handleLogin = async (event) => {
+    const handleLogin = (event) => {
         event.preventDefault();
         // TODO: SET REDIRECT URI TO BE DYNAMIC
         var client_id = keys.spotify.id; // Your client id
@@ -106,25 +106,34 @@ export default function Header({
         window.location = url;
     };
 
-
-    const renderLogin = (path) => {
+    const renderLogin = (auth, path) => {
         if (path === "/") {
-            return (
-                <>
-                    <small>Log in to </small> <Button variant="success" id="btn-spotify-login"
-                        className="btn-spotify" onClick={(event) => handleLogin(event)}>
-                        <img id="spotify-logo-header" alt="Spotify-Login"
-                            src={process.env.PUBLIC_URL + '/static/img/spotify_logo_with_text_black.svg'} />
-                    </Button>
-                </>
-            );
+            if (!(localStorage.getItem('user'))) {
+                return (
+                    <>
+                        <small>Log in to </small><Button variant="success" id="btn-spotify-login"
+                            className="btn-spotify" onClick={(event) => handleLogin(event)}>
+                            <img className="img-header" id="spotify-logo-header" alt="Spotify-Login"
+                                src={process.env.PUBLIC_URL + '/static/img/spotify_logo_with_text_black.svg'} />
+                        </Button>
+                    </>
+                );
+            }
+            else {
+                return (
+                    <>
+                        <small>Logged in </small> 
+                        <img className="img-header" id="user-profile-header" alt="User-Profile" src={user.data.images[0].url} />
+                    </>
+                )
+            }
         }
     };
 
     return (
         <header>
             <A href="/"><h1><span className="emphasis">This</span>Weekend</h1></A>
-            {renderLogin(path)}
+            {renderLogin(auth, path)}
         </header>
     )
 }

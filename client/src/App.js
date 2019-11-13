@@ -17,8 +17,8 @@ export default function App() {
   const [data, setData] = useState({ hits: [] });
   const [accessToken, setAccessToken] = useState(localStorage.getItem('access_token') || undefined);
   const [user,setUser] = useState(JSON.parse(localStorage.getItem('user')) || {});
-  const [auth,setAuth] = useState(user !== {});
-
+  const [auth,setAuth] = useState(JSON.stringify(user) !== JSON.stringify({}));
+  
   const [keys] = useState({
     google: process.env.REACT_APP_GOOGLE_KEY,
     spotify: {
