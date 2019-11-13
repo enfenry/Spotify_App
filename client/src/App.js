@@ -3,7 +3,7 @@ import './App.css';
 // import axios from 'axios';
 import { useRoutes } from 'hookrouter';
 import Main from './pages/Main'
-import Login from './pages/Login';
+import Callback from './pages/Callback';
 import Results from './pages/Results'
 import Container from 'react-bootstrap/Container';
 import Footer from './components/Footer';
@@ -28,18 +28,16 @@ export default function App() {
     ticketmaster: process.env.REACT_APP_TICKETMASTER_KEY
   });
 
+
   const routes = {
     '/': () => <Main path={path} setPath={setPath} results={results} setResults={setResults}
       query={query} setQuery={setQuery} data={data} setData={setData} keys={keys} auth={auth} setAuth={setAuth}
       user={user} setUser={setUser} />,
-    '/callback': () => <Main path={path} setPath={setPath} results={results} setResults={setResults}
+    '/callback': () => <Callback path={path} setPath={setPath} results={results} setResults={setResults}
       query={query} setQuery={setQuery} data={data} setData={setData} keys={keys} auth={auth} setAuth={setAuth} 
       user={user} setUser={setUser} />,
     '/results': () => <Results path={path} setPath={setPath} results={results} setResults={setResults}
       modalShow={modalShow} setModalShow={setModalShow} currentEvent={currentEvent} setCurrentEvent={setCurrentEvent}
-      query={query} setQuery={setQuery} data={data} setData={setData} keys={keys} auth={auth} setAuth={setAuth}
-      user={user} setUser={setUser} />,
-    '/login': () => <Login path={path} setPath={setPath} results={results} setResults={setResults}
       query={query} setQuery={setQuery} data={data} setData={setData} keys={keys} auth={auth} setAuth={setAuth}
       user={user} setUser={setUser} />
   };

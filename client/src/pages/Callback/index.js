@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-// import './Login.css';
+// import './Callback.css';
 import Header from '../../components/Header';
 import SearchBar from '../../components/SearchBar';
+// import { useRedirect } from 'hookrouter';
 
-export default function Login({
+export default function Callback({
     path,
     setPath,
     results,
@@ -19,14 +20,15 @@ export default function Login({
     keys }) {
 
     useEffect(() => {
-        setPath("/login");
+        setPath("/callback");
+        window.location = "/"
     })
 
     return (
-        <div className="Login">
+        <div className="Callback">
             <br />
-            <Header path={path} setPath={setPath} keys={keys} auth={auth} setAuth={setAuth} 
-            user={user} setUser={setUser}/>
+            <Header path={path} setPath={setPath} keys={keys} auth={auth} setAuth={setAuth}
+                user={user} setUser={setUser} />
             <br />
             <br />
 
