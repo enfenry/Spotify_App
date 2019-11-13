@@ -142,7 +142,6 @@ export default function Header({
 
                 return (
                     <>
-                        <small>Logged in </small>
                         <OverlayTrigger rootClose trigger="click" placement="right" overlay={popover}>
                             <img className="img-header" id="user-profile-header" alt="User-Profile" type="button" src={user.data.images[0].url} />
                         </OverlayTrigger>

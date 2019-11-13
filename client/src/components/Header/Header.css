@@ -21,3 +21,7 @@
 a:hover {
     text-decoration: none !important;
 }
+
+#popover-basic {
+    margin-top: 40px;
+}
