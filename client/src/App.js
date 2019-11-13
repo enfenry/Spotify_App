@@ -8,14 +8,14 @@ import Footer from './components/Footer';
 
 export default function App() {
 
-  const [path, setPath] = useState("/");
+  const [path, setPath] = useState(localStorage.getItem('path') || undefined);
   const [results, setResults] = useState([]);
   const [modalShow, setModalShow] = useState(false);
   const [currentEvent, setCurrentEvent] = useState({});
   const [query, setQuery] = useState('');
   const [accessToken, setAccessToken] = useState(localStorage.getItem('access_token') || undefined);
-  const [user,setUser] = useState(JSON.parse(localStorage.getItem('user')) || {});
-  const [auth,setAuth] = useState(JSON.stringify(user) !== JSON.stringify({}));
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || {});
+  const [auth, setAuth] = useState(JSON.stringify(user) !== JSON.stringify({}));
   const [keys] = useState({
     google: process.env.REACT_APP_GOOGLE_KEY,
     spotify: {
@@ -25,17 +25,36 @@ export default function App() {
     ticketmaster: process.env.REACT_APP_TICKETMASTER_KEY
   });
 
+  console.log('path',path);
+  
+
   const routes = {
     '/': () => <Main path={path} setPath={setPath} setResults={setResults}
       query={query} setQuery={setQuery} keys={keys} auth={auth} setAuth={setAuth}
-      user={user} setUser={setUser} setAccessToken ={setAccessToken}/>,
-    '/callback': () => <Main path={path} setPath={setPath} setResults={setResults}
-    query={query} setQuery={setQuery} keys={keys} auth={auth} setAuth={setAuth}
-    user={user} setUser={setUser} setAccessToken ={setAccessToken}/>,
+      user={user} setUser={setUser} setAccessToken={setAccessToken} />,
+    '/callback': () => {
+      if (path === "/") {
+
+        return (
+          <Main path={path} setPath={setPath} setResults={setResults}
+            query={query} setQuery={setQuery} keys={keys} auth={auth} setAuth={setAuth}
+            user={user} setUser={setUser} setAccessToken={setAccessToken} />
+        )
+
+      } else if (path === "/results") {
+
+        return (
+          <Results path={path} setPath={setPath} results={results} setResults={setResults}
+            modalShow={modalShow} setModalShow={setModalShow} currentEvent={currentEvent} setCurrentEvent={setCurrentEvent}
+            query={query} setQuery={setQuery} keys={keys} auth={auth} setAuth={setAuth}
+            user={user} setUser={setUser} setAccessToken={setAccessToken} />
+        )
+      }
+    },
     '/results': () => <Results path={path} setPath={setPath} results={results} setResults={setResults}
       modalShow={modalShow} setModalShow={setModalShow} currentEvent={currentEvent} setCurrentEvent={setCurrentEvent}
       query={query} setQuery={setQuery} keys={keys} auth={auth} setAuth={setAuth}
-      user={user} setUser={setUser} setAccessToken ={setAccessToken}/>
+      user={user} setUser={setUser} setAccessToken={setAccessToken} />
   };
 
   const MyApp = () => {

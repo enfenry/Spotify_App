@@ -26,8 +26,8 @@ function Results({
     keys }) {
 
     useEffect(() => {
+        localStorage.setItem("path","/results")
         setPath("/results");
-        console.log(keys);
     })
 
     return (

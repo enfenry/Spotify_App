@@ -18,6 +18,7 @@ export default function Main({
     keys }) {
 
     useEffect(() => {
+        localStorage.setItem("path","/")
         setPath("/");
     })
 
