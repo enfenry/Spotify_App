@@ -36,6 +36,9 @@ export default function Header({ path, setPath, auth, setAuth, user,setUser, key
         console.log('state', state)
         console.log('storedState', storedState);
 
+        console.log('state == null', state == null)
+        console.log('state !== storedState', state !== storedState);
+
         if (access_token && (state == null || state !== storedState)) {
             alert('There was an error during the authentication');
         }
@@ -49,24 +52,13 @@ export default function Header({ path, setPath, auth, setAuth, user,setUser, key
                 }).then((response) => {
                         console.log(response);
                         setAuth(true);
+                        localStorage.setItem('auth',true);
                         setUser(response);
+                        localStorage.setItem('user',JSON.stringify(response));
                     }, (error) => {
                         console.log(error);
                     });
-
-                // $.ajax({
-                //     url: 'https://api.spotify.com/v1/me',
-                //     headers: {
-                //         'Authorization': 'Bearer ' + access_token
-                //     },
-                //     success: function (response) {
-                //         console.log(response);
-                //     }
-                // });
             }
-            else {
-            }
-
         }
     })
 

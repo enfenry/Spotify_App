@@ -17,7 +17,7 @@ export default function App() {
   const [query, setQuery] = useState('');
   const [data, setData] = useState({ hits: [] });
   const [auth,setAuth] = useState(false);
-  const [user,setUser] = useState({});
+  const [user,setUser] = useState(JSON.parse(localStorage.getItem('user')) || {});
 
   const [keys] = useState({
     google: process.env.REACT_APP_GOOGLE_KEY,
@@ -26,7 +26,7 @@ export default function App() {
       secret: process.env.REACT_APP_SPOTIFY_SECRET
     },
     ticketmaster: process.env.REACT_APP_TICKETMASTER_KEY
-  })
+  });
 
   
 
