@@ -19,7 +19,7 @@ export default function Header({
     const handleLogout = (path) => {
         localStorage.clear();
         navigate(path);
-        if (path === "/") {
+        if (path === "/" || path === "/results") {
             window.location.reload();
         }
     }

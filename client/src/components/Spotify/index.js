@@ -70,25 +70,24 @@ export default function Spotify({
         }
     }, [auth])
 
-    const renderLogin = (path) => {
+    const renderLogin = () => {
 
-        if (path === "/") {
-            if (!(localStorage.getItem('user'))) {
-                return (
-                    <Login keys={keys} stateKey={stateKey} />
-                );
-            }
-            else {
-                return (
-                    <Logout path={path} user={user} setUser={setUser} />
-                )
-            }
+        if (!(localStorage.getItem('user'))) {
+            return (
+                <Login keys={keys} stateKey={stateKey} />
+            );
         }
+        else {
+            return (
+                <Logout path={path} user={user} setUser={setUser} />
+            )
+        }
+
     };
 
     return (
         <>
-            {renderLogin(path)}
+            {renderLogin()}
         </>
     )
 }

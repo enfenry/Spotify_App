@@ -36,13 +36,16 @@ function Results({
             <Row className="centered">
                 <Col xs="auto">
                     <Header />
-                    <Spotify keys={keys} auth={auth} setAuth={setAuth} user={user} setUser={setUser}
-                        setAccessToken={setAccessToken} />
                 </Col>
                 <Col className="centered">
                     <SearchBar path={path} setPath={setPath} setResults={setResults}
                         query={query} setQuery={setQuery} keys={keys} />
                 </Col>
+                <Col xs="3">
+                    <Spotify keys={keys} path={path} auth={auth} setAuth={setAuth} user={user} setUser={setUser}
+                        setAccessToken={setAccessToken} />
+                </Col>
+
             </Row>
             <main>
                 <Row className="centered">
