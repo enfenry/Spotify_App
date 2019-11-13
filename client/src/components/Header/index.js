@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import './Header.css';
 import { A } from 'hookrouter';
 import axios from 'axios';
-import LoginSpotify from '../LoginSpotify';
-import LogoutSpotify from '../LogoutSpotify';
+import LoginSpotify from '../Spotify/Login';
+import LogoutSpotify from '../Spotify/Logout';
 
 export default function Header({
     path,

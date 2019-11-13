@@ -41,5 +41,5 @@ main {
 
 .img-header {
     max-width: 80%;
-    height: 2rem;
+    height: calc(1.5em + .75rem + 2px) !important;
 }

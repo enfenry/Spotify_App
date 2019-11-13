@@ -19,6 +19,9 @@ export default function Header({
     const handleLogout = (path) => {
         localStorage.clear();
         navigate(path);
+        if (path === "/") {
+            window.location.reload();
+        }
     }
 
     const popover = (
