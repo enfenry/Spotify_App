@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 // import './Main.css';
 import Header from '../../components/Header';
 import SearchBar from '../../components/SearchBar';
+import Spotify from '../../components/Spotify';
 
 export default function Main({
     path,
@@ -23,8 +24,11 @@ export default function Main({
     return (
         <div className="Main">
             <br />
-            <Header path={path} keys={keys} auth={auth} setAuth={setAuth} 
-            user={user} setUser={setUser} setAccessToken ={setAccessToken}/>
+            <header>
+                <Header />
+                <Spotify path={path} keys={keys} auth={auth} setAuth={setAuth}
+                    user={user} setUser={setUser} setAccessToken={setAccessToken} />
+            </header>
             <br />
             <br />
 

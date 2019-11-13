@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import Header from '../../components/Header';
 import SearchBar from '../../components/SearchBar';
 import ResultsBox from '../../components/ResultsBox';
+import Spotify from '../../components/Spotify';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
@@ -34,7 +35,8 @@ function Results({
             <br />
             <Row className="centered">
                 <Col xs="auto">
-                    <Header keys={keys} auth={auth} setAuth={setAuth} user={user} setUser={setUser}
+                    <Header />
+                    <Spotify keys={keys} auth={auth} setAuth={setAuth} user={user} setUser={setUser}
                         setAccessToken={setAccessToken} />
                 </Col>
                 <Col className="centered">
