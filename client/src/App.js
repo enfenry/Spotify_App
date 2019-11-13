@@ -16,8 +16,8 @@ export default function App() {
   const [currentEvent, setCurrentEvent] = useState({});
   const [query, setQuery] = useState('');
   const [data, setData] = useState({ hits: [] });
-  const [auth,setAuth] = useState(false);
   const [user,setUser] = useState(JSON.parse(localStorage.getItem('user')) || {});
+  const [auth,setAuth] = useState(user !== {});
 
   const [keys] = useState({
     google: process.env.REACT_APP_GOOGLE_KEY,
@@ -27,8 +27,6 @@ export default function App() {
     },
     ticketmaster: process.env.REACT_APP_TICKETMASTER_KEY
   });
-
-  
 
   const routes = {
     '/': () => <Main path={path} setPath={setPath} results={results} setResults={setResults}
