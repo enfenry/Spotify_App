@@ -79,7 +79,7 @@ export default function Header({
             }
             else {
                 return (
-                    <LogoutSpotify path={path} user={user} />
+                    <LogoutSpotify path={path} user={user} setUser={setUser} />
                 )
             }
         }

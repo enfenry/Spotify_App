@@ -1,5 +1,5 @@
-// import React, { useEffect } from 'react';
-import React from 'react';
+import React, { useEffect } from 'react';
+// import React from 'react';
 import './LogoutSpotify.css';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
@@ -8,15 +8,17 @@ import { navigate } from 'hookrouter';
 
 export default function Header({
     path,
-    user
+    user,
+    setUser
 }) {
 
-    // TODO: HANDLE THIS THE REACT OR HOOKROUTER WAY
-    // THIS METHOD SUCKS
+    useEffect(() =>{
+        setUser(user);
+    })
+
     const handleLogout = (path) => {
         localStorage.clear();
         navigate(path);
-        window.location.reload();
     }
 
     const popover = (
