@@ -5,3 +5,11 @@ a:hover {
 #popover-basic {
     margin-top: 40px;
 }
+
+#user-profile-header {
+    border-radius: 50%;
+    background-color: black;
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+}

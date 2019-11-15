@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
+import './themes/theme1/theme1.css';
+// import './themes/theme2/theme2.css';
 import { useRoutes } from 'hookrouter';
 import Main from './pages/Main'
 import Results from './pages/Results'

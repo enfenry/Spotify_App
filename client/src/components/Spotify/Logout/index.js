@@ -5,8 +5,7 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import { navigate } from 'hookrouter';
 
-
-export default function Header({
+export default function Logout({
     path,
     user,
     setUser
@@ -19,6 +18,7 @@ export default function Header({
     const handleLogout = (path) => {
         localStorage.clear();
         navigate(path);
+        
         if (path === "/" || path === "/results") {
             window.location.reload();
         }

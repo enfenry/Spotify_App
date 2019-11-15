@@ -2,7 +2,7 @@ import React from 'react';
 import './LoginSpotify.css';
 import Button from 'react-bootstrap/Button';
 
-export default function LoginSpotify({
+export default function Login({
     keys,
     stateKey
 }) {

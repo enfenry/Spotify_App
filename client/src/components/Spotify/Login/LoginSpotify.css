@@ -1,4 +1,6 @@
 .btn-spotify {
-    background-color: rgb(30, 215, 96) !important;
+    /* background-color: #1ed760 !important */
+    /* SAME AS BELOW */
+    background-color: var(--color-secondary-2-0) !important;
     color: black !important;
 }

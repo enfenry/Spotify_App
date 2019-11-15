@@ -15,5 +15,5 @@
   }
 
   .form-control:focus {
-    box-shadow: 0 0 0 0.2rem rgb(80, 27, 110) !important;
+    box-shadow: 0 0 0 0.2rem var(--color-primary-0) !important;
   }

@@ -46,14 +46,12 @@
 }
 
 .view-container .mask {
-
     padding: 2%;
     position: relative;
     bottom: 2rem;
     height:100%;
     opacity: .9;
     background-color: rgba(0, 0, 0, 1); 
-    /* background-color: rgba(52, 55, 209, .7);  */
     transition: all .2s ease-in-out;
     display:flex;
     flex-direction: column;
@@ -65,7 +63,6 @@
     opacity: 0;
     transition: all .2s ease-in-out;
 }
-
 
 .view-container:hover img { 
     transform: scale(1.1);
