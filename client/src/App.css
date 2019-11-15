@@ -28,6 +28,7 @@ main {
   background-color: var(--color-primary-0) !important;
   border-color: var(--color-primary-3) !important;
   height: calc(1.5em + .75rem + 2px) !important;
+  width: 100% !important;
 }
 
 .btn-default:hover {

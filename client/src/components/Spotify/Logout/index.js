@@ -8,7 +8,8 @@ import { navigate } from 'hookrouter';
 export default function Logout({
     path,
     user,
-    setUser
+    setUser,
+    popoverPlacement
 }) {
 
     useEffect(() =>{
@@ -24,8 +25,11 @@ export default function Logout({
         }
     }
 
+    console.log('popoverPlacement',popoverPlacement);
+
     const popover = (
-        <Popover id="popover-basic">
+        
+        <Popover id={`popover-basic popover-positioned-${popoverPlacement}`}>
             <Popover.Title as="h3">Logged in as {user.data.display_name}</Popover.Title>
             <Popover.Content>
                 <a onClick={() => handleLogout(path)}>Sign Out</a>
@@ -34,7 +38,7 @@ export default function Logout({
     );
 
     return (
-        <OverlayTrigger rootClose trigger="click" placement="right" overlay={popover}>
+        <OverlayTrigger rootClose trigger="click" placement={popoverPlacement} overlay={popover}>
             <img className="img-header" id="user-profile-header" alt="User-Profile" type="button" src={user.data.images[0].url} />
         </OverlayTrigger>
     )

@@ -11,6 +11,7 @@ export default function Spotify({
     user,
     setUser,
     setAccessToken,
+    popoverPlacement,
     keys }) {
 
     var stateKey = 'spotify_auth_state';
@@ -79,7 +80,7 @@ export default function Spotify({
         }
         else {
             return (
-                <Logout path={path} user={user} setUser={setUser} />
+                <Logout path={path} user={user} setUser={setUser} popoverPlacement ={popoverPlacement} />
             )
         }
 

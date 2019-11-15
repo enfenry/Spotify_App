@@ -13,3 +13,8 @@ a:hover {
     -moz-background-clip: padding;
     background-clip: padding-box;
 }
+
+#user-profile-header:hover {
+    opacity: .7;
+    transition: .3s ease;
+}
