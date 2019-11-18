@@ -12,9 +12,19 @@ a:hover {
     -webkit-background-clip: padding-box;
     -moz-background-clip: padding;
     background-clip: padding-box;
+    height:50px;
+    width: 50px;
 }
 
 #user-profile-header:hover {
     opacity: .7;
     transition: .3s ease;
 }
+
+
+
+
+
+
+
+

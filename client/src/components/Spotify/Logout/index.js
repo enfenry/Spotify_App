@@ -12,23 +12,23 @@ export default function Logout({
     popoverPlacement
 }) {
 
-    useEffect(() =>{
+    useEffect(() => {
         setUser(user);
     })
 
     const handleLogout = (path) => {
         localStorage.clear();
         navigate(path);
-        
+
         if (path === "/" || path === "/results") {
             window.location.reload();
         }
     }
 
-    console.log('popoverPlacement',popoverPlacement);
+    console.log('popoverPlacement', popoverPlacement);
 
     const popover = (
-        
+
         <Popover id={`popover-basic popover-positioned-${popoverPlacement}`}>
             <Popover.Title as="h3">Logged in as {user.data.display_name}</Popover.Title>
             <Popover.Content>
@@ -39,7 +39,7 @@ export default function Logout({
 
     return (
         <OverlayTrigger rootClose trigger="click" placement={popoverPlacement} overlay={popover}>
-            <img className="img-header" id="user-profile-header" alt="User-Profile" type="button" src={user.data.images[0].url} />
+                <img className="img-header" id="user-profile-header" alt="User-Profile" type="button" src={user.data.images[0].url} />
         </OverlayTrigger>
     )
 };

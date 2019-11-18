@@ -18,6 +18,10 @@ main {
   justify-content: center;
 }
 
+.space-between {
+  justify-content: space-between;
+}
+
 .padded {
   padding: 15px !important;
 }

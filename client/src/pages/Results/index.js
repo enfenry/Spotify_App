@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-// import './Results.css';
+import './Results.css';
 import Header from '../../components/Header';
 import SearchBar from '../../components/SearchBar';
 import ResultsBox from '../../components/ResultsBox';
 import Spotify from '../../components/Spotify';
+import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
@@ -31,29 +32,34 @@ function Results({
     })
 
     return (
-        <div className="Results">
-            <br />
-            <Row className="centered">
-                <Col xs="12" md="auto">
-                    <Header />
-                </Col>
-                <Col className="centered">
-                    <Row className="centered">
-                        <Col className="centered">
-                            <SearchBar path={path} setPath={setPath} setResults={setResults}
-                                query={query} setQuery={setQuery} keys={keys} />
-                        </Col>
-                        <Col lg ="2" xl="1">
-                            <Spotify keys={keys} path={path} auth={auth} setAuth={setAuth} user={user} setUser={setUser}
-                                setAccessToken={setAccessToken} popoverPlacement='bottom' />
-                        </Col>
-                    </Row>
-                </Col>
+        <div className="Results ">
+            <Container fluid>
+                <Row className="centered navBar">
+                    <br />
+                    <Col xs={{ span: 10, order: 1 }} md={{ span: 4, order: 1 }}>
+                        <Header />
+                    </Col>
 
-            </Row>
-            <main>
-                <Row className="centered">
-                    <Col xs="12" md="auto" className="padded centered">
+                    <Col xs={{ span: 12, order: 2 }} md={{ span: 8, order: 2 }} className="space-between">
+                        <Row noGutters={true} className="space-between">
+                            <Col className="centered" xs={{ span: 2, order: 10 }} md={{ span: 4, order: 12 }}>
+                                <Spotify keys={keys} path={path} auth={auth} setAuth={setAuth} user={user} setUser={setUser}
+                                    setAccessToken={setAccessToken} popoverPlacement='bottom' />
+                            </Col>
+                            <Col className="centered" xs={{ span: 12, order: 12 }} md={{ span: 8, order: 10 }}>
+                                <SearchBar path={path} setPath={setPath} setResults={setResults}
+                                    query={query} setQuery={setQuery} keys={keys} />
+                            </Col>
+
+                        </Row>
+                    </Col>
+
+
+                </Row>
+            </Container>
+            <main className="padding-top-1">
+                <Row className="">
+                    <Col xs="12" md="auto" className="padded">
                         <iframe title="playlist" src="https://open.spotify.com/embed/playlist/37i9dQZF1DX2Nc3B70tvx0?si=_AMfZgVbQsW4IeD6gwpB5w" width="300" height="540" frameBorder="0" allowtransparency="true" allow="encrypted-media" />
                     </Col>
                     <Col>
