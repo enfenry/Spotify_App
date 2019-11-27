@@ -26,8 +26,6 @@ export default function App() {
     },
     ticketmaster: process.env.REACT_APP_TICKETMASTER_KEY
   });
-
-  console.log('path',path);
   
 
   const routes = {

@@ -33,6 +33,7 @@ a {
 a:hover {
     opacity: .7;
     transition: .3s ease;
+    cursor: pointer;
 }
 
 .spaced {
