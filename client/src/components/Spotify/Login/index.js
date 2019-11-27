@@ -3,6 +3,7 @@ import './LoginSpotify.css';
 import Button from 'react-bootstrap/Button';
 
 export default function Login({
+    path,
     keys,
     stateKey
 }) {
@@ -40,13 +41,34 @@ export default function Login({
         window.location = url;
     };
 
+    const renderLoginButton = () => {
+        if (path === "/") {
+            return (
+                <>
+                    <small>Log in to </small><Button variant="success" id="btn-spotify-login"
+                        className="btn-spotify" onClick={(event) => handleLogin(event)}>
+                        <img className="img-header" id="spotify-logo-header" alt="Spotify-Login"
+                            src={process.env.PUBLIC_URL + '/static/img/spotify_logo_with_text_black.svg'} />
+                    </Button>
+                </>
+            )
+        }
+        else {
+            return (
+                <>
+                    <Button variant="success" id="btn-spotify-login"
+                        className="btn-spotify" onClick={(event) => handleLogin(event)}>
+                        <img className="img-header" id="spotify-logo-header" alt="Spotify-Login"
+                            src={process.env.PUBLIC_URL + '/static/img/spotify_logo_no_text_black.svg'} />
+                    </Button>
+                </>
+            )
+        }
+    }
+
     return (
         <>
-            <small>Log in to </small><Button variant="success" id="btn-spotify-login"
-                className="btn-spotify" onClick={(event) => handleLogin(event)}>
-                <img className="img-header" id="spotify-logo-header" alt="Spotify-Login"
-                    src={process.env.PUBLIC_URL + '/static/img/spotify_logo_with_text_black.svg'} />
-            </Button>
+            {renderLoginButton()}
         </>
     );
 };

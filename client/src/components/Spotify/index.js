@@ -75,7 +75,7 @@ export default function Spotify({
 
         if (!(localStorage.getItem('user'))) {
             return (
-                <Login keys={keys} stateKey={stateKey} />
+                <Login path={path} keys={keys} stateKey={stateKey} />
             );
         }
         else {
