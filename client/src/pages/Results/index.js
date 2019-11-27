@@ -23,6 +23,7 @@ function Results({
     setAuth,
     user,
     setUser,
+    accessToken,
     setAccessToken,
     keys }) {
 
@@ -49,7 +50,7 @@ function Results({
                             </Col>
                             <Col className="centered col-margin-v" xs={{ span: 12, order: 12 }} md={{ span: 10, order: 10 }}>
                                 <SearchBar path={path} setPath={setPath} setResults={setResults}
-                                    query={query} setQuery={setQuery} keys={keys} />
+                                    query={query} setQuery={setQuery} keys={keys} accessToken={accessToken} />
                             </Col>
 
                         </Row>

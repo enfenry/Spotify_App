@@ -56,7 +56,7 @@ export default function Spotify({
                         'Authorization': 'Bearer ' + access_token
                     }
                 }).then((response) => {
-                    console.log(response);
+                    // console.log(response);
 
                     setAuth(true);
                     localStorage.setItem('auth', true);
