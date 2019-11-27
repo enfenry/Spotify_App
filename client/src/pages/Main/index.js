@@ -2,39 +2,40 @@ import React, { useEffect } from 'react';
 // import './Main.css';
 import Header from '../../components/Header';
 import SearchBar from '../../components/SearchBar';
+import Spotify from '../../components/Spotify';
 
-export default function Login({
+export default function Main({
     path,
     setPath,
-    results,
     setResults,
     query,
     setQuery,
-    data,
-    setData,
     auth,
     setAuth,
     user,
     setUser,
-    accessToken,
     setAccessToken,
     keys }) {
 
     useEffect(() => {
+        localStorage.setItem("path","/")
         setPath("/");
     })
 
     return (
         <div className="Main">
             <br />
-            <Header path={path} setPath={setPath} keys={keys} auth={auth} setAuth={setAuth} 
-            user={user} setUser={setUser} accessToken={accessToken} setAccessToken ={setAccessToken}/>
+            <header>
+                <Header />
+                <Spotify path={path} keys={keys} auth={auth} setAuth={setAuth}
+                    user={user} setUser={setUser} setAccessToken={setAccessToken} popoverPlacement='right' />
+            </header>
             <br />
             <br />
 
             <main>
-                <SearchBar path={path} setPath={setPath} results={results} setResults={setResults}
-                    query={query} setQuery={setQuery} data={data} setData={setData} keys={keys} />
+                <SearchBar path={path} setPath={setPath} setResults={setResults}
+                    query={query} setQuery={setQuery} keys={keys} />
             </main>
         </div>
     );

@@ -12,12 +12,9 @@ import {navigate} from 'hookrouter';
 export default function SearchBar({
     path,
     setPath,
-    results,
     setResults,
     query,
     setQuery,
-    data,
-    setData,
     keys }) {
 
     const renderLabel = (path) => {
@@ -101,7 +98,6 @@ export default function SearchBar({
                 navigate("/results");
             })
     }
-
 
     return (
         <div className="SearchBar">

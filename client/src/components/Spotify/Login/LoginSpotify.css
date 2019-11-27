@@ -1,0 +1,16 @@
+.btn-spotify {
+    /* background-color: #1ed760 !important */
+    /* SAME AS BELOW */
+    background-color: var(--color-secondary-2-0) !important;
+    border-color: var(--color-secondary-2-3) !important;
+    color: black !important;
+}
+
+.btn-spotify:hover {
+    opacity: .7;
+    transition: .3s ease;
+}
+
+.btn-spotify:focus {
+    box-shadow: 0 0 0 0.2rem var(--color-secondary-2-4) !important;
+}

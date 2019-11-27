@@ -1,0 +1,38 @@
+a:hover {
+    text-decoration: none !important;
+    cursor:pointer;
+}
+
+#popover-basic {
+    margin-top: 40px;
+}
+
+#user-profile-header {
+    border-radius: 50%;
+    background-color: black;
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+    height: 50px !important;
+    width: 50px !important;
+}
+
+#user-profile-header:hover {
+    opacity: .7;
+    transition: .3s ease;
+}
+
+/* .popover-body > .row:hover {
+    background-color: var(--color-primary-0);
+}
+
+.popover-body > .row:hover > a {
+    color: white !important;
+} */
+
+
+
+
+
+
+

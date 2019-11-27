@@ -1,7 +1,5 @@
 .App {
   text-align: center;
-  /* background-color: rgb(32, 32, 34); */
-  background: rgb(32, 32, 34);
   background: linear-gradient(0deg, rgba(15, 15, 15,1) 0%, rgba(32, 32, 34, 1) 50%);
   min-height: 100vh;
   display: flex;
@@ -20,14 +18,25 @@ main {
   justify-content: center;
 }
 
+.space-between {
+  justify-content: space-between;
+}
+
+.space-around {
+  justify-content: space-around;
+}
+
 .padded {
   padding: 15px !important;
 }
 
 .btn-default {
-  background-color: rgb(108, 13, 172) !important;
-  border-color: rgb(80, 27, 110) !important;
+  /* background-color: #6C0DAC !important;  */
+  /* SAME AS BELOW */
+  background-color: var(--color-primary-0) !important;
+  border-color: var(--color-primary-3) !important;
   height: calc(1.5em + .75rem + 2px) !important;
+  width: 100% !important;
 }
 
 .btn-default:hover {
@@ -36,5 +45,10 @@ main {
 }
 
 .btn-default:focus {
-  box-shadow: 0 0 0 0.2rem rgb(80, 27, 110) !important;
+  box-shadow: 0 0 0 0.2rem var(--color-primary-1) !important;
+}
+
+.img-header {
+    max-width: 80%;
+    height: calc(1.5em + .75rem + 2px) !important;
 }

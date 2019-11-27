@@ -7,3 +7,18 @@
 iframe {
     height: 570px;
 }
+
+.navBar {
+    margin-top: 20px;
+}
+
+@media only screen and (max-width:768px) {
+    .navBar {
+        justify-content: center;
+    }
+
+    .col-margin-v {
+        margin: 10px 10px;
+    }
+
+}
