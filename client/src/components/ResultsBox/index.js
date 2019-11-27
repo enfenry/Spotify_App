@@ -107,14 +107,16 @@ export default function ResultsBox({
     }
 
     const renderResults = (results) => {
+        // console.log('results in ResultsBox',results)
         var mapResults = [];
         mapResults = results.map((result, index) => {
             if (result._embedded.attractions) {
-                
+                console.log('rez',result, 'spotify_id', result.spotify_id);
+            // if (result.spotify_id) {
                 return (
                     <Col className="padded" key={index} sm="auto">
                         <div className="image-container view-container">
-                            <img className="result-image" src={result._embedded.attractions[0].images[0].url}
+                            <img className="result-image" src={result.images[0].url}
                                 alt={result._embedded.attractions[0].name} key={"img-" + index} data-toggle="modal"
                                 data-target="#modal-artist" />
                             <div className="mask" onClick={() => handleModal(result)}>

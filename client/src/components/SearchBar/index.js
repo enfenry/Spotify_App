@@ -77,21 +77,25 @@ export default function SearchBar({
 
     const searchTicketmaster = async (latLng) => {
         const ticketURL = `http://app.ticketmaster.com/discovery/v2/events.json?latlong=${latLng.lat},${latLng.lng}&radius=25&unit=miles&size=15&classificationName=music&sort=date,asc&apikey=${keys.ticketmaster}`;
-        // console.log(ticketURL);
+
         fetch(ticketURL)
             .then(response => response.json())
             .then(jsonData => {
-                // console.log('jsonData', jsonData);
-                console.log('realResults', jsonData._embedded.events);
-                setResults(jsonData._embedded.events);
+                // console.log('realResults', jsonData._embedded.events);
+                // setResults(jsonData._embedded.events);
                 return jsonData._embedded.events;
             })
             .then(results => {
-                // TODO: STOPPED HERE - GETTING SUCCESSFUL CONSOLE LOG
-                console.log('rezzies', results);
+                // console.log('rezzies', results);
                 results.forEach(result => {
                     searchSpotify(result);
                 });
+                return results;
+            })
+            .then(newResults => {
+                console.log('newResults',newResults);
+                setResults(newResults);
+                navigate("/results");
             })
             .catch((error) => {
                 console.error(error)
@@ -101,14 +105,25 @@ export default function SearchBar({
     const searchSpotify = async (result) => {
         const spotifyURL = `https://api.spotify.com/v1/search?q=${result._embedded.attractions[0].name}&type=artist&market=from_token&limit=10&offset=0&include_external=audio`
 
-
         await axios.get(spotifyURL, {
             headers: {
                 'Authorization': 'Bearer ' + accessToken
             }
-        }).then(response => {
-            console.log('response', response.data.artists.items[0]);
-        });
+        })
+            .then(response => {
+                let artist = response.data.artists.items[0];
+                // console.log('artist', response.data.artists.items[0]);
+                if (artist) {
+                    result.spotify_id = artist.id;
+                    result.name = artist.name;
+                    result.genres = artist.genres;
+                    result.images = artist.images;
+                }
+                return result;
+            })
+            // .then(newResult => {
+            //     console.log('newResult', newResult);
+            // });
     }
 
     const handleSearch = async (event) => {
@@ -117,11 +132,11 @@ export default function SearchBar({
         let coords;
 
         getCoords()
-            .then((response) => {
+            .then(response => {
                 coords = response;
                 searchTicketmaster(coords);
-                navigate("/results");
             })
+
     }
 
     return (
