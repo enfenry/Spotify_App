@@ -107,11 +107,10 @@ export default function ResultsBox({
     }
 
     const renderResults = (results) => {
-        // console.log('results in ResultsBox',results)
         var mapResults = [];
         mapResults = results.map((result, index) => {
             if (result._embedded.attractions) {
-                console.log('rez',result, 'spotify_id', result.spotify_id);
+
             // if (result.spotify_id) {
                 return (
                     <Col className="padded" key={index} sm="auto">
