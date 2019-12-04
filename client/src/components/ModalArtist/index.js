@@ -25,7 +25,7 @@ export default function ModalArtist({
         if (currentEvent.spotify_id) {
             return (
                 <img className="modal-image" src={currentEvent.images[0].url}
-                    alt={renderName(currentEvent)} key={"img-current"} />           
+                    alt={renderName(currentEvent)} key={"img-current"} />
             )
         }
         else if (currentEvent._embedded) {
@@ -61,13 +61,13 @@ export default function ModalArtist({
     const renderVenue = (currentEvent) => {
         if (currentEvent._embedded) {
             const venue = currentEvent._embedded.venues[0]
-            if (venue.name.length < 20) {
+            if (venue.name.length < 40) {
                 return (
                     <span>{venue.name}</span>
                 )
             }
             return (
-                <span>{`${venue.name.substring(0, 19)}...`}</span>
+                <span>{`${venue.name.substring(0, 39)}...`}</span>
             )
         }
     }
@@ -83,22 +83,27 @@ export default function ModalArtist({
     const renderTime = (currentEvent) => {
         if (currentEvent.dates) {
             let time = currentEvent.dates.start.localTime;
-            let hour = parseInt(time.substring(0, 2));
-            let minute = time.substring(2, time.length - 3);
-            let tail;
-            if (hour < 12) {
-                tail = 'AM';
+            if (time) {
+                let hour = parseInt(time.substring(0, 2));
+                let minute = time.substring(2, time.length - 3);
+                let tail;
+                if (hour < 12) {
+                    tail = 'AM';
+                }
+                else {
+                    if (hour > 12) {
+                        hour -= 12;
+                    }
+                    tail = 'PM';
+                }
+                if (minute === ":00") {
+                    return hour + tail;
+                }
+                return hour + minute + tail;
             }
             else {
-                if (hour > 12) {
-                    hour -= 12;
-                }
-                tail = 'PM';
+                console.log("result couldn't render time", currentEvent)
             }
-            if (minute === ":00") {
-                return hour + tail;
-            }
-            return hour + minute + tail;
         }
     }
 
