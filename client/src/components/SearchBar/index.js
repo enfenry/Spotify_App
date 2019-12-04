@@ -84,6 +84,8 @@ export default function SearchBar({
                 // console.log('realResults', jsonData._embedded.events);
                 return jsonData._embedded.events;
             })
+            // TEMPORARY FIX FOR RESULTS THAT DON'T HAVE AN ATTRACTION PROPERTY
+            .then(results => { return results.filter(result => { return result._embedded.attractions }) })
     }
 
     const mapSpotify = async (results) => {
@@ -134,7 +136,7 @@ export default function SearchBar({
                             })
                     })
                     .then(newResults => {
-                        console.log('newResults',newResults)
+                        console.log('newResults', newResults)
                         setResults(newResults);
                         navigate("/results");
                     })
