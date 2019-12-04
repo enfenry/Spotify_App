@@ -57,7 +57,7 @@ export default function Login({
             return (
                 <>
                     <Button variant="success" id="btn-spotify-login"
-                        className="btn-spotify" onClick={(event) => handleLogin(event)}>
+                        className="btn-spotify btn-spotify-small" onClick={(event) => handleLogin(event)}>
                         <img className="img-header" id="spotify-logo-header" alt="Spotify-Login"
                             src={process.env.PUBLIC_URL + '/static/img/spotify_logo_no_text_black.svg'} />
                     </Button>

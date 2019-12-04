@@ -6,16 +6,19 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Autocomplete from 'react-google-autocomplete';
-import {navigate} from 'hookrouter';
+import { navigate } from 'hookrouter';
+import axios from 'axios';
 
 
 export default function SearchBar({
     path,
     setPath,
+    results,
     setResults,
     query,
     setQuery,
-    keys }) {
+    keys,
+    accessToken }) {
 
     const renderLabel = (path) => {
         if (path === "/") {
@@ -58,7 +61,7 @@ export default function SearchBar({
             let geoURL = `https://maps.googleapis.com/maps/api/geocode/json?address=${query}&key=${keys.google}`;
             await fetch(geoURL)
                 .then(response => response.json())
-                .then((jsonData) => {
+                .then(jsonData => {
                     location = jsonData.results[0].geometry.location
                     coords = {
                         lat: location.lat,
@@ -73,30 +76,73 @@ export default function SearchBar({
     }
 
     const searchTicketmaster = async (latLng) => {
-        const ticketURL = `https://app.ticketmaster.com/discovery/v2/events.json?latlong=${latLng.lat},${latLng.lng}&radius=25&unit=miles&size=15&classificationName=music&sort=date,asc&apikey=${keys.ticketmaster}`;
-            // console.log(ticketURL);
-        fetch(ticketURL)
-        .then(response => response.json())
-        .then((jsonData) => {
-            // console.log('realResults',jsonData._embedded.events);
-            setResults(jsonData._embedded.events);
+        const ticketURL = `http://app.ticketmaster.com/discovery/v2/events.json?latlong=${latLng.lat},${latLng.lng}&radius=25&unit=miles&size=15&classificationName=music&sort=date,asc&apikey=${keys.ticketmaster}`;
+
+        return fetch(ticketURL)
+            .then(response => response.json())
+            .then(jsonData => {
+                // console.log('realResults', jsonData._embedded.events);
+                return jsonData._embedded.events;
+            })
+    }
+
+    const mapSpotify = async (results) => {
+        const newResults = await results.map(async (result) => {
+            return searchSpotify(result)
+        });
+
+        return Promise.all(newResults)
+            .then(values => {
+                return values;
+            });
+    }
+
+    const searchSpotify = async (result) => {
+        const spotifyURL = `https://api.spotify.com/v1/search?q=${result._embedded.attractions[0].name}&type=artist&market=from_token&limit=10&offset=0&include_external=audio`
+
+        return axios.get(spotifyURL, {
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            }
         })
-        .catch((error) => {
-            console.error(error)
-        })
+            .then(jsonData => {
+                let artist = jsonData.data.artists.items[0];
+                if (artist) {
+                    result.spotify_id = artist.id;
+                    result.name = artist.name;
+                    result.genres = artist.genres;
+                    result.images = artist.images;
+                }
+                else {
+                    console.log('no spotify result for ', jsonData);
+                }
+                return result;
+            })
     }
 
     const handleSearch = async (event) => {
         event.preventDefault();
         setPath("/results");
-        let coords;
 
         getCoords()
-            .then((response) => {
-                coords = response
+            .then(coords => {
                 searchTicketmaster(coords)
-                navigate("/results");
+                    .then(async results => {
+                        return mapSpotify(results)
+                            .then(mapResults => {
+                                return mapResults;
+                            })
+                    })
+                    .then(newResults => {
+                        console.log('newResults',newResults)
+                        setResults(newResults);
+                        navigate("/results");
+                    })
+                    .catch((error) => {
+                        console.error(error)
+                    })
             })
+
     }
 
     return (

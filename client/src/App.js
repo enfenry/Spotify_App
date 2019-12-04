@@ -31,14 +31,14 @@ export default function App() {
   const routes = {
     '/': () => <Main path={path} setPath={setPath} setResults={setResults}
       query={query} setQuery={setQuery} keys={keys} auth={auth} setAuth={setAuth}
-      user={user} setUser={setUser} setAccessToken={setAccessToken} />,
+      user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />,
     '/callback': () => {
       if (path === "/") {
 
         return (
           <Main path={path} setPath={setPath} setResults={setResults}
             query={query} setQuery={setQuery} keys={keys} auth={auth} setAuth={setAuth}
-            user={user} setUser={setUser} setAccessToken={setAccessToken} />
+            user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
         )
 
       } else if (path === "/results") {
@@ -47,14 +47,14 @@ export default function App() {
           <Results path={path} setPath={setPath} results={results} setResults={setResults}
             modalShow={modalShow} setModalShow={setModalShow} currentEvent={currentEvent} setCurrentEvent={setCurrentEvent}
             query={query} setQuery={setQuery} keys={keys} auth={auth} setAuth={setAuth}
-            user={user} setUser={setUser} setAccessToken={setAccessToken} />
+            user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
         )
       }
     },
     '/results': () => <Results path={path} setPath={setPath} results={results} setResults={setResults}
       modalShow={modalShow} setModalShow={setModalShow} currentEvent={currentEvent} setCurrentEvent={setCurrentEvent}
       query={query} setQuery={setQuery} keys={keys} auth={auth} setAuth={setAuth}
-      user={user} setUser={setUser} setAccessToken={setAccessToken} />
+      user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
   };
 
   const MyApp = () => {
