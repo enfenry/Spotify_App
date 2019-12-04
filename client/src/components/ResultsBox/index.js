@@ -121,7 +121,7 @@ export default function ResultsBox({
             // }
                 return (
                     <Col className="padded" key={index} sm="auto">
-                        <div className="image-container view-container">
+                        <div className="img-container">
                             <img className="result-image" src={result.images[0].url}
                                 alt={result._embedded.attractions[0].name} key={"img-" + result._embedded.attractions[0].name} data-toggle="modal"
                                 data-target="#modal-artist" />

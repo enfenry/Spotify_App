@@ -22,7 +22,13 @@ export default function ModalArtist({
     }
 
     const renderImage = (currentEvent) => {
-        if (currentEvent._embedded) {
+        if (currentEvent.spotify_id) {
+            return (
+                <img className="modal-image" src={currentEvent.images[0].url}
+                    alt={renderName(currentEvent)} key={"img-current"} />           
+            )
+        }
+        else if (currentEvent._embedded) {
             return (
                 <img className="modal-image" src={currentEvent._embedded.attractions[0].images[0].url}
                     alt={renderName(currentEvent)} key={"img-current"} />
