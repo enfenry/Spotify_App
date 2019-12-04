@@ -114,7 +114,7 @@ export default function SearchBar({
                     result.images = artist.images;
                 }
                 else {
-                    console.log('no artist found for ', jsonData);
+                    console.log('no spotify result for ', jsonData);
                 }
                 return result;
             })
