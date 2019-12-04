@@ -14,7 +14,7 @@ export default function ModalArtist({
     currentEvent
 }) {
 
-    // console.log(currentEvent);
+
     const renderName = (currentEvent) => {
         if (currentEvent._embedded) {
             return currentEvent._embedded.attractions[0].name;
@@ -175,7 +175,7 @@ export default function ModalArtist({
 
                                         {renderImage(currentEvent)}
                                         <div className="mask">
-                                            <iframe id="iframe-modal" title="topTracks" src={"https://open.spotify.com/embed/artist/7mnBLXK823vNxN3UWB7Gfz?si=OSj2G-oRQXaLYwukBQA-LA"} width="300" height="300" frameBorder="0" allowtransparency="true" allow="encrypted-media" />
+                                            <iframe id="iframe-modal" title="topTracks" src={`https://open.spotify.com/embed/artist/${currentEvent.spotify_id}?si=OSj2G-oRQXaLYwukBQA-LA`} width="300" height="300" frameBorder="0" allowtransparency="true" allow="encrypted-media" />
                                         </div>
                                     </div>
                                 </Col>
