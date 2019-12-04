@@ -46,6 +46,7 @@ export default function SearchBar({
         }
     };
 
+    // USE 
     const getCoords = async () => {
         let coords = {};
         let location;
@@ -122,14 +123,18 @@ export default function SearchBar({
             })
     }
 
+    // HANDLE SEARCH BY LOCATION
     const handleSearch = async (event) => {
         event.preventDefault();
         setPath("/results");
 
+        // SEARCH COORDS BASED ON STATE OF query USING GOOGLE API
         getCoords()
             .then(coords => {
+                // SEARCH TICKETMASTER BASED ON COORDINATES RETURNED FROM GOOGLE SEARCH
                 searchTicketmaster(coords)
                     .then(async results => {
+                        // SEARCH SPOTIFY AND UPDATE WITH MORE INFORMATION FOR EACH RESULT FROM TICKETMASTER SEARCH
                         return mapSpotify(results)
                             .then(mapResults => {
                                 return mapResults;
