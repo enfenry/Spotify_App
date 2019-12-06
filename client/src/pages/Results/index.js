@@ -46,7 +46,7 @@ function Results({
                         <Row noGutters={true} className="space-between">
                             <Col className="centered col-margin-v" xs={{ span: 12, order: 10 }} md={{ span: 2, order: 12 }}>
                                 <Spotify keys={keys} path={path} auth={auth} setAuth={setAuth} user={user} setUser={setUser}
-                                    setAccessToken={setAccessToken} popoverPlacement='bottom' />
+                                    accessToken={accessToken} setAccessToken={setAccessToken} popoverPlacement='bottom' />
                             </Col>
                             <Col className="centered col-margin-v" xs={{ span: 12, order: 12 }} md={{ span: 10, order: 10 }}>
                                 <SearchBar path={path} setPath={setPath} setResults={setResults}

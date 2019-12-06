@@ -38,7 +38,7 @@ export default function SearchBar({
                 <Form.Row>
                     <Col>
                         <Form.Text className="text-muted">
-                            <small>You can search by city, state, or zip.</small>
+                            <small>Try entering your city and state.</small>
                         </Form.Text>
                     </Col>
                 </Form.Row>
