@@ -10,6 +10,7 @@ export default function Spotify({
     setAuth,
     user,
     setUser,
+    accessToken,
     setAccessToken,
     popoverPlacement,
     keys }) {
@@ -38,7 +39,7 @@ export default function Spotify({
             state = params.state,
             storedState = localStorage.getItem(stateKey);
 
-        console.log('access_token', access_token)
+        // console.log('access_token', access_token)
         // console.log('state', state)
         // console.log('storedState', storedState);
 
@@ -72,7 +73,11 @@ export default function Spotify({
     }, [auth])
 
     const renderLogin = () => {
-
+        // console.log('user', user);
+        // console.log('localStorage.getItem("user")', localStorage.getItem('user'));
+        // console.log('accessToken',accessToken);
+        // console.log("localStorage.getItem('access_token')", localStorage.getItem('access_token'));
+        
         if (!(localStorage.getItem('user'))) {
             return (
                 <Login path={path} keys={keys} stateKey={stateKey} />

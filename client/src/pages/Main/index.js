@@ -29,7 +29,7 @@ export default function Main({
             <header>
                 <Header />
                 <Spotify path={path} keys={keys} auth={auth} setAuth={setAuth}
-                    user={user} setUser={setUser} setAccessToken={setAccessToken} popoverPlacement='right' />
+                    user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} popoverPlacement='right' />
             </header>
             <br />
             <br />
