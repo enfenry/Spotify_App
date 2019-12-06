@@ -14,7 +14,7 @@ export default function ModalArtist({
     currentEvent
 }) {
 
-    // console.log(currentEvent);
+
     const renderName = (currentEvent) => {
         if (currentEvent._embedded) {
             return currentEvent._embedded.attractions[0].name;
@@ -22,7 +22,13 @@ export default function ModalArtist({
     }
 
     const renderImage = (currentEvent) => {
-        if (currentEvent._embedded) {
+        if (currentEvent.spotify_id) {
+            return (
+                <img className="modal-image" src={currentEvent.images[0].url}
+                    alt={renderName(currentEvent)} key={"img-current"} />
+            )
+        }
+        else if (currentEvent._embedded) {
             return (
                 <img className="modal-image" src={currentEvent._embedded.attractions[0].images[0].url}
                     alt={renderName(currentEvent)} key={"img-current"} />
@@ -55,13 +61,13 @@ export default function ModalArtist({
     const renderVenue = (currentEvent) => {
         if (currentEvent._embedded) {
             const venue = currentEvent._embedded.venues[0]
-            if (venue.name.length < 20) {
+            if (venue.name.length < 40) {
                 return (
                     <span>{venue.name}</span>
                 )
             }
             return (
-                <span>{`${venue.name.substring(0, 19)}...`}</span>
+                <span>{`${venue.name.substring(0, 39)}...`}</span>
             )
         }
     }
@@ -77,22 +83,27 @@ export default function ModalArtist({
     const renderTime = (currentEvent) => {
         if (currentEvent.dates) {
             let time = currentEvent.dates.start.localTime;
-            let hour = parseInt(time.substring(0, 2));
-            let minute = time.substring(2, time.length - 3);
-            let tail;
-            if (hour < 12) {
-                tail = 'AM';
+            if (time) {
+                let hour = parseInt(time.substring(0, 2));
+                let minute = time.substring(2, time.length - 3);
+                let tail;
+                if (hour < 12) {
+                    tail = 'AM';
+                }
+                else {
+                    if (hour > 12) {
+                        hour -= 12;
+                    }
+                    tail = 'PM';
+                }
+                if (minute === ":00") {
+                    return hour + tail;
+                }
+                return hour + minute + tail;
             }
             else {
-                if (hour > 12) {
-                    hour -= 12;
-                }
-                tail = 'PM';
+                console.log("result couldn't render time", currentEvent)
             }
-            if (minute === ":00") {
-                return hour + tail;
-            }
-            return hour + minute + tail;
         }
     }
 
@@ -175,7 +186,7 @@ export default function ModalArtist({
 
                                         {renderImage(currentEvent)}
                                         <div className="mask">
-                                            <iframe id="iframe-modal" title="topTracks" src={"https://open.spotify.com/embed/artist/7mnBLXK823vNxN3UWB7Gfz?si=OSj2G-oRQXaLYwukBQA-LA"} width="300" height="300" frameBorder="0" allowtransparency="true" allow="encrypted-media" />
+                                            <iframe id="iframe-modal" title="topTracks" src={`https://open.spotify.com/embed/artist/${currentEvent.spotify_id}?si=OSj2G-oRQXaLYwukBQA-LA`} width="300" height="300" frameBorder="0" allowtransparency="true" allow="encrypted-media" />
                                         </div>
                                     </div>
                                 </Col>

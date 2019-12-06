@@ -60,22 +60,27 @@ export default function ResultsBox({
 
     const renderTime = (result) => {
         let time = result.dates.start.localTime;
-        let hour = parseInt(time.substring(0, 2));
-        let minute = time.substring(2, time.length - 3);
-        let tail;
-        if (hour < 12) {
-            tail = 'AM';
+        if (time) {
+            let hour = parseInt(time.substring(0, 2));
+            let minute = time.substring(2, time.length - 3);
+            let tail;
+            if (hour < 12) {
+                tail = 'AM';
+            }
+            else {
+                if (hour > 12) {
+                    hour -= 12;
+                }
+                tail = 'PM';
+            }
+            if (minute === ":00") {
+                return hour + tail;
+            }
+            return hour + minute + tail;
         }
         else {
-            if (hour > 12) {
-                hour -= 12;
-            }
-            tail = 'PM';
+            console.log("result couldn't render time", result)
         }
-        if (minute === ":00") {
-            return hour + tail;
-        }
-        return hour + minute + tail;
     }
 
     const renderPrices = (result) => {
@@ -111,17 +116,17 @@ export default function ResultsBox({
         mapResults = results.map((result, index) => {
             if (result._embedded.attractions) {
 
-            // TODO: CHECK IF THERE IS A SPOTIFY ID IN RESULT AND RENDERING RESULT DIFFERENTLY
-            //     var image;
-            //     var name;
-            //     var genres;
-                
-            // if (result.spotify_id) {
-            //     genres = result.genres;
-            // }
+                // TODO: CHECK IF THERE IS A SPOTIFY ID IN RESULT AND RENDERING RESULT DIFFERENTLY
+                //     var image;
+                //     var name;
+                //     var genres;
+
+                // if (result.spotify_id) {
+                //     genres = result.genres;
+                // }
                 return (
                     <Col className="padded" key={index} sm="auto">
-                        <div className="image-container view-container">
+                        <div className="img-container">
                             <img className="result-image" src={result.images[0].url}
                                 alt={result._embedded.attractions[0].name} key={"img-" + result._embedded.attractions[0].name} data-toggle="modal"
                                 data-target="#modal-artist" />
