@@ -53,6 +53,12 @@ const StyledImgContainer = styled.div`
         left: 0px;
         opacity: 0.9;
     }
+
+    :hover iframe {
+        width:300px;
+        height:300px;
+        transition: ease out .2s;
+    }
 `
 const StyledMask = styled.div`
     position: relative;
@@ -65,6 +71,11 @@ const StyledMask = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+`
+
+const StyledIframe = styled.iframe`
+    width:80px;
+    height:80px;
 `
 
 export default function ModalArtist({
@@ -244,7 +255,7 @@ export default function ModalArtist({
 
                                         {renderImage(currentEvent)}
                                         <StyledMask className="mask">
-                                            <iframe id="iframe-modal" title="topTracks" src={`https://open.spotify.com/embed/artist/${currentEvent.spotify_id}?si=OSj2G-oRQXaLYwukBQA-LA`} width="300" height="300" frameBorder="0" allowtransparency="true" allow="encrypted-media" />
+                                            <StyledIframe id="iframe-modal" title="topTracks" src={`https://open.spotify.com/embed/artist/${currentEvent.spotify_id}?si=OSj2G-oRQXaLYwukBQA-LA`} frameBorder="0" allowtransparency="true" allow="encrypted-media" />
                                         </StyledMask>
                                     </StyledImgContainer>
                                 </Col>
