@@ -1,19 +1,77 @@
 import React from 'react';
-import './ModalArtist.css';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import moment from 'moment';
+import styled from 'styled-components';
 
+const StyledModalHeader = styled(Modal.Header)`
+    text-align: center;
+    background-color: rgb(32, 32, 34);
+    border-bottom: 0px !important;
+    border-top: 0px !important;
+    color: white;
+`
+
+const StyledModalFooter = styled(Modal.Footer)`
+    text-align: center;
+    background-color: rgb(32, 32, 34);
+    border-bottom: 0px !important;
+    border-top: 0px !important;
+    color: white;
+`
+
+const StyledModalBody = styled(Modal.Body)`
+    text-align: center;
+    background-color: rgb(32, 32, 34);
+    border: 0px !important;
+    color: white;
+`
+
+const StyledModal = styled(Modal)`
+    color: white;
+`
+
+const StyledImg = styled.img`
+    height: 100%;
+    min-width: 100%;
+    max-width: none;
+    margin: 0 -100%;
+`
+
+const StyledImgContainer = styled.div`
+    height: 300px;
+    width: 300px;
+    overflow: hidden;
+    text-align: center;
+    margin: 0 auto;
+
+    :hover .mask {
+        bottom: 300px;
+        left: 0px;
+        opacity: 0.9;
+    }
+`
+const StyledMask = styled.div`
+    position: relative;
+    bottom: 80px;
+    left: 220px;
+    height: 100%;
+    opacity: .95;
+    background-color: rgba(0, 0, 0, 1);
+    transition: all .2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+`
 
 export default function ModalArtist({
     modalShow,
     setModalShow,
     currentEvent
 }) {
-
 
     const renderName = (currentEvent) => {
         if (currentEvent._embedded) {
@@ -24,13 +82,13 @@ export default function ModalArtist({
     const renderImage = (currentEvent) => {
         if (currentEvent.spotify_id) {
             return (
-                <img className="modal-image" src={currentEvent.images[0].url}
+                <StyledImg className="modal-image" src={currentEvent.images[0].url}
                     alt={renderName(currentEvent)} key={"img-current"} />
             )
         }
         else if (currentEvent._embedded) {
             return (
-                <img className="modal-image" src={currentEvent._embedded.attractions[0].images[0].url}
+                <StyledImg className="modal-image" src={currentEvent._embedded.attractions[0].images[0].url}
                     alt={renderName(currentEvent)} key={"img-current"} />
             )
         }
@@ -163,7 +221,7 @@ export default function ModalArtist({
     }
 
     return (
-        <Modal
+        <StyledModal
             className="modal-artist"
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
@@ -171,24 +229,24 @@ export default function ModalArtist({
             show={modalShow}
             onHide={() => { setModalShow(false) }}>
 
-            <Modal.Header>
+            <StyledModalHeader>
                 <Modal.Title id="contained-modal-title-vcenter">
                     {renderName(currentEvent)}
                 </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
+            </StyledModalHeader>
+            <StyledModalBody>
                 <Container>
                     <Row>
                         <Col md="6">
                             <Row>
                                 <Col>
-                                    <div className="modal-image-container">
+                                    <StyledImgContainer className="modal-image-container">
 
                                         {renderImage(currentEvent)}
-                                        <div className="mask">
+                                        <StyledMask className="mask">
                                             <iframe id="iframe-modal" title="topTracks" src={`https://open.spotify.com/embed/artist/${currentEvent.spotify_id}?si=OSj2G-oRQXaLYwukBQA-LA`} width="300" height="300" frameBorder="0" allowtransparency="true" allow="encrypted-media" />
-                                        </div>
-                                    </div>
+                                        </StyledMask>
+                                    </StyledImgContainer>
                                 </Col>
                             </Row>
                         </Col>
@@ -205,10 +263,10 @@ export default function ModalArtist({
                         </Col>
                     </Row>
                 </Container>
-            </Modal.Body>
-            <Modal.Footer>
+            </StyledModalBody>
+            <StyledModalFooter>
                 <Button className="btn-default" onClick={() => { setModalShow(false) }}>Close</Button>
-            </Modal.Footer>
-        </Modal>
+            </StyledModalFooter>
+        </StyledModal>
     );
 }

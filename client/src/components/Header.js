@@ -21,7 +21,6 @@ const StyledLink = styled(A)`
     }
 `
 
-
 export default function Header() {
 
     const theme = useContext(ThemeContext);
