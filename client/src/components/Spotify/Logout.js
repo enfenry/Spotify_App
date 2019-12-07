@@ -1,10 +1,33 @@
 import React, { useEffect } from 'react';
-// import React from 'react';
-import './LogoutSpotify.css';
 import Row from 'react-bootstrap/Row';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import { navigate } from 'hookrouter';
+import styled from 'styled-components';
+
+const StyledLink = styled.a`
+    text-decoration: none !important;
+    cursor:pointer;
+`
+
+const StyledPopover = styled(Popover)`
+    margin-top: 40px;
+`
+
+const StyledImg = styled.img`
+    border-radius: 50%;
+    background-color: black;
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+    height: 50px !important;
+    width: 50px !important;
+
+    &:hover {
+        opacity: .7;
+        transition: .3s ease;
+    }
+`
 
 export default function Logout({
     path,
@@ -27,20 +50,19 @@ export default function Logout({
     }
 
     const popover = (
-
-        <Popover id={`popover-basic popover-positioned-${popoverPlacement}`}>
+        <StyledPopover id={`popover-positioned-${popoverPlacement}`}>
             <Popover.Title as="h3">Logged in as {user.data.display_name}</Popover.Title>
             <Popover.Content>
                 <Row noGutters={true}>
-                    <a onClick={() => handleLogout(path)}>Sign Out</a>
+                    <StyledLink onClick={() => handleLogout(path)}>Sign Out</StyledLink>
                 </Row>
             </Popover.Content>
-        </Popover>
+        </StyledPopover>
     );
 
     return (
         <OverlayTrigger rootClose trigger="click" placement={popoverPlacement} overlay={popover}>
-            <img className="img-header" id="user-profile-header" alt="User-Profile" type="button" src={user.data.images[0].url} />
+            <StyledImg className="img-header" id="user-profile-header" alt="User-Profile" type="button" src={user.data.images[0].url} />
         </OverlayTrigger>
     )
 };

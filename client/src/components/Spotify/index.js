@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
-import './Spotify.css';
 import axios from 'axios';
-import Login from './Login';
-import Logout from './Logout';
+import Login from './Login.js';
+import Logout from './Logout.js';
 
 export default function Spotify({
     path,
