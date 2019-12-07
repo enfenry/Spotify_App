@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 // import './Main.css';
-import Header from '../../components/Header';
+import Header from '../../components/Header.js';
 import SearchBar from '../../components/SearchBar';
 import Spotify from '../../components/Spotify';
 

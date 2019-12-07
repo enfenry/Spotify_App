@@ -52,27 +52,3 @@
     left: 0px;
     opacity: 0.9;
 }
-
-/* #iframe-modal:hover { 
-    transform: scale(1.1);
-    -webkit-filter: grayscale(100%);
-    filter: grayscale(100%);
-    -webkit-filter: blur(2px);
-    filter: blur(2px);
-} */
-
-/* #iframe-modal {
-    animation: rotate 1s, spin 3s;
-}
-
-@-webkit-keyframes translate {
-    100% {
-         transform: scaleX(2) scaleY(2);
-    }
-}
-
-@-webkit-keyframes translate {
-    100% {
-         transform: scaleX(2) scaleY(2);
-    }
-} */

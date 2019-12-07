@@ -6,12 +6,14 @@ import { useRoutes } from 'hookrouter';
 import Main from './pages/Main'
 import Results from './pages/Results'
 import Container from 'react-bootstrap/Container';
-import Footer from './components/Footer';
+import Footer from './components/Footer.js';
+import styled from 'styled-components';
+import { ThemeContext, themes } from './themes/themes';
 
 export default function App() {
 
   // Assign state variables
-  // TODO: Cut down on use of 
+  // TODO: Cut down on declaring so many
   const [path, setPath] = useState(localStorage.getItem('path') || undefined);
   const [results, setResults] = useState([]);
   const [modalShow, setModalShow] = useState(false);
@@ -28,28 +30,34 @@ export default function App() {
     },
     ticketmaster: process.env.REACT_APP_TICKETMASTER_KEY
   });
-  
 
   const routes = {
-    '/': () => <Main path={path} setPath={setPath} setResults={setResults}
-      query={query} setQuery={setQuery} keys={keys} auth={auth} setAuth={setAuth}
-      user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />,
+    '/': () =>
+      <ThemeContext.Provider value={themes.default}>
+        <Main path={path} setPath={setPath} setResults={setResults}
+          query={query} setQuery={setQuery} keys={keys} auth={auth} setAuth={setAuth}
+          user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
+      </ThemeContext.Provider>,
     '/callback': () => {
       if (path === "/") {
 
         return (
-          <Main path={path} setPath={setPath} setResults={setResults}
-            query={query} setQuery={setQuery} keys={keys} auth={auth} setAuth={setAuth}
-            user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
+          <ThemeContext.Provider value={themes.default}>
+            <Main path={path} setPath={setPath} setResults={setResults}
+              query={query} setQuery={setQuery} keys={keys} auth={auth} setAuth={setAuth}
+              user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
+          </ThemeContext.Provider>
         )
 
       } else if (path === "/results") {
 
         return (
-          <Results path={path} setPath={setPath} results={results} setResults={setResults}
-            modalShow={modalShow} setModalShow={setModalShow} currentEvent={currentEvent} setCurrentEvent={setCurrentEvent}
-            query={query} setQuery={setQuery} keys={keys} auth={auth} setAuth={setAuth}
-            user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
+          <ThemeContext.Provider value={themes.default}>
+            <Results path={path} setPath={setPath} results={results} setResults={setResults}
+              modalShow={modalShow} setModalShow={setModalShow} currentEvent={currentEvent} setCurrentEvent={setCurrentEvent}
+              query={query} setQuery={setQuery} keys={keys} auth={auth} setAuth={setAuth}
+              user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
+          </ThemeContext.Provider>
         )
       }
     },

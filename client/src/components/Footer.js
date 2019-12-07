@@ -20,7 +20,7 @@ export default function Footer() {
     `
 
     // min-width:70px specified by spotify branding guidelines 
-    const FooterLogo = styled.img`
+    const StyledLogo = styled.img`
         max-width: 80%;
         min-width:70px;
         height: 1.5rem;
@@ -30,7 +30,7 @@ export default function Footer() {
          ${props => props.spacebetween ? "justify-content: space-between" : ""};
     `
 
-    const Link = styled.a`
+    const StyledLink = styled.a`
         text-decoration: none;
         color: var(--color-primary-0) !important;
         opacity: 1;
@@ -52,10 +52,10 @@ export default function Footer() {
                                 <small>Made by:</small>
                             </Col>
                             <Col xs="6" lg="2">
-                                <Link href="https://github.com/ansarkhan" target="_blank" rel="noopener noreferrer">Ansar</Link>
+                                <StyledLink href="https://github.com/ansarkhan" target="_blank" rel="noopener noreferrer">Ansar</StyledLink>
                             </Col>
                             <Col xs="6" lg="2">
-                                <Link href="https://enfenry.github.io/" target="_blank" rel="noopener noreferrer">Nolan</Link>
+                                <StyledLink href="https://enfenry.github.io/" target="_blank" rel="noopener noreferrer">Nolan</StyledLink>
                             </Col>
                         </Row>
                     </Col>
@@ -65,14 +65,14 @@ export default function Footer() {
                                 <small>Powered by:</small>
                             </Col>
                             <Col xs="6" lg="2">
-                                <Link href="https://developer.spotify.com/documentation/web-api/" target="_blank" rel="noopener noreferrer">
-                                    <FooterLogo alt="Spotify" src={process.env.PUBLIC_URL + '/static/img/spotify_logo_with_text_green.svg'} />
-                                </Link>
+                                <StyledLink href="https://developer.spotify.com/documentation/web-api/" target="_blank" rel="noopener noreferrer">
+                                    <StyledLogo alt="Spotify" src={process.env.PUBLIC_URL + '/static/img/spotify_logo_with_text_green.svg'} />
+                                </StyledLink>
                             </Col>
                             <Col xs="6" lg="2">
-                                <Link href="https://developer.ticketmaster.com/" target="_blank" rel="noopener noreferrer">
-                                    <FooterLogo alt="Ticketmaster" src={process.env.PUBLIC_URL + '/static/img/ticketmaster_logo_white.svg'} />
-                                </Link>
+                                <StyledLink href="https://developer.ticketmaster.com/" target="_blank" rel="noopener noreferrer">
+                                    <StyledLogo alt="Ticketmaster" src={process.env.PUBLIC_URL + '/static/img/ticketmaster_logo_white.svg'} />
+                                </StyledLink>
                             </Col>
                         </Row>
                     </Col>
