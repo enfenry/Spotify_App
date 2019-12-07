@@ -4,48 +4,48 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import styled from 'styled-components';
 
+const StyledFooter = styled.div`
+position: fixed;
+bottom: 0;
+left:0;
+width: 100%;
+height: 60px;
+font-size: 70%;
+background-color:black;
+display:flex;
+justify-content: center;
+align-items: center;
+`
+
+// min-width:70px specified by spotify branding guidelines 
+const StyledLogo = styled.img`
+max-width: 80%;
+min-width:70px;
+height: 1.5rem;
+`
+
+const StyledRow = styled(Row)`
+ ${props => props.spacebetween ? "justify-content: space-between" : ""};
+`
+
+const StyledLink = styled.a`
+text-decoration: none;
+color: var(--color-primary-0) !important;
+opacity: 1;
+
+&:hover {
+    opacity: .7;
+    transition: .3s ease;
+    cursor: pointer;
+}
+`
+
 export default function Footer() {
-
-    const StyledFooter = styled.div`
-        position: fixed;
-        bottom: 0;
-        left:0;
-        width: 100%;
-        height: 60px;
-        font-size: 70%;
-        background-color:black;
-        display:flex;
-        justify-content: center;
-        align-items: center;
-    `
-
-    // min-width:70px specified by spotify branding guidelines 
-    const StyledLogo = styled.img`
-        max-width: 80%;
-        min-width:70px;
-        height: 1.5rem;
-    `
-
-    const StyledRow = styled(Row)`
-         ${props => props.spacebetween ? "justify-content: space-between" : ""};
-    `
-
-    const StyledLink = styled.a`
-        text-decoration: none;
-        color: var(--color-primary-0) !important;
-        opacity: 1;
-    
-        &:hover {
-            opacity: .7;
-            transition: .3s ease;
-            cursor: pointer;
-        }
-    `
 
     return (
         <StyledFooter>
             <Container>
-                <StyledRow spacebetween>
+                <StyledRow spacebetween="true">
                     <Col xs="6">
                         <Row className="centered">
                             <Col xs="12" lg="3">

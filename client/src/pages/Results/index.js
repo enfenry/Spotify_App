@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './Results.css';
 import Header from '../../components/Header.js';
-import SearchBar from '../../components/SearchBar';
+import SearchBar from '../../components/SearchBar.js';
 import ResultsBox from '../../components/ResultsBox';
 import Spotify from '../../components/Spotify';
 import Container from 'react-bootstrap/Container';
