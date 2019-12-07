@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import './SearchBar.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -19,6 +19,12 @@ export default function SearchBar({
     setQuery,
     keys,
     accessToken }) {
+
+    // GRABBING REFERENCE OBJECT SO THAT WE CAN CALL handleFocus FUNCTION FOR THE AUTOCOMPLETE COMPONENT
+    const inputEl = useRef(null);
+    const handleFocus = () => {
+      inputEl.current.refs.input.focus();
+    };
 
     const renderLabel = (path) => {
         if (path === "/") {
@@ -46,7 +52,7 @@ export default function SearchBar({
         }
     };
 
-    // USE 
+    // SEARCH COORDS BASED ON STATE OF query USING GOOGLE API
     const getCoords = async () => {
         let coords = {};
         let location;
@@ -164,10 +170,11 @@ export default function SearchBar({
 
                                 <Form.Row>
                                     <Col>
-                                        <Autocomplete onPlaceSelected={(place) => setQuery(place)}
+                                        <Autocomplete ref={inputEl} onPlaceSelected={(place) => setQuery(place)}
                                             types={['geocode']} placeholder="Enter location" type="location"
                                             id="input-location" className="form-control form-control-default"
-                                            onChange={(event) => setQuery(event.target.value)} />
+                                            onChange={(event) => setQuery(event.target.value)}
+                                            onMouseEnter={handleFocus} />
                                     </Col>
                                     <Col sm="auto">
                                         <Button id="btn-location" variant="primary" type="submit" className="btn-default"

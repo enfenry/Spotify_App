@@ -10,6 +10,8 @@ import Footer from './components/Footer';
 
 export default function App() {
 
+  // Assign state variables
+  // TODO: Cut down on use of 
   const [path, setPath] = useState(localStorage.getItem('path') || undefined);
   const [results, setResults] = useState([]);
   const [modalShow, setModalShow] = useState(false);
