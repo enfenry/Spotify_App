@@ -3,7 +3,10 @@ import Button from 'react-bootstrap/Button';
 import styled from 'styled-components';
 
 const StyledButton = styled(Button)`
-    ${props => props.small ? "height: 50px; width: auto;" : ""}
+    ${props => props.small ? 
+        `height: 50px; 
+        width: auto;
+        ` : ""}
     background-color: var(--color-secondary-2-0) !important;
     border-color: var(--color-secondary-2-3) !important;
     color: black !important;

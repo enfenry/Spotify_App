@@ -3,8 +3,8 @@ import './App.css';
 import './themes/theme1/theme1.css';
 // import './themes/theme2/theme2.css';
 import { useRoutes } from 'hookrouter';
-import Main from './pages/Main'
-import Results from './pages/Results'
+import Main from './pages/Main.js'
+import Results from './pages/Results.js'
 import Container from 'react-bootstrap/Container';
 import Footer from './components/Footer.js';
 import styled from 'styled-components';
@@ -13,7 +13,7 @@ import { ThemeContext, themes } from './themes/themes';
 export default function App() {
 
   // Assign state variables
-  // TODO: Cut down on declaring so many
+  // TODO: Cut down on declaring so many and especially passing so many (useContext)
   const [path, setPath] = useState(localStorage.getItem('path') || undefined);
   const [results, setResults] = useState([]);
   const [modalShow, setModalShow] = useState(false);
