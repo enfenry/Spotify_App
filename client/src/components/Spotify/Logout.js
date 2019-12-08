@@ -60,9 +60,19 @@ export default function Logout({
         </StyledPopover>
     );
 
+    // TODO: TEST THAT THIS WORKS (TRY USING ANSAR'S SPOTIFY)
+    const renderSrc = () => {
+        if (user.data.images[0]) {
+            return user.data.images[0].url
+        }
+        else {
+            return process.env.PUBLIC_URL + '/static/img/user.png'
+        }
+    }
+
     return (
         <OverlayTrigger rootClose trigger="click" placement={popoverPlacement} overlay={popover}>
-            <StyledImg className="img-header" id="user-profile-header" alt="User-Profile" type="button" src={user.data.images[0].url} />
+            <StyledImg className="img-header" id="user-profile-header" alt="User-Profile" type="button" src={renderSrc()} />
         </OverlayTrigger>
     )
 };

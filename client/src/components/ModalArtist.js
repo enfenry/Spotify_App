@@ -57,7 +57,6 @@ const StyledImgContainer = styled.div`
     :hover iframe {
         width:300px;
         height:300px;
-        transition: ease out .2s;
     }
 `
 const StyledMask = styled.div`
