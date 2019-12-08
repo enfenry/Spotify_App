@@ -1,5 +1,4 @@
-import React from 'react';
-import './SearchBar.css';
+import React, {useRef} from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -8,7 +7,26 @@ import Button from 'react-bootstrap/Button';
 import Autocomplete from 'react-google-autocomplete';
 import { navigate } from 'hookrouter';
 import axios from 'axios';
+import styled from 'styled-components';
 
+const StyledFormGroup = styled(Form.Group)`
+    margin-bottom: 0px !important;
+`
+
+const StyledAutocomplete = styled(Autocomplete)`
+    &:focus {
+        box-shadow: 0 0 0 0.2rem var(--color-primary-0) !important;
+    }
+`
+
+const StyledFormRow = styled(Form.Row)`
+    align-items: center !important;
+    justify-content: center !important;
+`
+
+const StyledSearchBar = styled.div`
+    width:100%;
+`
 
 export default function SearchBar({
     path,
@@ -19,6 +37,12 @@ export default function SearchBar({
     setQuery,
     keys,
     accessToken }) {
+
+    // GRABBING REFERENCE OBJECT SO THAT WE CAN CALL handleFocus FUNCTION FOR THE AUTOCOMPLETE COMPONENT
+    const inputEl = useRef(null);
+    const handleFocus = () => {
+      inputEl.current.refs.input.focus();
+    };
 
     const renderLabel = (path) => {
         if (path === "/") {
@@ -46,7 +70,7 @@ export default function SearchBar({
         }
     };
 
-    // USE 
+    // SEARCH COORDS BASED ON STATE OF query USING GOOGLE API
     const getCoords = async () => {
         let coords = {};
         let location;
@@ -153,21 +177,22 @@ export default function SearchBar({
     }
 
     return (
-        <div className="SearchBar">
+        <StyledSearchBar>
             <Container>
                 <Row>
                     <Col xs="12">
                         <Form id="form-location">
-                            <Form.Group controlId="input-location">
+                            <StyledFormGroup controlId="input-location">
 
                                 {renderLabel(path)}
 
-                                <Form.Row>
+                                <StyledFormRow>
                                     <Col>
-                                        <Autocomplete onPlaceSelected={(place) => setQuery(place)}
+                                        <StyledAutocomplete ref={inputEl} onPlaceSelected={(place) => setQuery(place)}
                                             types={['geocode']} placeholder="Enter location" type="location"
                                             id="input-location" className="form-control form-control-default"
-                                            onChange={(event) => setQuery(event.target.value)} />
+                                            onChange={(event) => setQuery(event.target.value)}
+                                            onMouseEnter={handleFocus} />
                                     </Col>
                                     <Col sm="auto">
                                         <Button id="btn-location" variant="primary" type="submit" className="btn-default"
@@ -175,15 +200,15 @@ export default function SearchBar({
                                             Search
                                         </Button>
                                     </Col>
-                                </Form.Row>
+                                </StyledFormRow>
 
                                 {renderHelperText(path)}
 
-                            </Form.Group>
+                            </StyledFormGroup>
                         </Form>
                     </Col>
                 </Row>
             </Container>
-        </div>
+        </StyledSearchBar>
     );
 }

@@ -1,10 +1,63 @@
 // import React, { useEffect } from 'react';
 import React from 'react';
-import './ResultsBox.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import ModalArtist from '../ModalArtist';
+import ModalArtist from './ModalArtist.js';
 import moment from 'moment';
+import styled from 'styled-components';
+
+const StyledImg = styled.img`
+    height: 100%;
+    min-width: 100%;
+    max-width: none;
+    margin: 0 -100%;
+    transition: all .2s linear;
+`
+
+const StyledImgContainer = styled.div`
+    height: 12rem;
+    width: 12rem;
+    overflow: hidden;
+    text-align: center;
+    margin: 0 auto;
+    font-size: calc(2px + 2vmin);
+
+    span {
+        opacity: 0;
+        transition: all .2s ease-in-out;
+    }
+
+    &:hover img { 
+        transform: scale(1.1);
+        -webkit-filter: grayscale(100%);
+        filter: grayscale(100%);
+        -webkit-filter: blur(2px);
+        filter: blur(2px);
+    } 
+    &:hover .mask { 
+        bottom: 12rem;
+        opacity: 0.8;
+    }
+    
+    &:hover span
+     {
+        opacity: 1;
+    }
+`
+
+const StyledMask = styled.div`
+    padding: 2%;
+    position: relative;
+    bottom: 2rem;
+    height:100%;
+    opacity: .9;
+    background-color: rgba(0, 0, 0, 1); 
+    transition: all .2s ease-in-out;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor:pointer;
+`
 
 export default function ResultsBox({
     results,
@@ -126,11 +179,11 @@ export default function ResultsBox({
                 // }
                 return (
                     <Col className="padded" key={index} sm="auto">
-                        <div className="img-container">
-                            <img className="result-image" src={result.images[0].url}
+                        <StyledImgContainer>
+                            <StyledImg src={result.images[0].url}
                                 alt={result._embedded.attractions[0].name} key={"img-" + result._embedded.attractions[0].name} data-toggle="modal"
                                 data-target="#modal-artist" />
-                            <div className="mask" onClick={() => handleModal(result)}>
+                            <StyledMask className="mask" onClick={() => handleModal(result)}>
                                 <Row>
                                     <Col>
                                         {result._embedded.attractions[0].name}
@@ -173,8 +226,8 @@ export default function ResultsBox({
                                 </Row>
                                 <Row>
                                 </Row>
-                            </div>
-                        </div>
+                            </StyledMask>
+                        </StyledImgContainer>
                     </Col>
                 )
             };

@@ -1,8 +1,17 @@
 import React, { useEffect } from 'react';
-// import './Main.css';
-import Header from '../../components/Header';
-import SearchBar from '../../components/SearchBar';
-import Spotify from '../../components/Spotify';
+import Header from '../components/Header.js';
+import SearchBar from '../components/SearchBar.js';
+import Spotify from '../components/Spotify';
+// import styled from 'styled-components';
+
+
+// text-align: center;
+// background-color: rgb(32, 32, 34);
+// min-height: 100vh;
+// display: flex;
+// flex-direction: column;
+// font-size: calc(10px + 2vmin);
+// color: white;
 
 export default function Main({
     path,
