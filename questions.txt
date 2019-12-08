@@ -1,2 +1,3 @@
 - where does .env file go?
-- 
+- Why don't I see a node_modules folder
+- Npm run dev not working
