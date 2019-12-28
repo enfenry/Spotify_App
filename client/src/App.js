@@ -31,40 +31,38 @@ export default function App() {
     ticketmaster: process.env.REACT_APP_TICKETMASTER_KEY
   });
 
-  const routes = {
-    '/': () =>
+  const renderMain = () => {
+    return (
       <ThemeContext.Provider value={themes.default}>
         <Main path={path} setPath={setPath} setResults={setResults}
           query={query} setQuery={setQuery} keys={keys} auth={auth} setAuth={setAuth}
           user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
-      </ThemeContext.Provider>,
+      </ThemeContext.Provider>
+    )
+  }
+
+  const renderResults = () => {
+    return (
+      <ThemeContext.Provider value={themes.default}>
+        <Results path={path} setPath={setPath} results={results} setResults={setResults}
+          modalShow={modalShow} setModalShow={setModalShow} currentEvent={currentEvent} setCurrentEvent={setCurrentEvent}
+          query={query} setQuery={setQuery} keys={keys} auth={auth} setAuth={setAuth}
+          user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
+      </ThemeContext.Provider>
+    )
+  }
+
+  const routes = {
+    '/': () => { return renderMain() },
     '/callback': () => {
-      if (path === "/") {
-
-        return (
-          <ThemeContext.Provider value={themes.default}>
-            <Main path={path} setPath={setPath} setResults={setResults}
-              query={query} setQuery={setQuery} keys={keys} auth={auth} setAuth={setAuth}
-              user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
-          </ThemeContext.Provider>
-        )
-
-      } else if (path === "/results") {
-
-        return (
-          <ThemeContext.Provider value={themes.default}>
-            <Results path={path} setPath={setPath} results={results} setResults={setResults}
-              modalShow={modalShow} setModalShow={setModalShow} currentEvent={currentEvent} setCurrentEvent={setCurrentEvent}
-              query={query} setQuery={setQuery} keys={keys} auth={auth} setAuth={setAuth}
-              user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
-          </ThemeContext.Provider>
-        )
+      switch (path) {
+        case '/results':
+          return renderResults();
+        case '/':
+          return renderMain();
       }
     },
-    '/results': () => <Results path={path} setPath={setPath} results={results} setResults={setResults}
-      modalShow={modalShow} setModalShow={setModalShow} currentEvent={currentEvent} setCurrentEvent={setCurrentEvent}
-      query={query} setQuery={setQuery} keys={keys} auth={auth} setAuth={setAuth}
-      user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
+    '/results': () => {return renderResults()}
   };
 
   const MyApp = () => {
