@@ -7,7 +7,7 @@ import Main from './pages/Main.js'
 import Results from './pages/Results.js'
 import Container from 'react-bootstrap/Container';
 import Footer from './components/Footer.js';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import { ThemeContext, themes } from './themes/themes';
 
 export default function App() {
@@ -31,38 +31,32 @@ export default function App() {
     ticketmaster: process.env.REACT_APP_TICKETMASTER_KEY
   });
 
-  const renderMain = () => {
-    return (
-      <ThemeContext.Provider value={themes.default}>
-        <Main path={path} setPath={setPath} setResults={setResults}
-          query={query} setQuery={setQuery} keys={keys} auth={auth} setAuth={setAuth}
-          user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
-      </ThemeContext.Provider>
-    )
-  }
+  const mainPage =
+    <ThemeContext.Provider value={themes.alternate}>
+      <Main path={path} setPath={setPath} setResults={setResults}
+        query={query} setQuery={setQuery} keys={keys} auth={auth} setAuth={setAuth}
+        user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
+    </ThemeContext.Provider>
 
-  const renderResults = () => {
-    return (
-      <ThemeContext.Provider value={themes.default}>
-        <Results path={path} setPath={setPath} results={results} setResults={setResults}
-          modalShow={modalShow} setModalShow={setModalShow} currentEvent={currentEvent} setCurrentEvent={setCurrentEvent}
-          query={query} setQuery={setQuery} keys={keys} auth={auth} setAuth={setAuth}
-          user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
-      </ThemeContext.Provider>
-    )
-  }
+  const resultsPage =
+    <ThemeContext.Provider value={themes.default}>
+      <Results path={path} setPath={setPath} results={results} setResults={setResults}
+        modalShow={modalShow} setModalShow={setModalShow} currentEvent={currentEvent} setCurrentEvent={setCurrentEvent}
+        query={query} setQuery={setQuery} keys={keys} auth={auth} setAuth={setAuth}
+        user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
+    </ThemeContext.Provider>
 
   const routes = {
-    '/': () => { return renderMain() },
+    '/': () => { return mainPage },
     '/callback': () => {
       switch (path) {
         case '/results':
-          return renderResults();
+          return resultsPage;
         case '/':
-          return renderMain();
+          return mainPage;
       }
     },
-    '/results': () => {return renderResults()}
+    '/results': () => { return resultsPage }
   };
 
   const MyApp = () => {
@@ -75,9 +69,10 @@ export default function App() {
     <div className="App">
       <Container fluid>
         {MyApp()}
-        <Footer />
+        <ThemeContext.Provider value={themes.alternate}>
+          <Footer />
+        </ThemeContext.Provider>
       </Container>
     </div>
   );
-
 }

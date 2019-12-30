@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import moment from 'moment';
+import { ThemeContext } from '../themes/themes';
 import styled from 'styled-components';
 
 const StyledModalHeader = styled(Modal.Header)`
@@ -82,6 +83,23 @@ export default function ModalArtist({
     setModalShow,
     currentEvent
 }) {
+    const theme = useContext(ThemeContext);
+
+    const StyledButton = styled(Button)`
+        background-color: ${theme.colorPrimary0} !important;
+        border-color: ${theme.colorPrimary3} !important;
+        height: calc(1.5em + .75rem + 2px) !important;
+        width: 100% !important;
+
+        &:hover {
+            opacity: .7;
+            transition: .3s ease;
+        }
+        
+        &:focus {
+            box-shadow: 0 0 0 0.2rem var(--color-primary-1) !important;
+        }
+    `
 
     const renderName = (currentEvent) => {
         if (currentEvent._embedded) {
@@ -275,7 +293,7 @@ export default function ModalArtist({
                 </Container>
             </StyledModalBody>
             <StyledModalFooter>
-                <Button className="btn-default" onClick={() => { setModalShow(false) }}>Close</Button>
+                <StyledButton className="btn-default" onClick={() => { setModalShow(false) }}>Close</StyledButton>
             </StyledModalFooter>
         </StyledModal>
     );

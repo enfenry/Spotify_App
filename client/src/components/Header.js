@@ -6,8 +6,12 @@ import styled from 'styled-components';
 const StyledSpan = styled.span`
     color: white;
 `
-const StyledLink = styled(A)`
-    color: var(--color-primary-0);
+
+export default function Header() {
+    const theme = useContext(ThemeContext);
+    
+    const StyledLink = styled(A)`
+    color: ${theme.colorPrimary0};
 
     h1:hover {
         transition: .3s ease;
@@ -15,15 +19,11 @@ const StyledLink = styled(A)`
     }
 
     &:hover {
-        color: var(--color-primary-0);
+        color: ${theme.colorPrimary0};
         text-decoration: none;
         cursor: pointer;
     }
 `
-
-export default function Header() {
-
-    const theme = useContext(ThemeContext);
 
     return (
         <>
