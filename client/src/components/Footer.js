@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { ThemeContext } from '../themes/themes';
+import { ThemeContext } from '../themes';
 import styled from 'styled-components';
 
 const StyledFooter = styled.div`
@@ -29,20 +29,24 @@ const StyledRow = styled(Row)`
  ${props => props.spacebetween ? "justify-content: space-between" : ""};
 `
 
+const StyledLink = styled.a`
+text-decoration: none;
+color: ${props => props.theme.colorPrimary0} !important;
+opacity: 1;
+
+&:hover {
+    opacity: .7;
+    transition: .3s ease;
+    cursor: pointer;
+}
+`
+
 export default function Footer() {
     const theme = useContext(ThemeContext);
 
-    const StyledLink = styled.a`
-    text-decoration: none;
-    color: ${theme.colorPrimary0} !important;
-    opacity: 1;
-    
-    &:hover {
-        opacity: .7;
-        transition: .3s ease;
-        cursor: pointer;
+    StyledLink.defaultProps = {
+        theme: theme
     }
-    `
 
     return (
         <StyledFooter>
