@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, { useRef, useContext } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -7,15 +7,16 @@ import Button from 'react-bootstrap/Button';
 import Autocomplete from 'react-google-autocomplete';
 import { navigate } from 'hookrouter';
 import axios from 'axios';
+import { ThemeContext } from '../themes';
 import styled from 'styled-components';
 
 const StyledFormGroup = styled(Form.Group)`
     margin-bottom: 0px !important;
 `
 
-const StyledAutocomplete = styled(Autocomplete)`
+var StyledAutocomplete = styled(Autocomplete)`
     &:focus {
-        box-shadow: 0 0 0 0.2rem var(--color-primary-0) !important;
+        box-shadow: 0 0 0 0.2rem ${props => props.theme.colorPrimary0} !important;
     }
 `
 
@@ -28,6 +29,20 @@ const StyledSearchBar = styled.div`
     width:100%;
 `
 
+const StyledButton = styled(Button)`
+    background-color: ${props => props.theme.colorPrimary0} !important;
+    border-color: ${props => props.theme.colorPrimary3} !important;
+
+    &:hover {
+        opacity: .7;
+        transition: .3s ease;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 0.2rem ${props => props.theme.colorPrimary1} !important;
+    }
+`
+
 export default function SearchBar({
     path,
     setPath,
@@ -38,10 +53,20 @@ export default function SearchBar({
     keys,
     accessToken }) {
 
+    const theme = useContext(ThemeContext);
+
+    StyledAutocomplete.defaultProps = {
+        theme: theme
+      }
+    
+    StyledButton.defaultProps = {
+        theme: theme
+      }
+
     // GRABBING REFERENCE OBJECT SO THAT WE CAN CALL handleFocus FUNCTION FOR THE AUTOCOMPLETE COMPONENT
     const inputEl = useRef(null);
     const handleFocus = () => {
-      inputEl.current.refs.input.focus();
+        inputEl.current.refs.input.focus();
     };
 
     const renderLabel = (path) => {
@@ -74,7 +99,6 @@ export default function SearchBar({
     const getCoords = async () => {
         let coords = {};
         let location;
-
         if (query.geometry) {
             location = query.geometry.location
             coords = {
@@ -195,10 +219,10 @@ export default function SearchBar({
                                             onMouseEnter={handleFocus} />
                                     </Col>
                                     <Col sm="auto">
-                                        <Button id="btn-location" variant="primary" type="submit" className="btn-default"
+                                        <StyledButton id="btn-location" variant="primary" type="submit"
                                             onClick={(event) => handleSearch(event)}>
                                             Search
-                                        </Button>
+                                        </StyledButton>
                                     </Col>
                                 </StyledFormRow>
 

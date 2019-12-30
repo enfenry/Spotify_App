@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import moment from 'moment';
+import { ThemeContext } from '../themes';
 import styled from 'styled-components';
 
 const StyledModalHeader = styled(Modal.Header)`
@@ -77,11 +78,32 @@ const StyledIframe = styled.iframe`
     height:80px;
 `
 
+const StyledButton = styled(Button)`
+    background-color: ${props => props.theme.colorPrimary0} !important;
+    border-color: ${props => props.theme.colorPrimary3} !important;
+    height: calc(1.5em + .75rem + 2px) !important;
+    width: 100% !important;
+
+    &:hover {
+        opacity: .7;
+        transition: .3s ease;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 0.2rem ${props => props.theme.colorPrimary1} !important;
+    }
+`
+
 export default function ModalArtist({
     modalShow,
     setModalShow,
     currentEvent
 }) {
+    const theme = useContext(ThemeContext);
+
+    StyledButton.defaultProps = {
+        theme: theme
+      }
 
     const renderName = (currentEvent) => {
         if (currentEvent._embedded) {
@@ -275,7 +297,7 @@ export default function ModalArtist({
                 </Container>
             </StyledModalBody>
             <StyledModalFooter>
-                <Button className="btn-default" onClick={() => { setModalShow(false) }}>Close</Button>
+                <StyledButton className="btn-default" onClick={() => { setModalShow(false) }}>Close</StyledButton>
             </StyledModalFooter>
         </StyledModal>
     );

@@ -7,8 +7,8 @@ const StyledButton = styled(Button)`
         `height: 50px; 
         width: auto;
         ` : ""}
-    background-color: var(--color-secondary-2-0) !important;
-    border-color: var(--color-secondary-2-3) !important;
+    background-color: #1ED760 !important;
+    border-color: #00D14E !important;
     color: black !important;
     
     &:hover {
@@ -17,7 +17,7 @@ const StyledButton = styled(Button)`
     }
 
     &:focus {
-        box-shadow: 0 0 0 0.2rem var(--color-secondary-2-4) !important;
+        box-shadow: 0 0 0 0.2rem #009C3A !important;
     }
 `
 

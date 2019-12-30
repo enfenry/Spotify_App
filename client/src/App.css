@@ -28,24 +28,6 @@ main {
   padding: 15px !important;
 }
 
-.btn-default {
-  /* background-color: #6C0DAC !important;  */
-  /* SAME AS BELOW */
-  background-color: var(--color-primary-0) !important;
-  border-color: var(--color-primary-3) !important;
-  height: calc(1.5em + .75rem + 2px) !important;
-  width: 100% !important;
-}
-
-.btn-default:hover {
-  opacity: .7;
-  transition: .3s ease;
-}
-
-.btn-default:focus {
-  box-shadow: 0 0 0 0.2rem var(--color-primary-1) !important;
-}
-
 .img-header {
     max-width: 80%;
     height: calc(1.5em + .75rem + 2px) !important;

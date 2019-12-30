@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { ThemeContext } from '../themes';
 import styled from 'styled-components';
 
 const StyledFooter = styled.div`
@@ -30,7 +31,7 @@ const StyledRow = styled(Row)`
 
 const StyledLink = styled.a`
 text-decoration: none;
-color: var(--color-primary-0) !important;
+color: ${props => props.theme.colorPrimary0} !important;
 opacity: 1;
 
 &:hover {
@@ -41,6 +42,11 @@ opacity: 1;
 `
 
 export default function Footer() {
+    const theme = useContext(ThemeContext);
+
+    StyledLink.defaultProps = {
+        theme: theme
+    }
 
     return (
         <StyledFooter>

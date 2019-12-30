@@ -14,6 +14,7 @@ export default function Spotify({
     popoverPlacement,
     keys }) {
 
+    // USING SPOTIFY'S IMPLICIT GRANT FLOW AUTHENTICATION METHOD
     var stateKey = 'spotify_auth_state';
 
     useEffect(() => {

@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
 import './App.css';
-import './themes/theme1/theme1.css';
-// import './themes/theme2/theme2.css';
 import { useRoutes } from 'hookrouter';
 import Main from './pages/Main.js'
 import Results from './pages/Results.js'
 import Container from 'react-bootstrap/Container';
 import Footer from './components/Footer.js';
-import styled from 'styled-components';
-import { ThemeContext, themes } from './themes/themes';
+import { ThemeContext, themes } from './themes';
 
 export default function App() {
 
@@ -31,40 +28,32 @@ export default function App() {
     ticketmaster: process.env.REACT_APP_TICKETMASTER_KEY
   });
 
+  const mainPage =
+    <ThemeContext.Provider value={themes.default}>
+      <Main path={path} setPath={setPath} setResults={setResults}
+        query={query} setQuery={setQuery} keys={keys} auth={auth} setAuth={setAuth}
+        user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
+    </ThemeContext.Provider>
+
+  const resultsPage =
+    <ThemeContext.Provider value={themes.default}>
+      <Results path={path} setPath={setPath} results={results} setResults={setResults}
+        modalShow={modalShow} setModalShow={setModalShow} currentEvent={currentEvent} setCurrentEvent={setCurrentEvent}
+        query={query} setQuery={setQuery} keys={keys} auth={auth} setAuth={setAuth}
+        user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
+    </ThemeContext.Provider>
+
   const routes = {
-    '/': () =>
-      <ThemeContext.Provider value={themes.default}>
-        <Main path={path} setPath={setPath} setResults={setResults}
-          query={query} setQuery={setQuery} keys={keys} auth={auth} setAuth={setAuth}
-          user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
-      </ThemeContext.Provider>,
+    '/': () => { return mainPage },
     '/callback': () => {
-      if (path === "/") {
-
-        return (
-          <ThemeContext.Provider value={themes.default}>
-            <Main path={path} setPath={setPath} setResults={setResults}
-              query={query} setQuery={setQuery} keys={keys} auth={auth} setAuth={setAuth}
-              user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
-          </ThemeContext.Provider>
-        )
-
-      } else if (path === "/results") {
-
-        return (
-          <ThemeContext.Provider value={themes.default}>
-            <Results path={path} setPath={setPath} results={results} setResults={setResults}
-              modalShow={modalShow} setModalShow={setModalShow} currentEvent={currentEvent} setCurrentEvent={setCurrentEvent}
-              query={query} setQuery={setQuery} keys={keys} auth={auth} setAuth={setAuth}
-              user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
-          </ThemeContext.Provider>
-        )
+      switch (path) {
+        case '/results':
+          return resultsPage;
+        case '/':
+          return mainPage;
       }
     },
-    '/results': () => <Results path={path} setPath={setPath} results={results} setResults={setResults}
-      modalShow={modalShow} setModalShow={setModalShow} currentEvent={currentEvent} setCurrentEvent={setCurrentEvent}
-      query={query} setQuery={setQuery} keys={keys} auth={auth} setAuth={setAuth}
-      user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
+    '/results': () => { return resultsPage }
   };
 
   const MyApp = () => {
@@ -77,9 +66,10 @@ export default function App() {
     <div className="App">
       <Container fluid>
         {MyApp()}
-        <Footer />
+        <ThemeContext.Provider value={themes.default}>
+          <Footer />
+        </ThemeContext.Provider>
       </Container>
     </div>
   );
-
 }
