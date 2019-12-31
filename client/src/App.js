@@ -15,7 +15,6 @@ export default function App() {
   // TODO: Cut down on declaring so many and especially passing so many (useContext)
   const [path, setPath] = useState(localStorage.getItem('path') || undefined);
   const [results, setResults] = useState([]);
-  const [currentEvent, setCurrentEvent] = useState({});
   const [query, setQuery] = useState('');
   const [accessToken, setAccessToken] = useState(localStorage.getItem('access_token') || undefined);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || {});
@@ -39,7 +38,6 @@ export default function App() {
   const resultsPage =
     <ThemeContext.Provider value={themes.default}>
       <Results path={path} setPath={setPath} results={results} setResults={setResults}
-        currentEvent={currentEvent} setCurrentEvent={setCurrentEvent}
         query={query} setQuery={setQuery} keys={keys} auth={auth} setAuth={setAuth}
         user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
     </ThemeContext.Provider>

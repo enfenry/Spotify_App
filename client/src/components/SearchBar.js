@@ -46,7 +46,6 @@ const StyledButton = styled(Button)`
 export default function SearchBar({
     path,
     setPath,
-    results,
     setResults,
     query,
     setQuery,

@@ -59,27 +59,25 @@ const StyledMask = styled.div`
     cursor:pointer;
 `
 
-export default function ResultsBox({
-    results,
-    currentEvent,
-    setCurrentEvent }) {
+export default function ResultsBox({results}) {
 
     function reducer(state, action) {
-        switch (action.modalShow) {
-            case false:
-                return { modalShow: false };
-            case true:
-                return { modalShow: true };
+        switch (action.type) {
+            case 'SHOW_MODAL':
+                // return { visible: action.visible, result: state.result };
+                return { ...state, visible: action.visible }
+            case 'SET_RESULT':
+                return { ...state, visible: action.visible, result: action.result };
             default:
-                throw new Error();
+                return initialState;
         }
     }
 
-    const [modalState, dispatch] = useReducer(reducer, { modalShow: false });
+    const initialState = { type: 'SHOW_MODAL', visible: false, result: {} };
+    const [modalState, dispatch] = useReducer(reducer, initialState);
 
     const handleModal = (result) => {
-        setCurrentEvent(result);
-        dispatch({ modalShow: true });
+        dispatch({ type: 'SET_RESULT', result: result, visible: true });
     }
 
     const renderLocation = (result) => {
@@ -210,7 +208,6 @@ export default function ResultsBox({
                                         <Row>
                                             <Col>
                                                 {renderVenue(result)}
-
                                             </Col>
                                         </Row>
                                         <Row>
@@ -256,7 +253,7 @@ export default function ResultsBox({
         <>
             {renderResults(results)}
             <MyContext.Provider value={{ modalState, dispatch }}>
-                <ModalArtist id="modal-artist" currentEvent={currentEvent} />
+                <ModalArtist id="modal-artist" />
             </MyContext.Provider>
         </>
     )

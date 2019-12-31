@@ -38,8 +38,6 @@ function Results({
     setPath,
     results,
     setResults,
-    currentEvent,
-    setCurrentEvent,
     query,
     setQuery,
     auth,
@@ -89,7 +87,7 @@ function Results({
                         <StyledIframe title="playlist" src="https://open.spotify.com/embed/playlist/37i9dQZF1DX2Nc3B70tvx0?si=_AMfZgVbQsW4IeD6gwpB5w" width="300" height="540" frameBorder="0" allowtransparency="true" allow="encrypted-media" />
                     </Col>
                     <Col>
-                        <ResultsBox results={results} currentEvent={currentEvent} setCurrentEvent={setCurrentEvent} />
+                        <ResultsBox results={results}/>
                     </Col>
                 </Row>
             </main>
