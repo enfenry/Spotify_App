@@ -1,5 +1,3 @@
-// import React from 'react';
-
 export const keys = {
     google: process.env.REACT_APP_GOOGLE_KEY,
     spotify: {
@@ -8,5 +6,3 @@ export const keys = {
     },
     ticketmaster: process.env.REACT_APP_TICKETMASTER_KEY
 };
-
-// export const KeysContext = React.createContext(keys);
