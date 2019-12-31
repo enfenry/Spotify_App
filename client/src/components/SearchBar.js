@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import Autocomplete from 'react-google-autocomplete';
 import { navigate } from 'hookrouter';
 import axios from 'axios';
+import { keys } from '../keys';
 import { ThemeContext } from '../themes';
 import styled from 'styled-components';
 
@@ -49,7 +50,6 @@ export default function SearchBar({
     setResults,
     query,
     setQuery,
-    keys,
     accessToken }) {
 
     const theme = useContext(ThemeContext);

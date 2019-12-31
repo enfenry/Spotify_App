@@ -45,8 +45,8 @@ function Results({
     user,
     setUser,
     accessToken,
-    setAccessToken,
-    keys }) {
+    setAccessToken
+}) {
 
     useEffect(() => {
         localStorage.setItem("path", "/results")
@@ -66,12 +66,12 @@ function Results({
                         className="space-between">
                         <Row noGutters={true} className="space-between">
                             <StyledCol centered="true" margintopbottom="true" xs={{ span: 12, order: 10 }} md={{ span: 2, order: 12 }}>
-                                <Spotify keys={keys} path={path} auth={auth} setAuth={setAuth} user={user} setUser={setUser}
+                                <Spotify path={path} auth={auth} setAuth={setAuth} user={user} setUser={setUser}
                                     accessToken={accessToken} setAccessToken={setAccessToken} popoverPlacement='bottom' />
                             </StyledCol>
                             <StyledCol centered="true" margintopbottom="true" xs={{ span: 12, order: 12 }} md={{ span: 10, order: 10 }}>
                                 <SearchBar path={path} setPath={setPath} setResults={setResults}
-                                    query={query} setQuery={setQuery} keys={keys} accessToken={accessToken} />
+                                    query={query} setQuery={setQuery} accessToken={accessToken} />
                             </StyledCol>
 
                         </Row>

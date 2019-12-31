@@ -14,8 +14,8 @@ export default function Main({
     user,
     setUser,
     accessToken,
-    setAccessToken,
-    keys }) {
+    setAccessToken
+}) {
 
     useEffect(() => {
         localStorage.setItem("path","/")
@@ -27,7 +27,7 @@ export default function Main({
             <br />
             <header>
                 <Header />
-                <Spotify path={path} keys={keys} auth={auth} setAuth={setAuth}
+                <Spotify path={path} auth={auth} setAuth={setAuth}
                     user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} popoverPlacement='right' />
             </header>
             <br />
@@ -35,7 +35,7 @@ export default function Main({
 
             <main>
                 <SearchBar path={path} setPath={setPath} setResults={setResults}
-                    query={query} setQuery={setQuery} keys={keys} accessToken={accessToken} />
+                    query={query} setQuery={setQuery} accessToken={accessToken} />
             </main>
         </div>
     );

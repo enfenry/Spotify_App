@@ -19,26 +19,18 @@ export default function App() {
   const [accessToken, setAccessToken] = useState(localStorage.getItem('access_token') || undefined);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || {});
   const [auth, setAuth] = useState(JSON.stringify(user) !== JSON.stringify({}));
-  const [keys] = useState({
-    google: process.env.REACT_APP_GOOGLE_KEY,
-    spotify: {
-      id: process.env.REACT_APP_SPOTIFY_ID,
-      secret: process.env.REACT_APP_SPOTIFY_SECRET
-    },
-    ticketmaster: process.env.REACT_APP_TICKETMASTER_KEY
-  });
 
   const mainPage =
     <ThemeContext.Provider value={themes.default}>
       <Main path={path} setPath={setPath} setResults={setResults}
-        query={query} setQuery={setQuery} keys={keys} auth={auth} setAuth={setAuth}
+        query={query} setQuery={setQuery} auth={auth} setAuth={setAuth}
         user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
     </ThemeContext.Provider>
 
   const resultsPage =
     <ThemeContext.Provider value={themes.default}>
       <Results path={path} setPath={setPath} results={results} setResults={setResults}
-        query={query} setQuery={setQuery} keys={keys} auth={auth} setAuth={setAuth}
+        query={query} setQuery={setQuery} auth={auth} setAuth={setAuth}
         user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
     </ThemeContext.Provider>
 

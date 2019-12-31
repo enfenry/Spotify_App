@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
+import { keys } from '../../keys';
 import styled from 'styled-components';
 
 const StyledButton = styled(Button)`
@@ -23,7 +24,6 @@ const StyledButton = styled(Button)`
 
 export default function Login({
     path,
-    keys,
     stateKey
 }) {
 
