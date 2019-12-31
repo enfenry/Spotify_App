@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useReducer } from 'react';
 import './App.css';
 import { useRoutes } from 'hookrouter';
 import Main from './pages/Main.js'
@@ -7,13 +7,12 @@ import Container from 'react-bootstrap/Container';
 import Footer from './components/Footer.js';
 import { ThemeContext, themes } from './themes';
 
+export const MyContext = React.createContext(null);
+
 export default function App() {
 
   // Assign state variables
   // TODO: Cut down on declaring so many and especially passing so many (useContext)
-
-  const [modalShow, setModalShow] = useState(false);
-
   const [path, setPath] = useState(localStorage.getItem('path') || undefined);
   const [results, setResults] = useState([]);
   const [currentEvent, setCurrentEvent] = useState({});
@@ -40,7 +39,7 @@ export default function App() {
   const resultsPage =
     <ThemeContext.Provider value={themes.default}>
       <Results path={path} setPath={setPath} results={results} setResults={setResults}
-        modalShow={modalShow} setModalShow={setModalShow} currentEvent={currentEvent} setCurrentEvent={setCurrentEvent}
+        currentEvent={currentEvent} setCurrentEvent={setCurrentEvent}
         query={query} setQuery={setQuery} keys={keys} auth={auth} setAuth={setAuth}
         user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
     </ThemeContext.Provider>

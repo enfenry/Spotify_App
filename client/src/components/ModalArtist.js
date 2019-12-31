@@ -1,4 +1,4 @@
-import React, { useContext, useReducer } from 'react';
+import React, { useContext } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import moment from 'moment';
 import { ThemeContext } from '../themes';
-import { ModalContext } from './ResultsBox';
+import { MyContext } from '../App';
 import styled from 'styled-components';
 
 const StyledModalHeader = styled(Modal.Header)`
@@ -98,7 +98,7 @@ const StyledButton = styled(Button)`
 export default function ModalArtist({
     currentEvent
 }) {
-    const {modalState, dispatch} = useContext(ModalContext);
+    const {modalState, dispatch} = useContext(MyContext);
     const theme = useContext(ThemeContext);
 
     StyledButton.defaultProps = {
