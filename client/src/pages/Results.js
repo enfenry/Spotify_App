@@ -36,10 +36,6 @@ const StyledRow = styled(Row)`
 function Results({
     path,
     setPath,
-    results,
-    setResults,
-    query,
-    setQuery,
     auth,
     setAuth,
     user,
@@ -70,10 +66,8 @@ function Results({
                                     accessToken={accessToken} setAccessToken={setAccessToken} popoverPlacement='bottom' />
                             </StyledCol>
                             <StyledCol centered="true" margintopbottom="true" xs={{ span: 12, order: 12 }} md={{ span: 10, order: 10 }}>
-                                <SearchBar path={path} setPath={setPath} setResults={setResults}
-                                    query={query} setQuery={setQuery} accessToken={accessToken} />
+                                <SearchBar path={path} setPath={setPath} accessToken={accessToken} />
                             </StyledCol>
-
                         </Row>
                     </Col>
 
@@ -87,7 +81,7 @@ function Results({
                         <StyledIframe title="playlist" src="https://open.spotify.com/embed/playlist/37i9dQZF1DX2Nc3B70tvx0?si=_AMfZgVbQsW4IeD6gwpB5w" width="300" height="540" frameBorder="0" allowtransparency="true" allow="encrypted-media" />
                     </Col>
                     <Col>
-                        <ResultsBox results={results}/>
+                        <ResultsBox/>
                     </Col>
                 </Row>
             </main>

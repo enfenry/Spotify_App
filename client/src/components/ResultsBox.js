@@ -1,8 +1,8 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useContext } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ModalArtist from './ModalArtist.js';
-import { MyContext } from '../App';
+import { MyContext, ResultsContext } from '../App';
 import moment from 'moment';
 import styled from 'styled-components';
 
@@ -59,12 +59,11 @@ const StyledMask = styled.div`
     cursor:pointer;
 `
 
-export default function ResultsBox({results}) {
+export default function ResultsBox() {
 
     function reducer(state, action) {
         switch (action.type) {
             case 'SHOW_MODAL':
-                // return { visible: action.visible, result: state.result };
                 return { ...state, visible: action.visible }
             case 'SET_RESULT':
                 return { ...state, visible: action.visible, result: action.result };
@@ -74,10 +73,13 @@ export default function ResultsBox({results}) {
     }
 
     const initialState = { type: 'SHOW_MODAL', visible: false, result: {} };
-    const [modalState, dispatch] = useReducer(reducer, initialState);
+    const [modalState, dispatchModal] = useReducer(reducer, initialState);
+
+    const {resultsState, dispatch} = useContext(ResultsContext);
+    const results = resultsState.results;
 
     const handleModal = (result) => {
-        dispatch({ type: 'SET_RESULT', result: result, visible: true });
+        dispatchModal({ type: 'SET_RESULT', result: result, visible: true });
     }
 
     const renderLocation = (result) => {
@@ -252,7 +254,7 @@ export default function ResultsBox({results}) {
     return (
         <>
             {renderResults(results)}
-            <MyContext.Provider value={{ modalState, dispatch }}>
+            <MyContext.Provider value={{ modalState, dispatchModal }}>
                 <ModalArtist id="modal-artist" />
             </MyContext.Provider>
         </>

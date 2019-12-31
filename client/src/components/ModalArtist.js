@@ -96,7 +96,7 @@ const StyledButton = styled(Button)`
 `
 
 export default function ModalArtist() {
-    const {modalState, dispatch} = useContext(MyContext);
+    const {modalState, dispatchModal} = useContext(MyContext);
     const result = modalState.result;
 
     const theme = useContext(ThemeContext);
@@ -260,7 +260,7 @@ export default function ModalArtist() {
             centered
             show={modalState.visible}
             onHide={() => { 
-                dispatch({ type: 'SHOW_MODAL', visible: false }) 
+                dispatchModal({ type: 'SHOW_MODAL', visible: false }) 
                 }}>
 
             <StyledModalHeader>
@@ -300,7 +300,7 @@ export default function ModalArtist() {
             </StyledModalBody>
             <StyledModalFooter>
                 <StyledButton className="btn-default" onClick={() => { 
-                    dispatch({ type: 'SHOW_MODAL', visible: false }) 
+                    dispatchModal({ type: 'SHOW_MODAL', visible: false }) 
                     }}>Close</StyledButton>
             </StyledModalFooter>
         </StyledModal>
