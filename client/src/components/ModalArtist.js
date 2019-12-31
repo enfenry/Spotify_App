@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useReducer } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import moment from 'moment';
 import { ThemeContext } from '../themes';
+import { ModalContext } from './ResultsBox';
 import styled from 'styled-components';
 
 const StyledModalHeader = styled(Modal.Header)`
@@ -95,15 +96,14 @@ const StyledButton = styled(Button)`
 `
 
 export default function ModalArtist({
-    modalShow,
-    setModalShow,
     currentEvent
 }) {
+    const {modalState, dispatch} = useContext(ModalContext);
     const theme = useContext(ThemeContext);
 
     StyledButton.defaultProps = {
         theme: theme
-      }
+    }
 
     const renderName = (currentEvent) => {
         if (currentEvent._embedded) {
@@ -258,8 +258,10 @@ export default function ModalArtist({
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered
-            show={modalShow}
-            onHide={() => { setModalShow(false) }}>
+            show={modalState.modalShow}
+            onHide={() => { 
+                dispatch({ modalShow: false }) 
+                }}>
 
             <StyledModalHeader>
                 <Modal.Title id="contained-modal-title-vcenter">
@@ -297,7 +299,9 @@ export default function ModalArtist({
                 </Container>
             </StyledModalBody>
             <StyledModalFooter>
-                <StyledButton className="btn-default" onClick={() => { setModalShow(false) }}>Close</StyledButton>
+                <StyledButton className="btn-default" onClick={() => { 
+                    dispatch({ modalShow: false }) 
+                    }}>Close</StyledButton>
             </StyledModalFooter>
         </StyledModal>
     );

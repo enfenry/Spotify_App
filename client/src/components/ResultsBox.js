@@ -1,5 +1,5 @@
 // import React, { useEffect } from 'react';
-import React from 'react';
+import React, { useReducer } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ModalArtist from './ModalArtist.js';
@@ -58,17 +58,33 @@ const StyledMask = styled.div`
     justify-content: space-between;
     cursor:pointer;
 `
+export const ModalContext = React.createContext(false);
+
+function reducer(state, action) {
+    switch (action.modalShow) {
+        case false:
+            state.modalShow = false;
+            return { modalShow: false };
+        case true:
+            state.modalShow = true;
+            return { modalShow: true };
+        default:
+            throw new Error();
+    }
+}
 
 export default function ResultsBox({
     results,
-    modalShow,
-    setModalShow,
     currentEvent,
     setCurrentEvent }) {
 
+    const [modalState, dispatch] = useReducer(reducer, { modalShow: false });
+
     const handleModal = (result) => {
         setCurrentEvent(result);
-        setModalShow(true);
+        console.log(modalState)
+        dispatch({ modalShow: true });
+        console.log(modalState)
     }
 
     const renderLocation = (result) => {
@@ -244,8 +260,9 @@ export default function ResultsBox({
     return (
         <>
             {renderResults(results)}
-
-            <ModalArtist id="modal-artist" modalShow={modalShow} setModalShow={setModalShow} currentEvent={currentEvent} />
+            <ModalContext.Provider value={{ modalState, dispatch }}>
+                <ModalArtist id="modal-artist" currentEvent={currentEvent} />
+            </ModalContext.Provider>
         </>
     )
 };

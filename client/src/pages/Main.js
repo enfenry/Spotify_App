@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import Header from '../components/Header.js';
 import SearchBar from '../components/SearchBar.js';
 import Spotify from '../components/Spotify';
-// import styled from 'styled-components';
 
 export default function Main({
     path,

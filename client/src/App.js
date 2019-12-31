@@ -11,9 +11,11 @@ export default function App() {
 
   // Assign state variables
   // TODO: Cut down on declaring so many and especially passing so many (useContext)
+
+  const [modalShow, setModalShow] = useState(false);
+
   const [path, setPath] = useState(localStorage.getItem('path') || undefined);
   const [results, setResults] = useState([]);
-  const [modalShow, setModalShow] = useState(false);
   const [currentEvent, setCurrentEvent] = useState({});
   const [query, setQuery] = useState('');
   const [accessToken, setAccessToken] = useState(localStorage.getItem('access_token') || undefined);
