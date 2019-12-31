@@ -8,6 +8,7 @@ import Autocomplete from 'react-google-autocomplete';
 import { navigate } from 'hookrouter';
 import axios from 'axios';
 import { keys } from '../keys';
+import { ResultsContext } from '../App';
 import { ThemeContext } from '../themes';
 import styled from 'styled-components';
 
@@ -47,7 +48,6 @@ const StyledButton = styled(Button)`
 export default function SearchBar({
     path,
     setPath,
-    setResults,
     accessToken }) {
 
     function reducer(state, action) {
@@ -60,7 +60,9 @@ export default function SearchBar({
     }
 
     const initialState = { type: 'UPDATE_QUERY', query: '' };
-    const [searchState, dispatch] = useReducer(reducer, initialState);
+    const [searchState, dispatchQuery] = useReducer(reducer, initialState);
+
+    const { resultsState, dispatch } = useContext(ResultsContext);
 
     const theme = useContext(ThemeContext);
 
@@ -200,7 +202,7 @@ export default function SearchBar({
                     })
                     .then(newResults => {
                         console.log('newResults', newResults)
-                        setResults(newResults);
+                        dispatch({ type: 'SET_RESULTS', results: newResults });
                         navigate("/results");
                     })
                     .catch((error) => {
@@ -222,10 +224,10 @@ export default function SearchBar({
 
                                 <StyledFormRow>
                                     <Col>
-                                        <StyledAutocomplete ref={inputEl} onPlaceSelected={(place) => dispatch({ type: 'UPDATE_QUERY', query: place })}
+                                        <StyledAutocomplete ref={inputEl} onPlaceSelected={(place) => dispatchQuery({ type: 'UPDATE_QUERY', query: place })}
                                             types={['geocode']} placeholder="Enter location" type="location"
                                             id="input-location" className="form-control form-control-default"
-                                            onChange={(event) => dispatch({ type: 'UPDATE_QUERY', query: event.target.value })}
+                                            onChange={(event) => dispatchQuery({ type: 'UPDATE_QUERY', query: event.target.value })}
                                             onMouseEnter={handleFocus} />
                                     </Col>
                                     <Col sm="auto">

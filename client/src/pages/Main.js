@@ -6,7 +6,6 @@ import Spotify from '../components/Spotify';
 export default function Main({
     path,
     setPath,
-    setResults,
     auth,
     setAuth,
     user,
@@ -32,7 +31,7 @@ export default function Main({
             <br />
 
             <main>
-                <SearchBar path={path} setPath={setPath} setResults={setResults} accessToken={accessToken} />
+                <SearchBar path={path} setPath={setPath} accessToken={accessToken} />
             </main>
         </div>
     );
