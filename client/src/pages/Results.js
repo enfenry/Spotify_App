@@ -38,8 +38,6 @@ function Results({
     setPath,
     results,
     setResults,
-    query,
-    setQuery,
     auth,
     setAuth,
     user,
@@ -70,10 +68,8 @@ function Results({
                                     accessToken={accessToken} setAccessToken={setAccessToken} popoverPlacement='bottom' />
                             </StyledCol>
                             <StyledCol centered="true" margintopbottom="true" xs={{ span: 12, order: 12 }} md={{ span: 10, order: 10 }}>
-                                <SearchBar path={path} setPath={setPath} setResults={setResults}
-                                    query={query} setQuery={setQuery} accessToken={accessToken} />
+                                <SearchBar path={path} setPath={setPath} setResults={setResults} accessToken={accessToken} />
                             </StyledCol>
-
                         </Row>
                     </Col>
 

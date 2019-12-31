@@ -1,4 +1,4 @@
-import React, { useRef, useContext } from 'react';
+import React, { useRef, useContext, useReducer } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -48,19 +48,29 @@ export default function SearchBar({
     path,
     setPath,
     setResults,
-    query,
-    setQuery,
     accessToken }) {
+
+    function reducer(state, action) {
+        switch (action.type) {
+            case 'UPDATE_QUERY':
+                return { ...state, query: action.query }
+            default:
+                return initialState;
+        }
+    }
+
+    const initialState = { type: 'UPDATE_QUERY', query: '' };
+    const [searchState, dispatch] = useReducer(reducer, initialState);
 
     const theme = useContext(ThemeContext);
 
     StyledAutocomplete.defaultProps = {
         theme: theme
-      }
-    
+    }
+
     StyledButton.defaultProps = {
         theme: theme
-      }
+    }
 
     // GRABBING REFERENCE OBJECT SO THAT WE CAN CALL handleFocus FUNCTION FOR THE AUTOCOMPLETE COMPONENT
     const inputEl = useRef(null);
@@ -98,6 +108,7 @@ export default function SearchBar({
     const getCoords = async () => {
         let coords = {};
         let location;
+        let query = searchState.query;
         if (query.geometry) {
             location = query.geometry.location
             coords = {
@@ -211,10 +222,10 @@ export default function SearchBar({
 
                                 <StyledFormRow>
                                     <Col>
-                                        <StyledAutocomplete ref={inputEl} onPlaceSelected={(place) => setQuery(place)}
+                                        <StyledAutocomplete ref={inputEl} onPlaceSelected={(place) => dispatch({ type: 'UPDATE_QUERY', query: place })}
                                             types={['geocode']} placeholder="Enter location" type="location"
                                             id="input-location" className="form-control form-control-default"
-                                            onChange={(event) => setQuery(event.target.value)}
+                                            onChange={(event) => dispatch({ type: 'UPDATE_QUERY', query: event.target.value })}
                                             onMouseEnter={handleFocus} />
                                     </Col>
                                     <Col sm="auto">

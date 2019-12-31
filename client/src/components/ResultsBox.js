@@ -64,7 +64,6 @@ export default function ResultsBox({results}) {
     function reducer(state, action) {
         switch (action.type) {
             case 'SHOW_MODAL':
-                // return { visible: action.visible, result: state.result };
                 return { ...state, visible: action.visible }
             case 'SET_RESULT':
                 return { ...state, visible: action.visible, result: action.result };

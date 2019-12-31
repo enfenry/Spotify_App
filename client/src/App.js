@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import { useRoutes } from 'hookrouter';
 import Main from './pages/Main.js'
@@ -15,22 +15,19 @@ export default function App() {
   // TODO: Cut down on declaring so many and especially passing so many (useContext)
   const [path, setPath] = useState(localStorage.getItem('path') || undefined);
   const [results, setResults] = useState([]);
-  const [query, setQuery] = useState('');
   const [accessToken, setAccessToken] = useState(localStorage.getItem('access_token') || undefined);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || {});
   const [auth, setAuth] = useState(JSON.stringify(user) !== JSON.stringify({}));
 
   const mainPage =
     <ThemeContext.Provider value={themes.default}>
-      <Main path={path} setPath={setPath} setResults={setResults}
-        query={query} setQuery={setQuery} auth={auth} setAuth={setAuth}
+      <Main path={path} setPath={setPath} setResults={setResults} auth={auth} setAuth={setAuth}
         user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
     </ThemeContext.Provider>
 
   const resultsPage =
     <ThemeContext.Provider value={themes.default}>
-      <Results path={path} setPath={setPath} results={results} setResults={setResults}
-        query={query} setQuery={setQuery} auth={auth} setAuth={setAuth}
+      <Results path={path} setPath={setPath} results={results} setResults={setResults} auth={auth} setAuth={setAuth}
         user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
     </ThemeContext.Provider>
 

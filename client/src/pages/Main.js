@@ -7,8 +7,6 @@ export default function Main({
     path,
     setPath,
     setResults,
-    query,
-    setQuery,
     auth,
     setAuth,
     user,
@@ -34,8 +32,7 @@ export default function Main({
             <br />
 
             <main>
-                <SearchBar path={path} setPath={setPath} setResults={setResults}
-                    query={query} setQuery={setQuery} accessToken={accessToken} />
+                <SearchBar path={path} setPath={setPath} setResults={setResults} accessToken={accessToken} />
             </main>
         </div>
     );
