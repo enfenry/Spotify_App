@@ -1,8 +1,8 @@
-// import React, { useEffect } from 'react';
-import React from 'react';
+import React, { useReducer } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ModalArtist from './ModalArtist.js';
+import { MyContext } from '../App';
 import moment from 'moment';
 import styled from 'styled-components';
 
@@ -59,16 +59,25 @@ const StyledMask = styled.div`
     cursor:pointer;
 `
 
-export default function ResultsBox({
-    results,
-    modalShow,
-    setModalShow,
-    currentEvent,
-    setCurrentEvent }) {
+export default function ResultsBox({results}) {
+
+    function reducer(state, action) {
+        switch (action.type) {
+            case 'SHOW_MODAL':
+                // return { visible: action.visible, result: state.result };
+                return { ...state, visible: action.visible }
+            case 'SET_RESULT':
+                return { ...state, visible: action.visible, result: action.result };
+            default:
+                return initialState;
+        }
+    }
+
+    const initialState = { type: 'SHOW_MODAL', visible: false, result: {} };
+    const [modalState, dispatch] = useReducer(reducer, initialState);
 
     const handleModal = (result) => {
-        setCurrentEvent(result);
-        setModalShow(true);
+        dispatch({ type: 'SET_RESULT', result: result, visible: true });
     }
 
     const renderLocation = (result) => {
@@ -199,7 +208,6 @@ export default function ResultsBox({
                                         <Row>
                                             <Col>
                                                 {renderVenue(result)}
-
                                             </Col>
                                         </Row>
                                         <Row>
@@ -244,8 +252,9 @@ export default function ResultsBox({
     return (
         <>
             {renderResults(results)}
-
-            <ModalArtist id="modal-artist" modalShow={modalShow} setModalShow={setModalShow} currentEvent={currentEvent} />
+            <MyContext.Provider value={{ modalState, dispatch }}>
+                <ModalArtist id="modal-artist" />
+            </MyContext.Provider>
         </>
     )
 };

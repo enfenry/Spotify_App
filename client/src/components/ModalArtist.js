@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import moment from 'moment';
 import { ThemeContext } from '../themes';
+import { MyContext } from '../App';
 import styled from 'styled-components';
 
 const StyledModalHeader = styled(Modal.Header)`
@@ -94,41 +95,40 @@ const StyledButton = styled(Button)`
     }
 `
 
-export default function ModalArtist({
-    modalShow,
-    setModalShow,
-    currentEvent
-}) {
+export default function ModalArtist() {
+    const {modalState, dispatch} = useContext(MyContext);
+    const result = modalState.result;
+
     const theme = useContext(ThemeContext);
 
     StyledButton.defaultProps = {
         theme: theme
-      }
+    }
 
-    const renderName = (currentEvent) => {
-        if (currentEvent._embedded) {
-            return currentEvent._embedded.attractions[0].name;
+    const renderName = (result) => {
+        if (result._embedded) {
+            return result._embedded.attractions[0].name;
         }
     }
 
-    const renderImage = (currentEvent) => {
-        if (currentEvent.spotify_id) {
+    const renderImage = (result) => {
+        if (result.spotify_id) {
             return (
-                <StyledImg className="modal-image" src={currentEvent.images[0].url}
-                    alt={renderName(currentEvent)} key={"img-current"} />
+                <StyledImg className="modal-image" src={result.images[0].url}
+                    alt={renderName(result)} key={"img-current"} />
             )
         }
-        else if (currentEvent._embedded) {
+        else if (result._embedded) {
             return (
-                <StyledImg className="modal-image" src={currentEvent._embedded.attractions[0].images[0].url}
-                    alt={renderName(currentEvent)} key={"img-current"} />
+                <StyledImg className="modal-image" src={result._embedded.attractions[0].images[0].url}
+                    alt={renderName(result)} key={"img-current"} />
             )
         }
     }
 
-    const renderLocation = (currentEvent) => {
-        if (currentEvent._embedded) {
-            let venue = currentEvent._embedded.venues[0];
+    const renderLocation = (result) => {
+        if (result._embedded) {
+            let venue = result._embedded.venues[0];
             if (venue.state) {
 
                 return (
@@ -148,9 +148,9 @@ export default function ModalArtist({
         }
     }
 
-    const renderVenue = (currentEvent) => {
-        if (currentEvent._embedded) {
-            const venue = currentEvent._embedded.venues[0]
+    const renderVenue = (result) => {
+        if (result._embedded) {
+            const venue = result._embedded.venues[0]
             if (venue.name.length < 40) {
                 return (
                     <span>{venue.name}</span>
@@ -162,17 +162,17 @@ export default function ModalArtist({
         }
     }
 
-    const renderDate = (currentEvent) => {
-        if (currentEvent.dates) {
+    const renderDate = (result) => {
+        if (result.dates) {
             let format = "YYYY-MM-DD";
-            let convertedDate = moment(currentEvent.dates.start.localDate, format);
+            let convertedDate = moment(result.dates.start.localDate, format);
             return convertedDate.format("MMM Do, YYYY");
         }
     }
 
-    const renderTime = (currentEvent) => {
-        if (currentEvent.dates) {
-            let time = currentEvent.dates.start.localTime;
+    const renderTime = (result) => {
+        if (result.dates) {
+            let time = result.dates.start.localTime;
             if (time) {
                 let hour = parseInt(time.substring(0, 2));
                 let minute = time.substring(2, time.length - 3);
@@ -192,14 +192,14 @@ export default function ModalArtist({
                 return hour + minute + tail;
             }
             else {
-                console.log("result couldn't render time", currentEvent)
+                console.log("result couldn't render time", result)
             }
         }
     }
 
-    const renderPrices = (currentEvent) => {
-        if (currentEvent.priceRanges) {
-            const pricing = currentEvent.priceRanges[0];
+    const renderPrices = (result) => {
+        if (result.priceRanges) {
+            const pricing = result.priceRanges[0];
 
             if (pricing.max === pricing.min) {
                 return (
@@ -214,9 +214,9 @@ export default function ModalArtist({
         }
     }
 
-    const renderGenre = (currentEvent) => {
-        if (currentEvent.classifications) {
-            let genre = currentEvent.classifications[0].genre;
+    const renderGenre = (result) => {
+        if (result.classifications) {
+            let genre = result.classifications[0].genre;
             if (genre) {
                 return (
                     <span> Genre: {genre.name}</span>
@@ -225,10 +225,10 @@ export default function ModalArtist({
         }
     }
 
-    const renderOtherArtists = (currentEvent) => {
-        if (currentEvent.otherArtists) {
+    const renderOtherArtists = (result) => {
+        if (result.otherArtists) {
             var mapOtherArtists = [];
-            mapOtherArtists = currentEvent.otherArtists.map((artist, index) => {
+            mapOtherArtists = result.otherArtists.map((artist, index) => {
                 return (
                     <Row key={`artist-${index}`}>
                         {artist}
@@ -258,12 +258,14 @@ export default function ModalArtist({
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered
-            show={modalShow}
-            onHide={() => { setModalShow(false) }}>
+            show={modalState.visible}
+            onHide={() => { 
+                dispatch({ type: 'SHOW_MODAL', visible: false }) 
+                }}>
 
             <StyledModalHeader>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    {renderName(currentEvent)}
+                    {renderName(result)}
                 </Modal.Title>
             </StyledModalHeader>
             <StyledModalBody>
@@ -274,30 +276,32 @@ export default function ModalArtist({
                                 <Col>
                                     <StyledImgContainer className="modal-image-container">
 
-                                        {renderImage(currentEvent)}
+                                        {renderImage(result)}
                                         <StyledMask className="mask">
-                                            <StyledIframe id="iframe-modal" title="topTracks" src={`https://open.spotify.com/embed/artist/${currentEvent.spotify_id}?si=OSj2G-oRQXaLYwukBQA-LA`} frameBorder="0" allowtransparency="true" allow="encrypted-media" />
+                                            <StyledIframe id="iframe-modal" title="topTracks" src={`https://open.spotify.com/embed/artist/${result.spotify_id}?si=OSj2G-oRQXaLYwukBQA-LA`} frameBorder="0" allowtransparency="true" allow="encrypted-media" />
                                         </StyledMask>
                                     </StyledImgContainer>
                                 </Col>
                             </Row>
                         </Col>
                         <Col md="6">
-                            <Row><p className="text-left"><small>{currentEvent.bio}</small></p></Row>
+                            <Row><p className="text-left"><small>{result.bio}</small></p></Row>
                             <Row></Row>
-                            <Row>{renderGenre(currentEvent)}</Row>
-                            <Row>{renderDate(currentEvent)}</Row>
-                            <Row>{renderTime(currentEvent)}</Row>
-                            <Row>{renderVenue(currentEvent)}</Row>
-                            <Row>{renderLocation(currentEvent)}</Row>
-                            <Row>{renderPrices(currentEvent)}</Row>
-                            <Row>{renderOtherArtists(currentEvent)}</Row>
+                            <Row>{renderGenre(result)}</Row>
+                            <Row>{renderDate(result)}</Row>
+                            <Row>{renderTime(result)}</Row>
+                            <Row>{renderVenue(result)}</Row>
+                            <Row>{renderLocation(result)}</Row>
+                            <Row>{renderPrices(result)}</Row>
+                            <Row>{renderOtherArtists(result)}</Row>
                         </Col>
                     </Row>
                 </Container>
             </StyledModalBody>
             <StyledModalFooter>
-                <StyledButton className="btn-default" onClick={() => { setModalShow(false) }}>Close</StyledButton>
+                <StyledButton className="btn-default" onClick={() => { 
+                    dispatch({ type: 'SHOW_MODAL', visible: false }) 
+                    }}>Close</StyledButton>
             </StyledModalFooter>
         </StyledModal>
     );

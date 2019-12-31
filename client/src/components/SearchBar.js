@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import Autocomplete from 'react-google-autocomplete';
 import { navigate } from 'hookrouter';
 import axios from 'axios';
+import { keys } from '../keys';
 import { ThemeContext } from '../themes';
 import styled from 'styled-components';
 
@@ -46,11 +47,9 @@ const StyledButton = styled(Button)`
 export default function SearchBar({
     path,
     setPath,
-    results,
     setResults,
     query,
     setQuery,
-    keys,
     accessToken }) {
 
     const theme = useContext(ThemeContext);

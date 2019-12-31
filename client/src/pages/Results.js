@@ -38,10 +38,6 @@ function Results({
     setPath,
     results,
     setResults,
-    modalShow,
-    setModalShow,
-    currentEvent,
-    setCurrentEvent,
     query,
     setQuery,
     auth,
@@ -49,8 +45,8 @@ function Results({
     user,
     setUser,
     accessToken,
-    setAccessToken,
-    keys }) {
+    setAccessToken
+}) {
 
     useEffect(() => {
         localStorage.setItem("path", "/results")
@@ -70,12 +66,12 @@ function Results({
                         className="space-between">
                         <Row noGutters={true} className="space-between">
                             <StyledCol centered="true" margintopbottom="true" xs={{ span: 12, order: 10 }} md={{ span: 2, order: 12 }}>
-                                <Spotify keys={keys} path={path} auth={auth} setAuth={setAuth} user={user} setUser={setUser}
+                                <Spotify path={path} auth={auth} setAuth={setAuth} user={user} setUser={setUser}
                                     accessToken={accessToken} setAccessToken={setAccessToken} popoverPlacement='bottom' />
                             </StyledCol>
                             <StyledCol centered="true" margintopbottom="true" xs={{ span: 12, order: 12 }} md={{ span: 10, order: 10 }}>
                                 <SearchBar path={path} setPath={setPath} setResults={setResults}
-                                    query={query} setQuery={setQuery} keys={keys} accessToken={accessToken} />
+                                    query={query} setQuery={setQuery} accessToken={accessToken} />
                             </StyledCol>
 
                         </Row>
@@ -91,8 +87,7 @@ function Results({
                         <StyledIframe title="playlist" src="https://open.spotify.com/embed/playlist/37i9dQZF1DX2Nc3B70tvx0?si=_AMfZgVbQsW4IeD6gwpB5w" width="300" height="540" frameBorder="0" allowtransparency="true" allow="encrypted-media" />
                     </Col>
                     <Col>
-                        <ResultsBox results={results} modalShow={modalShow} setModalShow={setModalShow}
-                            currentEvent={currentEvent} setCurrentEvent={setCurrentEvent} />
+                        <ResultsBox results={results}/>
                     </Col>
                 </Row>
             </main>

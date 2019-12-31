@@ -11,8 +11,8 @@ export default function Spotify({
     setUser,
     accessToken,
     setAccessToken,
-    popoverPlacement,
-    keys }) {
+    popoverPlacement
+}) {
 
     // USING SPOTIFY'S IMPLICIT GRANT FLOW AUTHENTICATION METHOD
     var stateKey = 'spotify_auth_state';
@@ -77,15 +77,15 @@ export default function Spotify({
         // console.log('localStorage.getItem("user")', localStorage.getItem('user'));
         // console.log('accessToken',accessToken);
         // console.log("localStorage.getItem('access_token')", localStorage.getItem('access_token'));
-        
+
         if (!(localStorage.getItem('user'))) {
             return (
-                <Login path={path} keys={keys} stateKey={stateKey} />
+                <Login path={path} stateKey={stateKey} />
             );
         }
         else {
             return (
-                <Logout path={path} user={user} setUser={setUser} popoverPlacement ={popoverPlacement} />
+                <Logout path={path} user={user} setUser={setUser} popoverPlacement={popoverPlacement} />
             )
         }
 
