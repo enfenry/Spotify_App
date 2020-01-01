@@ -30,11 +30,8 @@ export default function Login({ stateKey }) {
 
     const handleLogin = (event) => {
         event.preventDefault();
-        // TODO: SET REDIRECT URI TO BE DYNAMIC
         var client_id = keys.spotify.id; // Your client id
-        var redirect_uri = 'http://localhost:3000/callback'; // Your redirect uri   
-        // THE BELOW DOESN'T WORK
-        // var redirect_uri = process.env.PUBLIC_URL + '/callback'; // Your redirect uri
+        var redirect_uri = `${window.location.origin}/callback`; // Your redirect uri   
 
         function generateRandomString(length) {
             var text = '';
