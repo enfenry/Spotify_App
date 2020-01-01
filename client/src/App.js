@@ -9,37 +9,41 @@ import { ThemeContext, themes } from './themes';
 
 export const MyContext = React.createContext(null);
 export const ResultsContext = React.createContext(null);
+export const PathContext = React.createContext(null);
 
 export default function App() {
 
-  // ------------------------------------------
   function reducer(state, action) {
     switch (action.type) {
       case 'SET_RESULTS':
         return { ...state, results: action.results }
+      case 'SET_PATH':
+        return { ...state, path: action.path }
       default:
-        return initialState;
+        return state;
     }
   }
 
-  const initialState = { type: 'SET_RESULTS', results: [] };
-  const [resultsState, dispatch] = useReducer(reducer, initialState);
+  const initResults = { type: 'SET_RESULTS', results: [] };
+  const [resultsState, dispatchResults] = useReducer(reducer, initResults);
+
+  const initPath = { type: 'SET_PATH', path: localStorage.getItem('path') || undefined }
+  const [pathState, dispatchPath] = useReducer(reducer, initPath);
+  const path = pathState.path;
+
   // ------------------------------------------
 
   // Assign state variables
   // TODO: Cut down on declaring so many and especially passing so many (useContext)
-  const [path, setPath] = useState(localStorage.getItem('path') || undefined);
   const [accessToken, setAccessToken] = useState(localStorage.getItem('access_token') || undefined);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || {});
   const [auth, setAuth] = useState(JSON.stringify(user) !== JSON.stringify({}));
 
   const mainPage =
-    <Main path={path} setPath={setPath} auth={auth} setAuth={setAuth}
-      user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
+    <Main auth={auth} setAuth={setAuth} user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
 
   const resultsPage =
-    <Results path={path} setPath={setPath} auth={auth} setAuth={setAuth}
-      user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
+    <Results auth={auth} setAuth={setAuth} user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
 
   const routes = {
     '/': () => { return mainPage },
@@ -49,6 +53,8 @@ export default function App() {
           return resultsPage;
         case '/':
           return mainPage;
+        default:
+          return <>No Page Found</>
       }
     },
     '/results': () => { return resultsPage }
@@ -64,9 +70,11 @@ export default function App() {
     <div className="App">
       <Container fluid>
         <ThemeContext.Provider value={themes.default}>
-          <ResultsContext.Provider value={{ resultsState, dispatch }}>
-            {MyApp()}
-            <Footer />
+          <ResultsContext.Provider value={{ resultsState, dispatchResults }}>
+            <PathContext.Provider value={{ pathState, dispatchPath }}>
+              {MyApp()}
+              <Footer />
+            </PathContext.Provider>
           </ResultsContext.Provider>
         </ThemeContext.Provider>
       </Container>

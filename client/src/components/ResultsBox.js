@@ -75,7 +75,7 @@ export default function ResultsBox() {
     const initialState = { type: 'SHOW_MODAL', visible: false, result: {} };
     const [modalState, dispatchModal] = useReducer(reducer, initialState);
 
-    const {resultsState, dispatch} = useContext(ResultsContext);
+    const { resultsState } = useContext(ResultsContext);
     const results = resultsState.results;
 
     const handleModal = (result) => {

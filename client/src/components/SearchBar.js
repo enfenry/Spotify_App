@@ -8,7 +8,7 @@ import Autocomplete from 'react-google-autocomplete';
 import { navigate } from 'hookrouter';
 import axios from 'axios';
 import { keys } from '../keys';
-import { ResultsContext } from '../App';
+import { ResultsContext, PathContext } from '../App';
 import { ThemeContext } from '../themes';
 import styled from 'styled-components';
 
@@ -45,24 +45,23 @@ const StyledButton = styled(Button)`
     }
 `
 
-export default function SearchBar({
-    path,
-    setPath,
-    accessToken }) {
+export default function SearchBar({ accessToken }) {
 
     function reducer(state, action) {
         switch (action.type) {
             case 'UPDATE_QUERY':
                 return { ...state, query: action.query }
             default:
-                return initialState;
+                return state;
         }
     }
 
-    const initialState = { type: 'UPDATE_QUERY', query: '' };
-    const [searchState, dispatchQuery] = useReducer(reducer, initialState);
+    const initialSearch = { type: 'UPDATE_QUERY', query: '' };
+    const [searchState, dispatchSearch] = useReducer(reducer, initialSearch);
 
-    const { resultsState, dispatch } = useContext(ResultsContext);
+    const { dispatchResults } = useContext(ResultsContext);
+    const { pathState, dispatchPath } = useContext(PathContext);
+    const path = pathState.path;
 
     const theme = useContext(ThemeContext);
 
@@ -186,7 +185,6 @@ export default function SearchBar({
     // HANDLE SEARCH BY LOCATION
     const handleSearch = async (event) => {
         event.preventDefault();
-        setPath("/results");
 
         // SEARCH COORDS BASED ON STATE OF query USING GOOGLE API
         getCoords()
@@ -202,7 +200,8 @@ export default function SearchBar({
                     })
                     .then(newResults => {
                         console.log('newResults', newResults)
-                        dispatch({ type: 'SET_RESULTS', results: newResults });
+                        dispatchPath({ type: 'SET_PATH', path: '/results' });
+                        dispatchResults({ type: 'SET_RESULTS', results: newResults });
                         navigate("/results");
                     })
                     .catch((error) => {
@@ -224,10 +223,10 @@ export default function SearchBar({
 
                                 <StyledFormRow>
                                     <Col>
-                                        <StyledAutocomplete ref={inputEl} onPlaceSelected={(place) => dispatchQuery({ type: 'UPDATE_QUERY', query: place })}
+                                        <StyledAutocomplete ref={inputEl} onPlaceSelected={(place) => dispatchSearch({ type: 'UPDATE_QUERY', query: place })}
                                             types={['geocode']} placeholder="Enter location" type="location"
                                             id="input-location" className="form-control form-control-default"
-                                            onChange={(event) => dispatchQuery({ type: 'UPDATE_QUERY', query: event.target.value })}
+                                            onChange={(event) => dispatchSearch({ type: 'UPDATE_QUERY', query: event.target.value })}
                                             onMouseEnter={handleFocus} />
                                     </Col>
                                     <Col sm="auto">

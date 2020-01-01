@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
+import { PathContext } from '../App';
 import Header from '../components/Header.js';
 import SearchBar from '../components/SearchBar.js';
 import ResultsBox from '../components/ResultsBox.js';
@@ -34,8 +35,6 @@ const StyledRow = styled(Row)`
 `
 
 function Results({
-    path,
-    setPath,
     auth,
     setAuth,
     user,
@@ -43,14 +42,15 @@ function Results({
     accessToken,
     setAccessToken
 }) {
+    const { dispatchPath } = useContext(PathContext);
 
     useEffect(() => {
-        localStorage.setItem("path", "/results")
-        setPath("/results");
-    })
+        localStorage.setItem('path', '/results');
+        dispatchPath({ type: 'SET_PATH', path: '/results' });
+    },[])
 
     return (
-        <div className="Results">
+        <div className='Results'>
             <Container fluid>
                 <StyledRow>
                     <br />
@@ -62,11 +62,11 @@ function Results({
                         className="space-between">
                         <Row noGutters={true} className="space-between">
                             <StyledCol centered="true" margintopbottom="true" xs={{ span: 12, order: 10 }} md={{ span: 2, order: 12 }}>
-                                <Spotify path={path} auth={auth} setAuth={setAuth} user={user} setUser={setUser}
+                                <Spotify auth={auth} setAuth={setAuth} user={user} setUser={setUser}
                                     accessToken={accessToken} setAccessToken={setAccessToken} popoverPlacement='bottom' />
                             </StyledCol>
                             <StyledCol centered="true" margintopbottom="true" xs={{ span: 12, order: 12 }} md={{ span: 10, order: 10 }}>
-                                <SearchBar path={path} setPath={setPath} accessToken={accessToken} />
+                                <SearchBar accessToken={accessToken} />
                             </StyledCol>
                         </Row>
                     </Col>
