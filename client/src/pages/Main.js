@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
+import { PathContext } from '../App';
 import Header from '../components/Header.js';
 import SearchBar from '../components/SearchBar.js';
 import Spotify from '../components/Spotify';
 
 export default function Main({
-    path,
-    setPath,
     auth,
     setAuth,
     user,
@@ -14,24 +13,26 @@ export default function Main({
     setAccessToken
 }) {
 
+    const { dispatchPath } = useContext(PathContext);
+
     useEffect(() => {
-        localStorage.setItem("path","/")
-        setPath("/");
-    })
+        localStorage.setItem('path','/')
+        dispatchPath({ type: 'SET_PATH', path: '/' });
+    },[])
 
     return (
-        <div className="Main">
+        <div className='Main'>
             <br />
             <header>
                 <Header />
-                <Spotify path={path} auth={auth} setAuth={setAuth}
-                    user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} popoverPlacement='right' />
+                <Spotify auth={auth} setAuth={setAuth} user={user} setUser={setUser} 
+                accessToken={accessToken} setAccessToken={setAccessToken} popoverPlacement='right' />
             </header>
             <br />
             <br />
 
             <main>
-                <SearchBar path={path} setPath={setPath} accessToken={accessToken} />
+                <SearchBar accessToken={accessToken} />
             </main>
         </div>
     );

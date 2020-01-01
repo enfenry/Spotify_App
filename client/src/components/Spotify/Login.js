@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import { keys } from '../../keys';
+import { PathContext } from '../../App';
 import styled from 'styled-components';
 
 const StyledButton = styled(Button)`
-    ${props => props.small ? 
+    ${props => props.small ?
         `height: 50px; 
         width: auto;
         ` : ""}
@@ -22,10 +23,10 @@ const StyledButton = styled(Button)`
     }
 `
 
-export default function Login({
-    path,
-    stateKey
-}) {
+export default function Login({ stateKey }) {
+
+    const { pathState } = useContext(PathContext);
+    const path = pathState.path;
 
     const handleLogin = (event) => {
         event.preventDefault();
@@ -60,34 +61,22 @@ export default function Login({
         window.location = url;
     };
 
-    const renderLoginButton = () => {
-        if (path === "/") {
-            return (
-                <>
-                    <small>Log in to </small><StyledButton
-                        onClick={(event) => handleLogin(event)}>
-                        <img className="img-header" id="spotify-logo-header" alt="Spotify-Login"
-                            src={process.env.PUBLIC_URL + '/static/img/spotify_logo_with_text_black.svg'} />
-                    </StyledButton>
-                </>
-            )
-        }
-        else {
-            return (
-                <>
-                    <StyledButton small="true"
-                         onClick={(event) => handleLogin(event)}>
-                        <img className="img-header" id="spotify-logo-header" alt="Spotify-Login"
-                            src={process.env.PUBLIC_URL + '/static/img/spotify_logo_no_text_black.svg'} />
-                    </StyledButton>
-                </>
-            )
-        }
+    const renderButton = (isSmall, src) => {
+        return (
+            <StyledButton small={isSmall} onClick={(event) => handleLogin(event)}>
+                <img className="img-header" id="spotify-logo-header" alt="Spotify-Login"
+                    src={src} />
+            </StyledButton>
+        )
+    }
+
+    const renderLogin = () => {
+        return path === '/' ?
+            <><small>Log in to </small>{renderButton('false', process.env.PUBLIC_URL + '/static/img/spotify_logo_with_text_black.svg')}</>
+            : renderButton('true', process.env.PUBLIC_URL + '/static/img/spotify_logo_no_text_black.svg');
     }
 
     return (
-        <>
-            {renderLoginButton()}
-        </>
+            renderLogin()
     );
 };

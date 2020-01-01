@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import Row from 'react-bootstrap/Row';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import { navigate } from 'hookrouter';
+import { PathContext } from '../../App';
 import styled from 'styled-components';
 
 const StyledLink = styled.a`
@@ -30,15 +31,19 @@ const StyledImg = styled.img`
 `
 
 export default function Logout({
-    path,
     user,
     setUser,
     popoverPlacement
 }) {
 
+    // TODO: Review use of [user] dependency array here
     useEffect(() => {
         setUser(user);
-    })
+    },[user])
+
+    const { pathState } = useContext(PathContext);
+    const path = pathState.path;
+    // console.log('path',path);
 
     const handleLogout = (path) => {
         localStorage.clear();

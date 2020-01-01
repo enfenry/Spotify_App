@@ -4,12 +4,10 @@ import Login from './Login.js';
 import Logout from './Logout.js';
 
 export default function Spotify({
-    path,
     auth,
     setAuth,
     user,
     setUser,
-    accessToken,
     setAccessToken,
     popoverPlacement
 }) {
@@ -78,22 +76,10 @@ export default function Spotify({
         // console.log('accessToken',accessToken);
         // console.log("localStorage.getItem('access_token')", localStorage.getItem('access_token'));
 
-        if (!(localStorage.getItem('user'))) {
-            return (
-                <Login path={path} stateKey={stateKey} />
-            );
-        }
-        else {
-            return (
-                <Logout path={path} user={user} setUser={setUser} popoverPlacement={popoverPlacement} />
-            )
-        }
-
+        return !(localStorage.getItem('user')) ? <Login stateKey={stateKey} /> : <Logout user={user} setUser={setUser} popoverPlacement={popoverPlacement} />;
     };
 
     return (
-        <>
-            {renderLogin()}
-        </>
+            renderLogin()
     )
 }
