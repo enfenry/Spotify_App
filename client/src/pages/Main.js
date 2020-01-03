@@ -8,9 +8,7 @@ export default function Main({
     auth,
     setAuth,
     user,
-    setUser,
-    accessToken,
-    setAccessToken
+    setUser
 }) {
 
     const { dispatchPath } = useContext(PathContext);
@@ -25,14 +23,13 @@ export default function Main({
             <br />
             <header>
                 <Header />
-                <Spotify auth={auth} setAuth={setAuth} user={user} setUser={setUser} 
-                accessToken={accessToken} setAccessToken={setAccessToken} popoverPlacement='right' />
+                <Spotify auth={auth} setAuth={setAuth} user={user} setUser={setUser} popoverPlacement='right' />
             </header>
             <br />
             <br />
 
             <main>
-                <SearchBar accessToken={accessToken} />
+                <SearchBar />
             </main>
         </div>
     );

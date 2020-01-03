@@ -8,7 +8,7 @@ import Autocomplete from 'react-google-autocomplete';
 import { navigate } from 'hookrouter';
 import axios from 'axios';
 import { keys } from '../keys';
-import { ResultsContext, PathContext } from '../App';
+import { ResultsContext, PathContext, TokenContext } from '../App';
 import { ThemeContext } from '../themes';
 import styled from 'styled-components';
 
@@ -45,7 +45,7 @@ const StyledButton = styled(Button)`
     }
 `
 
-export default function SearchBar({ accessToken }) {
+export default function SearchBar() {
 
     function reducer(state, action) {
         switch (action.type) {
@@ -62,6 +62,9 @@ export default function SearchBar({ accessToken }) {
     const { dispatchResults } = useContext(ResultsContext);
     const { pathState, dispatchPath } = useContext(PathContext);
     const path = pathState.path;
+
+    const { tokenState } = useContext(TokenContext);
+    const accessToken = tokenState.accessToken;
 
     const theme = useContext(ThemeContext);
 
@@ -109,6 +112,13 @@ export default function SearchBar({ accessToken }) {
     const getCoords = async () => {
         let coords = {};
         let location;
+
+        // TODO: AUTO-FILL SEARCH BAR WITH USER'S CURRENT LOCATION
+        // PLAYING AROUND WITH GEOLOCATION
+        // let geoCoords = {};
+        // let geolocation;
+        // PLAYING AROUND WITH GEOLOCATION
+
         let query = searchState.query;
         if (query.geometry) {
             location = query.geometry.location
@@ -127,10 +137,25 @@ export default function SearchBar({ accessToken }) {
                         lat: location.lat,
                         lng: location.lng
                     };
+                    console.log('coords',coords);
                 })
                 .catch((error) => {
                     console.error(error)
                 })
+
+            // TODO: AUTO-FILL SEARCH BAR WITH USER'S CURRENT LOCATION
+            // PLAYING AROUND WITH GEOLOCATION
+            // let locateURL = `https://www.googleapis.com/geolocation/v1/geolocate?key=${keys.google}`;
+            // return axios.post(locateURL, {})
+            //     .then(jsonData => {
+            //         geolocation = jsonData.data.location;
+            //         geoCoords = {
+            //             lat: location.lat,
+            //             lng: location.lng
+            //         };
+            //         console.log('geoCoords',geoCoords);
+            //     })
+            // PLAYING AROUND WITH GEOLOCATION
         }
         return coords;
     }
@@ -144,7 +169,8 @@ export default function SearchBar({ accessToken }) {
                 // console.log('realResults', jsonData._embedded.events);
                 return jsonData._embedded.events;
             })
-            // TEMPORARY FIX FOR RESULTS THAT DON'T HAVE AN ATTRACTION PROPERTY
+            // TODO: DECIDE HOW TO HANDLE RESULTS WITHOUT AN ATTRACTION PROPERTY
+            // TEMPORARY FIX TO FILTER OUT
             .then(results => { return results.filter(result => { return result._embedded.attractions }) })
     }
 

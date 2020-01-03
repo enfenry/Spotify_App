@@ -10,6 +10,7 @@ import { ThemeContext, themes } from './themes';
 export const MyContext = React.createContext(null);
 export const ResultsContext = React.createContext(null);
 export const PathContext = React.createContext(null);
+export const TokenContext = React.createContext(null);
 
 export default function App() {
 
@@ -19,6 +20,8 @@ export default function App() {
         return { ...state, results: action.results }
       case 'SET_PATH':
         return { ...state, path: action.path }
+      case 'SET_TOKEN':
+        return { ...state, accessToken: action.accessToken }
       default:
         return state;
     }
@@ -31,19 +34,21 @@ export default function App() {
   const [pathState, dispatchPath] = useReducer(reducer, initPath);
   const path = pathState.path;
 
+  const initToken = { type: 'SET_TOKEN', accessToken: localStorage.getItem('access_token') || undefined }
+  const [tokenState, dispatchToken] = useReducer(reducer, initToken);
+
   // ------------------------------------------
 
   // Assign state variables
   // TODO: Cut down on declaring so many and especially passing so many (useContext)
-  const [accessToken, setAccessToken] = useState(localStorage.getItem('access_token') || undefined);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || {});
   const [auth, setAuth] = useState(JSON.stringify(user) !== JSON.stringify({}));
 
   const mainPage =
-    <Main auth={auth} setAuth={setAuth} user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
+    <Main auth={auth} setAuth={setAuth} user={user} setUser={setUser} />
 
   const resultsPage =
-    <Results auth={auth} setAuth={setAuth} user={user} setUser={setUser} accessToken={accessToken} setAccessToken={setAccessToken} />
+    <Results auth={auth} setAuth={setAuth} user={user} setUser={setUser} />
 
   const routes = {
     '/': () => { return mainPage },
@@ -72,8 +77,10 @@ export default function App() {
         <ThemeContext.Provider value={themes.default}>
           <ResultsContext.Provider value={{ resultsState, dispatchResults }}>
             <PathContext.Provider value={{ pathState, dispatchPath }}>
+            <TokenContext.Provider value={{ tokenState, dispatchToken }}>
               {MyApp()}
               <Footer />
+              </TokenContext.Provider>
             </PathContext.Provider>
           </ResultsContext.Provider>
         </ThemeContext.Provider>
