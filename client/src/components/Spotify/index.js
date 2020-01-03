@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
+import { TokenContext } from '../../App';
 import axios from 'axios';
 import Login from './Login.js';
 import Logout from './Logout.js';
@@ -8,9 +9,10 @@ export default function Spotify({
     setAuth,
     user,
     setUser,
-    setAccessToken,
     popoverPlacement
 }) {
+
+    const { dispatchToken } = useContext(TokenContext);
 
     // USING SPOTIFY'S IMPLICIT GRANT FLOW AUTHENTICATION METHOD
     var stateKey = 'spotify_auth_state';
@@ -61,7 +63,7 @@ export default function Spotify({
                     localStorage.setItem('auth', true);
                     setUser(response);
                     localStorage.setItem('user', JSON.stringify(response));
-                    setAccessToken(access_token);
+                    dispatchToken({ type: 'SET_TOKEN', accessToken: access_token });
                     localStorage.setItem('access_token', access_token);
                 }, (error) => {
                     console.log(error);
