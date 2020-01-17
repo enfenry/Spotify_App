@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import './App.css';
 import { useRoutes } from 'hookrouter';
 import Main from './pages/Main.js'
@@ -11,6 +11,7 @@ export const MyContext = React.createContext(null);
 export const ResultsContext = React.createContext(null);
 export const PathContext = React.createContext(null);
 export const TokenContext = React.createContext(null);
+export const UserContext = React.createContext(null);
 
 export default function App() {
 
@@ -22,6 +23,8 @@ export default function App() {
         return { ...state, path: action.path }
       case 'SET_TOKEN':
         return { ...state, accessToken: action.accessToken }
+      case 'SET_USER':
+        return { ...state, user: action.user }
       default:
         return state;
     }
@@ -30,25 +33,18 @@ export default function App() {
   const initResults = { type: 'SET_RESULTS', results: [] };
   const [resultsState, dispatchResults] = useReducer(reducer, initResults);
 
-  const initPath = { type: 'SET_PATH', path: localStorage.getItem('path') || undefined }
+  const initPath = { type: 'SET_PATH', path: localStorage.getItem('path') || undefined };
   const [pathState, dispatchPath] = useReducer(reducer, initPath);
   const path = pathState.path;
 
-  const initToken = { type: 'SET_TOKEN', accessToken: localStorage.getItem('access_token') || undefined }
+  const initToken = { type: 'SET_TOKEN', accessToken: localStorage.getItem('access_token') || undefined };
   const [tokenState, dispatchToken] = useReducer(reducer, initToken);
 
-  // ------------------------------------------
+  const initUser = { type: 'SET_USER', user: JSON.parse(localStorage.getItem('user')) || {} };
+  const [userState, dispatchUser] = useReducer(reducer, initUser);
 
-  // Assign state variables
-  // TODO: Cut down on declaring so many and especially passing so many (useContext)
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || {});
-  const [auth, setAuth] = useState(JSON.stringify(user) !== JSON.stringify({}));
-
-  const mainPage =
-    <Main auth={auth} setAuth={setAuth} user={user} setUser={setUser} />
-
-  const resultsPage =
-    <Results auth={auth} setAuth={setAuth} user={user} setUser={setUser} />
+  const mainPage = <Main />;
+  const resultsPage = <Results />;
 
   const routes = {
     '/': () => { return mainPage },
@@ -67,8 +63,7 @@ export default function App() {
 
   const MyApp = () => {
     const routeResult = useRoutes(routes);
-    return routeResult;
-    // return routeResult || <NotFoundPage />;
+    return routeResult || <>No Page Found</>;
   }
 
   return (
@@ -77,9 +72,11 @@ export default function App() {
         <ThemeContext.Provider value={themes.default}>
           <ResultsContext.Provider value={{ resultsState, dispatchResults }}>
             <PathContext.Provider value={{ pathState, dispatchPath }}>
-            <TokenContext.Provider value={{ tokenState, dispatchToken }}>
-              {MyApp()}
-              <Footer />
+              <TokenContext.Provider value={{ tokenState, dispatchToken }}>
+                <UserContext.Provider value={{ userState, dispatchUser }}>
+                  {MyApp()}
+                  <Footer />
+                </UserContext.Provider>
               </TokenContext.Provider>
             </PathContext.Provider>
           </ResultsContext.Provider>

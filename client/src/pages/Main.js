@@ -5,8 +5,6 @@ import SearchBar from '../components/SearchBar.js';
 import Spotify from '../components/Spotify';
 
 export default function Main({
-    auth,
-    setAuth,
     user,
     setUser
 }) {
@@ -23,7 +21,7 @@ export default function Main({
             <br />
             <header>
                 <Header />
-                <Spotify auth={auth} setAuth={setAuth} user={user} setUser={setUser} popoverPlacement='right' />
+                <Spotify popoverPlacement='right' />
             </header>
             <br />
             <br />

@@ -3,7 +3,7 @@ import Row from 'react-bootstrap/Row';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import { navigate } from 'hookrouter';
-import { PathContext } from '../../App';
+import { PathContext, UserContext } from '../../App';
 import styled from 'styled-components';
 
 const StyledLink = styled.a`
@@ -31,19 +31,19 @@ const StyledImg = styled.img`
 `
 
 export default function Logout({
-    user,
-    setUser,
     popoverPlacement
 }) {
+    const { userState, dispatchUser } = useContext(UserContext);
+    const user = userState.user;
+    console.log('user',user);
 
     // TODO: Review use of [user] dependency array here
     useEffect(() => {
-        setUser(user);
+        dispatchUser({ type: 'SET_USER', user: user });
     },[user])
 
     const { pathState } = useContext(PathContext);
     const path = pathState.path;
-    // console.log('path',path);
 
     const handleLogout = (path) => {
         localStorage.clear();
