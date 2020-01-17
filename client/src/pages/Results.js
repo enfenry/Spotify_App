@@ -35,8 +35,6 @@ const StyledRow = styled(Row)`
 `
 
 function Results({
-    user,
-    setUser
 }) {
     const { dispatchPath } = useContext(PathContext);
 
