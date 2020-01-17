@@ -5,8 +5,6 @@ import SearchBar from '../components/SearchBar.js';
 import Spotify from '../components/Spotify';
 
 export default function Main({
-    user,
-    setUser
 }) {
 
     const { dispatchPath } = useContext(PathContext);
