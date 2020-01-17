@@ -61,8 +61,7 @@ export default function Login({ stateKey }) {
     const renderButton = (isSmall, src) => {
         return (
             <StyledButton small={isSmall} onClick={(event) => handleLogin(event)}>
-                <img className="img-header" id="spotify-logo-header" alt="Spotify-Login"
-                    src={src} />
+                <img className="img-header" id="spotify-logo-header" alt="Spotify-Login" src={src} />
             </StyledButton>
         )
     }

@@ -35,8 +35,6 @@ const StyledRow = styled(Row)`
 `
 
 function Results({
-    auth,
-    setAuth,
     user,
     setUser
 }) {
@@ -60,7 +58,7 @@ function Results({
                         className="space-between">
                         <Row noGutters={true} className="space-between">
                             <StyledCol centered="true" margintopbottom="true" xs={{ span: 12, order: 10 }} md={{ span: 2, order: 12 }}>
-                                <Spotify auth={auth} setAuth={setAuth} user={user} setUser={setUser} popoverPlacement='bottom' />
+                                <Spotify popoverPlacement='bottom' />
                             </StyledCol>
                             <StyledCol centered="true" margintopbottom="true" xs={{ span: 12, order: 12 }} md={{ span: 10, order: 10 }}>
                                 <SearchBar />

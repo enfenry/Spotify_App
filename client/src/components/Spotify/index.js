@@ -1,27 +1,22 @@
 import React, { useEffect, useContext } from 'react';
-import { TokenContext } from '../../App';
+import { TokenContext, UserContext } from '../../App';
 import axios from 'axios';
 import Login from './Login.js';
 import Logout from './Logout.js';
 
 export default function Spotify({
-    auth,
-    setAuth,
-    user,
-    setUser,
     popoverPlacement
 }) {
 
     const { dispatchToken } = useContext(TokenContext);
+    const { userState, dispatchUser } = useContext(UserContext);
+    const user = userState.user;
 
     // USING SPOTIFY'S IMPLICIT GRANT FLOW AUTHENTICATION METHOD
     var stateKey = 'spotify_auth_state';
 
     useEffect(() => {
-
-        console.log('auth', auth);
-        console.log('user', user);
-
+        // console.log('user', user);
         function getHashParams() {
             var hashParams = {};
             var e, r = /([^&;=]+)=?([^&;]*)/g,
@@ -46,7 +41,7 @@ export default function Spotify({
         // console.log('state == null', state == null)
         // console.log('state !== storedState', state !== storedState);
 
-        if (access_token && (state == null || state !== storedState) && !(auth)) {
+        if (access_token && (state == null || state !== storedState) && !(user.data)) {
             alert('There was an error during the authentication');
         }
         else {
@@ -58,10 +53,7 @@ export default function Spotify({
                     }
                 }).then((response) => {
                     // console.log(response);
-
-                    setAuth(true);
-                    localStorage.setItem('auth', true);
-                    setUser(response);
+                    dispatchUser({ type: 'SET_USER', user: response });
                     localStorage.setItem('user', JSON.stringify(response));
                     dispatchToken({ type: 'SET_TOKEN', accessToken: access_token });
                     localStorage.setItem('access_token', access_token);
@@ -70,7 +62,7 @@ export default function Spotify({
                 });
             }
         }
-    }, [auth])
+    }, [])
 
     const renderLogin = () => {
         // console.log('user', user);
@@ -78,7 +70,7 @@ export default function Spotify({
         // console.log('accessToken',accessToken);
         // console.log("localStorage.getItem('access_token')", localStorage.getItem('access_token'));
 
-        return !(localStorage.getItem('user')) ? <Login stateKey={stateKey} /> : <Logout user={user} setUser={setUser} popoverPlacement={popoverPlacement} />;
+        return !(localStorage.getItem('user')) ? <Login stateKey={stateKey} /> : <Logout popoverPlacement={popoverPlacement} />;
     };
 
     return (
