@@ -29,9 +29,5 @@ export default function Header() {
         theme: theme
     }
 
-    return (
-        <>
-            <StyledLink href="/"><h1><StyledSpan>This</StyledSpan>Weekend</h1></StyledLink>
-        </>
-    )
+    return (<StyledLink href="/"><h1><StyledSpan>This</StyledSpan>Weekend</h1></StyledLink>)
 }

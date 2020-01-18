@@ -142,9 +142,6 @@ export default function ResultsBox() {
             }
             return hour + minute + tail;
         }
-        else {
-            console.log("result couldn't render time", result)
-        }
     }
 
     const renderPrices = (result) => {
@@ -179,19 +176,10 @@ export default function ResultsBox() {
         var mapResults = [];
         mapResults = results.map((result, index) => {
             if (result._embedded.attractions) {
-
-                // TODO: CHECK IF THERE IS A SPOTIFY ID IN RESULT AND RENDERING RESULT DIFFERENTLY
-                //     var image;
-                //     var name;
-                //     var genres;
-
-                // if (result.spotify_id) {
-                //     genres = result.genres;
-                // }
                 return (
                     <Col className="padded" key={index} sm="auto">
                         <StyledImgContainer>
-                            <StyledImg src={result.images[0].url}
+                            <StyledImg src={result.images.length ? result.images[0].url : result._embedded.attractions[0].images[0].url}
                                 alt={result._embedded.attractions[0].name} key={"img-" + result._embedded.attractions[0].name} data-toggle="modal"
                                 data-target="#modal-artist" />
                             <StyledMask className="mask" onClick={() => handleModal(result)}>

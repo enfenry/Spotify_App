@@ -206,6 +206,10 @@ export default function SearchBar() {
                 }
                 return result;
             })
+            .catch(error => {
+                console.log('accessToken',accessToken);
+                console.log(error);
+            });
     }
 
     // HANDLE SEARCH BY LOCATION

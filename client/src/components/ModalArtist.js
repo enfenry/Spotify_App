@@ -96,7 +96,7 @@ const StyledButton = styled(Button)`
 `
 
 export default function ModalArtist() {
-    const {modalState, dispatchModal} = useContext(ModalContext);
+    const { modalState, dispatchModal } = useContext(ModalContext);
     const result = modalState.result;
 
     const theme = useContext(ThemeContext);
@@ -105,167 +105,101 @@ export default function ModalArtist() {
         theme: theme
     }
 
-    const renderName = (result) => {
-        if (result._embedded) {
-            return result._embedded.attractions[0].name;
+    let display = {
+        name: ``,
+        src: ``,
+        location: ``,
+        venue: ``,
+        date: ``,
+        time: ``,
+        prices: ``,
+        genre: ``,
+        otherArtists: ``
+    };
+
+    if (result._embedded) {
+        // check name to display
+        display.name = result._embedded.attractions[0].name;
+        // check src to display
+        display.src = result.images.length ? result.images[0].url : result._embedded.attractions[0].images[0].url;
+        // check location to display
+        let venue = result._embedded.venues[0];
+        if (venue.state) {
+            display.location = `${venue.city.name}, ${venue.state.stateCode}`;
         }
+        else if (venue.city) {
+            display.location = `${venue.city.name}, ${venue.country.countryCode}`;
+        }
+        // check venue to display
+        display.venue = venue.name.length < 38 ? venue.name : `${venue.name.substring(0, 37)}...`;
     }
-
-    const renderImage = (result) => {
-        if (result.spotify_id) {
-            return (
-                <StyledImg className="modal-image" src={result.images[0].url}
-                    alt={renderName(result)} key={"img-current"} />
-            )
-        }
-        else if (result._embedded) {
-            return (
-                <StyledImg className="modal-image" src={result._embedded.attractions[0].images[0].url}
-                    alt={renderName(result)} key={"img-current"} />
-            )
-        }
-    }
-
-    const renderLocation = (result) => {
-        if (result._embedded) {
-            let venue = result._embedded.venues[0];
-            if (venue.state) {
-
-                return (
-                    <span>{venue.city.name}, {venue.state.stateCode}</span>
-                )
-            }
-            else if (venue.city) {
-                return (
-                    <span>{venue.city.name}, {venue.country.countryCode}</span>
-                )
+    if (result.dates) {
+        // check date to display
+        let convertedDate = moment(result.dates.start.localDate, "YYYY-MM-DD");
+        display.date = convertedDate.format("MMM Do, YYYY");
+        //  check time to display
+        let time = result.dates.start.localTime;
+        if (time) {
+            let hour = parseInt(time.substring(0, 2));
+            let minute = time.substring(2, time.length - 3);
+            let tail;
+            if (hour < 12) {
+                tail = 'AM';
             }
             else {
-                return (
-                    <span></span>
-                )
-            }
-        }
-    }
-
-    const renderVenue = (result) => {
-        if (result._embedded) {
-            const venue = result._embedded.venues[0]
-            if (venue.name.length < 40) {
-                return (
-                    <span>{venue.name}</span>
-                )
-            }
-            return (
-                <span>{`${venue.name.substring(0, 39)}...`}</span>
-            )
-        }
-    }
-
-    const renderDate = (result) => {
-        if (result.dates) {
-            let format = "YYYY-MM-DD";
-            let convertedDate = moment(result.dates.start.localDate, format);
-            return convertedDate.format("MMM Do, YYYY");
-        }
-    }
-
-    const renderTime = (result) => {
-        if (result.dates) {
-            let time = result.dates.start.localTime;
-            if (time) {
-                let hour = parseInt(time.substring(0, 2));
-                let minute = time.substring(2, time.length - 3);
-                let tail;
-                if (hour < 12) {
-                    tail = 'AM';
+                if (hour > 12) {
+                    hour -= 12;
                 }
-                else {
-                    if (hour > 12) {
-                        hour -= 12;
-                    }
-                    tail = 'PM';
-                }
-                if (minute === ":00") {
-                    return hour + tail;
-                }
-                return hour + minute + tail;
+                tail = 'PM';
             }
-            else {
-                console.log("result couldn't render time", result)
+            if (minute === ":00") {
+                display.time = hour + tail;
             }
+            display.time = hour + minute + tail;
         }
     }
-
-    const renderPrices = (result) => {
-        if (result.priceRanges) {
-            const pricing = result.priceRanges[0];
-
-            if (pricing.max === pricing.min) {
-                return (
-                    <span>{pricing.min} {pricing.currency}</span>
-                )
-            }
-            else {
-                return (
-                    <span>{pricing.min} - {pricing.max} {pricing.currency}</span>
-                )
-            }
+    if (result.priceRanges) {
+        // check prices to display
+        const pricing = result.priceRanges[0];
+        display.prices = pricing.max === pricing.min ? `${pricing.min} ${pricing.currency}` : `${pricing.min} - ${pricing.max} ${pricing.currency}`;
+    }
+    if (result.classifications) {
+        // check genre to display
+        let genre = result.classifications[0].genre;
+        if (genre) {
+            display.genre = `Genre: ${genre.name}`;
         }
     }
-
-    const renderGenre = (result) => {
-        if (result.classifications) {
-            let genre = result.classifications[0].genre;
-            if (genre) {
-                return (
-                    <span> Genre: {genre.name}</span>
-                )
-            }
-        }
+    if (result.otherArtists) {
+        display.otherArtists = renderOtherArtists(result);
     }
 
     const renderOtherArtists = (result) => {
-        if (result.otherArtists) {
-            var mapOtherArtists = [];
-            mapOtherArtists = result.otherArtists.map((artist, index) => {
-                return (
-                    <Row key={`artist-${index}`}>
-                        {artist}
-                    </Row>
-                )
-            });
-
+        var mapOtherArtists = [];
+        mapOtherArtists = result.otherArtists.map((artist, index) => {
             return (
-                <Col>
-                    <Row>
-                        Playing with:
-                        </Row>
-                    <Row>
-                        <Col>
-                            {mapOtherArtists}
-                        </Col>
-                    </Row>
-                </Col>
+                <Row key={`artist-${index}`}>
+                    {artist}
+                </Row>
+            )
+        });
 
-            );
-        }
+        return (
+            <Col>
+                <Row>Playing with:</Row>
+                <Row>
+                    <Col>{mapOtherArtists}</Col>
+                </Row>
+            </Col>
+        );
     }
 
     return (
-        <StyledModal
-            className="modal-artist"
-            size="lg"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-            show={modalState.visible}
-            onHide={() => { 
-                dispatchModal({ type: 'SHOW_MODAL', visible: false }) 
-                }}>
-
+        <StyledModal className="modal-artist" size="lg" aria-labelledby="contained-modal-title-vcenter"
+            centered show={modalState.visible} onHide={() => {dispatchModal({ type: 'SHOW_MODAL', visible: false })}}>
             <StyledModalHeader>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    {renderName(result)}
+                    {display.name}
                 </Modal.Title>
             </StyledModalHeader>
             <StyledModalBody>
@@ -275,8 +209,8 @@ export default function ModalArtist() {
                             <Row>
                                 <Col>
                                     <StyledImgContainer className="modal-image-container">
-
-                                        {renderImage(result)}
+                                        <StyledImg className="modal-image" src={display.src}
+                                            alt={display.name} key={"img-current"} />
                                         <StyledMask className="mask">
                                             <StyledIframe id="iframe-modal" title="topTracks" src={`https://open.spotify.com/embed/artist/${result.spotify_id}?si=OSj2G-oRQXaLYwukBQA-LA`} frameBorder="0" allowtransparency="true" allow="encrypted-media" />
                                         </StyledMask>
@@ -287,21 +221,19 @@ export default function ModalArtist() {
                         <Col md="6">
                             <Row><p className="text-left"><small>{result.bio}</small></p></Row>
                             <Row></Row>
-                            <Row>{renderGenre(result)}</Row>
-                            <Row>{renderDate(result)}</Row>
-                            <Row>{renderTime(result)}</Row>
-                            <Row>{renderVenue(result)}</Row>
-                            <Row>{renderLocation(result)}</Row>
-                            <Row>{renderPrices(result)}</Row>
-                            <Row>{renderOtherArtists(result)}</Row>
+                            <Row>{display.genre}</Row>
+                            <Row>{display.date}</Row>
+                            <Row>{display.time}</Row>
+                            <Row>{display.venue}</Row>
+                            <Row>{display.location}</Row>
+                            <Row>{display.prices}</Row>
+                            <Row>{display.otherArtists}</Row>
                         </Col>
                     </Row>
                 </Container>
             </StyledModalBody>
             <StyledModalFooter>
-                <StyledButton className="btn-default" onClick={() => { 
-                    dispatchModal({ type: 'SHOW_MODAL', visible: false }) 
-                    }}>Close</StyledButton>
+                <StyledButton className="btn-default" onClick={() => {dispatchModal({ type: 'SHOW_MODAL', visible: false })}}>Close</StyledButton>
             </StyledModalFooter>
         </StyledModal>
     );
