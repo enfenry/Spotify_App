@@ -137,7 +137,7 @@ export default function SearchBar() {
                         lat: location.lat,
                         lng: location.lng
                     };
-                    console.log('coords',coords);
+                    // console.log('coords',coords);
                 })
                 .catch((error) => {
                     console.error(error)

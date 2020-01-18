@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import moment from 'moment';
 import { ThemeContext } from '../themes';
-import { MyContext } from '../App';
+import { ModalContext } from '../App';
 import styled from 'styled-components';
 
 const StyledModalHeader = styled(Modal.Header)`
@@ -96,7 +96,7 @@ const StyledButton = styled(Button)`
 `
 
 export default function ModalArtist() {
-    const {modalState, dispatchModal} = useContext(MyContext);
+    const {modalState, dispatchModal} = useContext(ModalContext);
     const result = modalState.result;
 
     const theme = useContext(ThemeContext);
