@@ -7,7 +7,7 @@ import Container from 'react-bootstrap/Container';
 import Footer from './components/Footer.js';
 import { ThemeContext, themes } from './themes';
 
-export const MyContext = React.createContext(null);
+export const ModalContext = React.createContext(null);
 export const ResultsContext = React.createContext(null);
 export const PathContext = React.createContext(null);
 export const TokenContext = React.createContext(null);

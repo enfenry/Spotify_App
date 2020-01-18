@@ -2,7 +2,7 @@ import React, { useReducer, useContext } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ModalArtist from './ModalArtist.js';
-import { MyContext, ResultsContext } from '../App';
+import { ModalContext, ResultsContext } from '../App';
 import moment from 'moment';
 import styled from 'styled-components';
 
@@ -254,9 +254,9 @@ export default function ResultsBox() {
     return (
         <>
             {renderResults(results)}
-            <MyContext.Provider value={{ modalState, dispatchModal }}>
+            <ModalContext.Provider value={{ modalState, dispatchModal }}>
                 <ModalArtist id="modal-artist" />
-            </MyContext.Provider>
+            </ModalContext.Provider>
         </>
     )
 };
