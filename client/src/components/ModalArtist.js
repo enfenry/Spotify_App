@@ -4,10 +4,10 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import moment from 'moment';
 import { ThemeContext } from '../themes';
 import { ModalContext } from '../App';
 import styled from 'styled-components';
+import { displayResult } from './displayResult';
 
 const StyledModalHeader = styled(Modal.Header)`
     text-align: center;
@@ -98,105 +98,39 @@ const StyledButton = styled(Button)`
 export default function ModalArtist() {
     const { modalState, dispatchModal } = useContext(ModalContext);
     const result = modalState.result;
-
+    const display = displayResult(result);
+    
     const theme = useContext(ThemeContext);
 
     StyledButton.defaultProps = {
         theme: theme
     }
 
-    let display = {
-        name: ``,
-        src: ``,
-        location: ``,
-        venue: ``,
-        date: ``,
-        time: ``,
-        prices: ``,
-        genre: ``,
-        otherArtists: ``
-    };
+    const renderOtherArtists = () => {
+        if (display.otherArtists.length) {
+            var mapOtherArtists = [];
+            mapOtherArtists = display.otherArtists.map((artist) => {
+                return (
+                    <Row key={`artist-${artist}`}>
+                        <small>{artist}</small>
+                    </Row>
+                )
+            });
 
-    if (result._embedded) {
-        // check name to display
-        display.name = result._embedded.attractions[0].name;
-        // check src to display
-        display.src = result.images.length ? result.images[0].url : result._embedded.attractions[0].images[0].url;
-        // check location to display
-        let venue = result._embedded.venues[0];
-        if (venue.state) {
-            display.location = `${venue.city.name}, ${venue.state.stateCode}`;
-        }
-        else if (venue.city) {
-            display.location = `${venue.city.name}, ${venue.country.countryCode}`;
-        }
-        // check venue to display
-        display.venue = venue.name.length < 38 ? venue.name : `${venue.name.substring(0, 37)}...`;
-    }
-    if (result.dates) {
-        // check date to display
-        let convertedDate = moment(result.dates.start.localDate, "YYYY-MM-DD");
-        display.date = convertedDate.format("MMM Do, YYYY");
-        //  check time to display
-        let time = result.dates.start.localTime;
-        if (time) {
-            let hour = parseInt(time.substring(0, 2));
-            let minute = time.substring(2, time.length - 3);
-            let tail;
-            if (hour < 12) {
-                tail = 'AM';
-            }
-            else {
-                if (hour > 12) {
-                    hour -= 12;
-                }
-                tail = 'PM';
-            }
-            if (minute === ":00") {
-                display.time = hour + tail;
-            }
-            display.time = hour + minute + tail;
-        }
-    }
-    if (result.priceRanges) {
-        // check prices to display
-        const pricing = result.priceRanges[0];
-        display.prices = pricing.max === pricing.min ? `${pricing.min} ${pricing.currency}` : `${pricing.min} - ${pricing.max} ${pricing.currency}`;
-    }
-    if (result.classifications) {
-        // check genre to display
-        let genre = result.classifications[0].genre;
-        if (genre) {
-            display.genre = `Genre: ${genre.name}`;
-        }
-    }
-    if (result.otherArtists) {
-        display.otherArtists = renderOtherArtists(result);
-    }
-
-    const renderOtherArtists = (result) => {
-        var mapOtherArtists = [];
-        mapOtherArtists = result.otherArtists.map((artist, index) => {
             return (
-                <Row key={`artist-${index}`}>
-                    {artist}
-                </Row>
-            )
-        });
-
-        return (
-            <Col>
-                <Row>Playing with:</Row>
-                <Row>
-                    <Col>{mapOtherArtists}</Col>
-                </Row>
-            </Col>
-        );
+                <Col>
+                    <Row>Playing with:</Row>
+                    <Row>
+                        <Col xs={{offset:1}}>{mapOtherArtists}</Col>
+                    </Row>
+                </Col>
+            );
+        }
     }
 
     return (
         <StyledModal className="modal-artist" size="lg" aria-labelledby="contained-modal-title-vcenter"
-            centered show={modalState.visible} onHide={() => {dispatchModal({ type: 'SHOW_MODAL', visible: false })}}>
+            centered show={modalState.visible} onHide={() => { dispatchModal({ type: 'SHOW_MODAL', visible: false }) }}>
             <StyledModalHeader>
                 <Modal.Title id="contained-modal-title-vcenter">
                     {display.name}
@@ -219,7 +153,6 @@ export default function ModalArtist() {
                             </Row>
                         </Col>
                         <Col md="6">
-                            <Row><p className="text-left"><small>{result.bio}</small></p></Row>
                             <Row></Row>
                             <Row>{display.genre}</Row>
                             <Row>{display.date}</Row>
@@ -227,13 +160,13 @@ export default function ModalArtist() {
                             <Row>{display.venue}</Row>
                             <Row>{display.location}</Row>
                             <Row>{display.prices}</Row>
-                            <Row>{display.otherArtists}</Row>
+                            <Row>{renderOtherArtists()}</Row>
                         </Col>
                     </Row>
                 </Container>
             </StyledModalBody>
             <StyledModalFooter>
-                <StyledButton className="btn-default" onClick={() => {dispatchModal({ type: 'SHOW_MODAL', visible: false })}}>Close</StyledButton>
+                <StyledButton className="btn-default" onClick={() => { dispatchModal({ type: 'SHOW_MODAL', visible: false }) }}>Close</StyledButton>
             </StyledModalFooter>
         </StyledModal>
     );

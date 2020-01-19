@@ -12,7 +12,7 @@ export const mapSpotify = async (results, accessToken) => {
 }
 
 const searchSpotify = async (result, accessToken) => {
-    const spotifyURL = `https://api.spotify.com/v1/search?q=${result._embedded.attractions[0].name}&type=artist&market=from_token&limit=10&offset=0&include_external=audio`
+    const spotifyURL = `https://api.spotify.com/v1/search?q=${result.name}&type=artist&market=from_token&limit=10&offset=0&include_external=audio`
     return axios.get(spotifyURL, {
         headers: {
             'Authorization': 'Bearer ' + accessToken
@@ -24,11 +24,9 @@ const searchSpotify = async (result, accessToken) => {
                 result.spotify_id = artist.id;
                 result.name = artist.name;
                 result.genres = artist.genres;
-                result.images = artist.images;
+                result.images.unshift(...artist.images);
             }
-            else {
-                console.log('no spotify result for ', jsonData);
-            }
+            // console.log('result',result);
             return result;
         })
         .catch(error => {
