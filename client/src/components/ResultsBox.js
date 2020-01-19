@@ -1,4 +1,4 @@
-import React, { useReducer, useContext } from 'react';
+import React, { useReducer, useContext, useEffect } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ModalArtist from './ModalArtist.js';
@@ -59,7 +59,11 @@ const StyledMask = styled.div`
     cursor:pointer;
 `
 
+const initialState = { type: 'SHOW_MODAL', visible: false, result: {} };
+
 export default function ResultsBox() {
+    const { resultsState } = useContext(ResultsContext);
+    const results = resultsState.results;
 
     function reducer(state, action) {
         switch (action.type) {
@@ -72,11 +76,7 @@ export default function ResultsBox() {
         }
     }
 
-    const initialState = { type: 'SHOW_MODAL', visible: false, result: {} };
     const [modalState, dispatchModal] = useReducer(reducer, initialState);
-
-    const { resultsState } = useContext(ResultsContext);
-    const results = resultsState.results;
 
     const handleModal = (result) => {
         dispatchModal({ type: 'SET_RESULT', result: result, visible: true });
@@ -94,7 +94,7 @@ export default function ResultsBox() {
                             <StyledImg src={display.src}
                                 alt={display.name} key={"img-" + display.name} data-toggle="modal"
                                 data-target="#modal-artist" />
-                            <StyledMask className="mask" onClick={() => handleModal(result)}>
+                            <StyledMask className="mask" onClick={() => handleModal(display)}>
                                 <Row>
                                     <Col>{display.name}</Col>
                                 </Row>
