@@ -9,8 +9,8 @@ import { navigate } from 'hookrouter';
 
 import { getCoords } from './searchFunctions/Google';
 import { searchTicketmaster } from './searchFunctions/Ticketmaster';
-import { mapSpotify } from './searchFunctions/Spotify';
-import { ResultsContext, PathContext, TokenContext } from '../App';
+import { mapArtists, findOrCreatePlaylist } from './searchFunctions/Spotify';
+import { ResultsContext, PathContext, TokenContext, UserContext } from '../App';
 import { ThemeContext } from '../themes';
 import styled from 'styled-components';
 
@@ -69,6 +69,9 @@ export default function SearchBar() {
     const { tokenState } = useContext(TokenContext);
     const accessToken = tokenState.accessToken;
 
+    const {userState} = useContext(UserContext);
+    const user = userState.user;
+
     const theme = useContext(ThemeContext);
 
     StyledAutocomplete.defaultProps = {
@@ -115,13 +118,14 @@ export default function SearchBar() {
                 searchTicketmaster(coords)
                     .then(async results => {
                         // SEARCH SPOTIFY AND UPDATE WITH MORE INFORMATION FOR EACH RESULT FROM TICKETMASTER SEARCH
-                        return mapSpotify(results, accessToken)
+                        return mapArtists(results, accessToken)
                             .then(mapResults => {
                                 return mapResults;
                             })
                     })
                     .then(newResults => {
                         console.log('newResults', newResults)
+                        findOrCreatePlaylist(user,accessToken);
                         dispatchPath({ type: 'SET_PATH', path: '/results' });
                         dispatchResults({ type: 'SET_RESULTS', results: newResults });
                         navigate("/results");
