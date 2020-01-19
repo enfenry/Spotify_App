@@ -9,8 +9,8 @@ import { navigate } from 'hookrouter';
 
 import { getCoords } from './searchFunctions/Google';
 import { searchTicketmaster } from './searchFunctions/Ticketmaster';
-import { mapSpotify } from './searchFunctions/Spotify';
-import { ResultsContext, PathContext, TokenContext } from '../App';
+import { mapArtists, findOrCreatePlaylist, replacePlaylist, getPlaylistURIs } from './searchFunctions/Spotify';
+import { ResultsContext, PlaylistContext, PathContext, TokenContext, UserContext } from '../App';
 import { ThemeContext } from '../themes';
 import styled from 'styled-components';
 
@@ -63,11 +63,16 @@ export default function SearchBar() {
     const query = searchState.query;
 
     const { dispatchResults } = useContext(ResultsContext);
+    const { dispatchPlaylist } = useContext(PlaylistContext);
+
     const { pathState, dispatchPath } = useContext(PathContext);
     const path = pathState.path;
 
     const { tokenState } = useContext(TokenContext);
     const accessToken = tokenState.accessToken;
+
+    const { userState } = useContext(UserContext);
+    const user = userState.user;
 
     const theme = useContext(ThemeContext);
 
@@ -115,16 +120,22 @@ export default function SearchBar() {
                 searchTicketmaster(coords)
                     .then(async results => {
                         // SEARCH SPOTIFY AND UPDATE WITH MORE INFORMATION FOR EACH RESULT FROM TICKETMASTER SEARCH
-                        return mapSpotify(results, accessToken)
+                        return mapArtists(results, accessToken)
                             .then(mapResults => {
                                 return mapResults;
                             })
                     })
                     .then(newResults => {
-                        console.log('newResults', newResults)
-                        dispatchPath({ type: 'SET_PATH', path: '/results' });
-                        dispatchResults({ type: 'SET_RESULTS', results: newResults });
-                        navigate("/results");
+                        console.log('newResults', newResults);
+                        findOrCreatePlaylist(user.data.id, accessToken)
+                            .then(newPlaylist => {
+                                const uris = getPlaylistURIs(newResults, 2);
+                                replacePlaylist(newPlaylist.id, uris, accessToken);
+                                dispatchPath({ type: 'SET_PATH', path: '/results' });
+                                dispatchPlaylist({ type: 'SET_PLAYLIST', playlist: newPlaylist });
+                                dispatchResults({ type: 'SET_RESULTS', results: newResults });
+                                navigate("/results");
+                            })
                     })
                     .catch((error) => {
                         console.error(error)

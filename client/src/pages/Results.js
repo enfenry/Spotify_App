@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { PathContext } from '../App';
+import { PathContext, PlaylistContext } from '../App';
 import Header from '../components/Header.js';
 import SearchBar from '../components/SearchBar.js';
 import ResultsBox from '../components/ResultsBox.js';
@@ -37,11 +37,20 @@ const StyledRow = styled(Row)`
 function Results({
 }) {
     const { dispatchPath } = useContext(PathContext);
+    const { playlistState } = useContext(PlaylistContext);
+    const playlist = playlistState.playlist;
 
     useEffect(() => {
         localStorage.setItem('path', '/results');
         dispatchPath({ type: 'SET_PATH', path: '/results' });
     },[])
+
+    const renderIframe = () => {
+        return playlist ? <StyledIframe title="playlist" 
+        src={`https://open.spotify.com/embed/playlist/${playlist.id}`}
+        width="300" height="540" frameBorder="0" allowtransparency="true" allow="encrypted-media" />
+        : <></>
+    }
 
     return (
         <div className='Results'>
@@ -70,8 +79,7 @@ function Results({
             <main className="padding-top-1">
                 <Row className="">
                     <Col xs="12" md="auto" className="padded">
-                        {/* TODO: CREATE THIS PLAYLIST BASED ON SEARCH RESULTS */}
-                        <StyledIframe title="playlist" src="https://open.spotify.com/embed/playlist/37i9dQZF1DX2Nc3B70tvx0?si=_AMfZgVbQsW4IeD6gwpB5w" width="300" height="540" frameBorder="0" allowtransparency="true" allow="encrypted-media" />
+                        {renderIframe()}
                     </Col>
                     <Col>
                         <ResultsBox/>

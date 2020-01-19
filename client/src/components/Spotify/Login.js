@@ -46,7 +46,7 @@ export default function Login({ stateKey }) {
         var state = generateRandomString(16);
 
         localStorage.setItem(stateKey, state);
-        var scope = 'user-read-private user-read-email';
+        var scope = 'user-read-private user-read-email playlist-modify-public';
 
         var url = 'https://accounts.spotify.com/authorize';
         url += '?response_type=token';

@@ -52,7 +52,6 @@ export default function Spotify({
                         'Authorization': 'Bearer ' + access_token
                     }
                 }).then((response) => {
-                    // console.log(response);
                     dispatchUser({ type: 'SET_USER', user: response });
                     localStorage.setItem('user', JSON.stringify(response));
                     dispatchToken({ type: 'SET_TOKEN', accessToken: access_token });
