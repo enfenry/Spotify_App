@@ -7,7 +7,6 @@ import Col from 'react-bootstrap/Col';
 import { ThemeContext } from '../themes';
 import { ModalContext } from '../App';
 import styled from 'styled-components';
-import { displayResult } from './displayResult';
 
 const StyledModalHeader = styled(Modal.Header)`
     text-align: center;
@@ -69,7 +68,7 @@ const StyledMask = styled.div`
     opacity: .95;
     background-color: rgba(0, 0, 0, 1);
     transition: all .2s ease-in-out;
-    display: flex;
+    result: flex;
     flex-direction: column;
     justify-content: space-between;
 `
@@ -98,7 +97,6 @@ const StyledButton = styled(Button)`
 export default function ModalArtist() {
     const { modalState, dispatchModal } = useContext(ModalContext);
     const result = modalState.result;
-    const display = displayResult(result);
     
     const theme = useContext(ThemeContext);
 
@@ -107,9 +105,9 @@ export default function ModalArtist() {
     }
 
     const renderOtherArtists = () => {
-        if (display.otherArtists.length) {
+        if (result.otherArtists) {
             var mapOtherArtists = [];
-            mapOtherArtists = display.otherArtists.map((artist) => {
+            mapOtherArtists = result.otherArtists.map((artist) => {
                 return (
                     <Row key={`artist-${artist}`}>
                         <small>{artist}</small>
@@ -133,7 +131,7 @@ export default function ModalArtist() {
             centered show={modalState.visible} onHide={() => { dispatchModal({ type: 'SHOW_MODAL', visible: false }) }}>
             <StyledModalHeader>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    {display.name}
+                    {result.name}
                 </Modal.Title>
             </StyledModalHeader>
             <StyledModalBody>
@@ -143,8 +141,8 @@ export default function ModalArtist() {
                             <Row>
                                 <Col>
                                     <StyledImgContainer className="modal-image-container">
-                                        <StyledImg className="modal-image" src={display.src}
-                                            alt={display.name} key={"img-current"} />
+                                        <StyledImg className="modal-image" src={result.src}
+                                            alt={result.name} key={"img-current"} />
                                         <StyledMask className="mask">
                                             <StyledIframe id="iframe-modal" title="topTracks" src={`https://open.spotify.com/embed/artist/${result.spotify_id}?si=OSj2G-oRQXaLYwukBQA-LA`} frameBorder="0" allowtransparency="true" allow="encrypted-media" />
                                         </StyledMask>
@@ -154,12 +152,12 @@ export default function ModalArtist() {
                         </Col>
                         <Col md="6">
                             <Row></Row>
-                            <Row>{display.genre}</Row>
-                            <Row>{display.date}</Row>
-                            <Row>{display.time}</Row>
-                            <Row>{display.venue}</Row>
-                            <Row>{display.location}</Row>
-                            <Row>{display.prices}</Row>
+                            <Row>{result.genre}</Row>
+                            <Row>{result.date}</Row>
+                            <Row>{result.time}</Row>
+                            <Row>{result.venue}</Row>
+                            <Row>{result.location}</Row>
+                            <Row>{result.prices}</Row>
                             <Row>{renderOtherArtists()}</Row>
                         </Col>
                     </Row>

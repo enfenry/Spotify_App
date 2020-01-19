@@ -59,6 +59,9 @@ export const displayResult = (result) => {
                 display.genre = `Genre: ${genre.name}`;
             }
         }
+        if (result.spotify_id) {
+            display.spotify_id = result.spotify_id;
+        }
         display.otherArtists = result.otherArtists;
     }
     return display;
