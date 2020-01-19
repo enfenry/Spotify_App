@@ -9,8 +9,8 @@ import { navigate } from 'hookrouter';
 
 import { getCoords } from './searchFunctions/Google';
 import { searchTicketmaster } from './searchFunctions/Ticketmaster';
-import { mapArtists, findOrCreatePlaylist, refillPlaylist, getPlaylistURIs } from './searchFunctions/Spotify';
-import { ResultsContext, PathContext, TokenContext, UserContext } from '../App';
+import { mapArtists, findOrCreatePlaylist, replacePlaylist, getPlaylistURIs } from './searchFunctions/Spotify';
+import { ResultsContext, PlaylistContext, PathContext, TokenContext, UserContext } from '../App';
 import { ThemeContext } from '../themes';
 import styled from 'styled-components';
 
@@ -63,6 +63,8 @@ export default function SearchBar() {
     const query = searchState.query;
 
     const { dispatchResults } = useContext(ResultsContext);
+    const { dispatchPlaylist } = useContext(PlaylistContext);
+
     const { pathState, dispatchPath } = useContext(PathContext);
     const path = pathState.path;
 
@@ -126,10 +128,11 @@ export default function SearchBar() {
                     .then(newResults => {
                         console.log('newResults', newResults);
                         findOrCreatePlaylist(user.data.id, accessToken)
-                            .then(playlist => {
+                            .then(newPlaylist => {
                                 const uris = getPlaylistURIs(newResults, 2);
-                                refillPlaylist(playlist.id, uris, accessToken);
+                                replacePlaylist(newPlaylist.id, uris, accessToken);
                                 dispatchPath({ type: 'SET_PATH', path: '/results' });
+                                dispatchPlaylist({ type: 'SET_PLAYLIST', playlist: newPlaylist });
                                 dispatchResults({ type: 'SET_RESULTS', results: newResults });
                                 navigate("/results");
                             })

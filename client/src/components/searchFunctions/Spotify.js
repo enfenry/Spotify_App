@@ -89,7 +89,6 @@ export const getTopTracks = (artistId, accessToken) => {
         }
     })
         .then(result => {
-            // console.log('tracks', result.data.tracks);
             return result.data.tracks;
         })
         .catch(error => {
@@ -109,7 +108,7 @@ export const getPlaylistURIs = (results, tracksPerResult) => {
     return trackList;
 }
 
-export const refillPlaylist = (playlistId, uris, accessToken) => {
+export const replacePlaylist = (playlistId, uris, accessToken) => {
     const spotifyURL = `https://api.spotify.com/v1/playlists/${playlistId}/tracks`;
     return axios({
         method: 'put',

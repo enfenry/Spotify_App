@@ -9,6 +9,7 @@ import { ThemeContext, themes } from './themes';
 
 export const ModalContext = React.createContext(null);
 export const ResultsContext = React.createContext(null);
+export const PlaylistContext = React.createContext(null);
 export const PathContext = React.createContext(null);
 export const TokenContext = React.createContext(null);
 export const UserContext = React.createContext(null);
@@ -19,6 +20,8 @@ export default function App() {
     switch (action.type) {
       case 'SET_RESULTS':
         return { ...state, results: action.results }
+      case 'SET_PLAYLIST':
+        return { ...state, playlist: action.playlist }
       case 'SET_PATH':
         return { ...state, path: action.path }
       case 'SET_TOKEN':
@@ -32,6 +35,9 @@ export default function App() {
 
   const initResults = { type: 'SET_RESULTS', results: [] };
   const [resultsState, dispatchResults] = useReducer(reducer, initResults);
+
+  const initPlaylist = { type: 'SET_PLAYLIST', playlist: undefined };
+  const [playlistState, dispatchPlaylist] = useReducer(reducer, initPlaylist);
 
   const initPath = { type: 'SET_PATH', path: localStorage.getItem('path') || undefined };
   const [pathState, dispatchPath] = useReducer(reducer, initPath);
@@ -71,14 +77,16 @@ export default function App() {
       <Container fluid>
         <ThemeContext.Provider value={themes.default}>
           <ResultsContext.Provider value={{ resultsState, dispatchResults }}>
-            <PathContext.Provider value={{ pathState, dispatchPath }}>
-              <TokenContext.Provider value={{ tokenState, dispatchToken }}>
-                <UserContext.Provider value={{ userState, dispatchUser }}>
-                  {MyApp()}
-                  <Footer />
-                </UserContext.Provider>
-              </TokenContext.Provider>
-            </PathContext.Provider>
+            <PlaylistContext.Provider value={{ playlistState, dispatchPlaylist }}>
+              <PathContext.Provider value={{ pathState, dispatchPath }}>
+                <TokenContext.Provider value={{ tokenState, dispatchToken }}>
+                  <UserContext.Provider value={{ userState, dispatchUser }}>
+                    {MyApp()}
+                    <Footer />
+                  </UserContext.Provider>
+                </TokenContext.Provider>
+              </PathContext.Provider>
+            </PlaylistContext.Provider>
           </ResultsContext.Provider>
         </ThemeContext.Provider>
       </Container>
