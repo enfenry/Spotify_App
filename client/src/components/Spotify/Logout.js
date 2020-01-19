@@ -35,12 +35,12 @@ export default function Logout({
 }) {
     const { userState, dispatchUser } = useContext(UserContext);
     const user = userState.user;
-    console.log('user',user);
 
     // TODO: Review use of [user] dependency array here
     useEffect(() => {
         dispatchUser({ type: 'SET_USER', user: user });
-    },[user])
+        console.log('user', user);
+    }, [user])
 
     const { pathState } = useContext(PathContext);
     const path = pathState.path;
@@ -67,12 +67,7 @@ export default function Logout({
 
     // TODO: TEST THAT THIS WORKS (TRY USING ANSAR'S SPOTIFY)
     const renderSrc = () => {
-        if (user.data.images[0]) {
-            return user.data.images[0].url
-        }
-        else {
-            return process.env.PUBLIC_URL + '/static/img/user.png'
-        }
+        return user.data.images[0] ? user.data.images[0].url : process.env.PUBLIC_URL + '/static/img/user.png';
     }
 
     return (

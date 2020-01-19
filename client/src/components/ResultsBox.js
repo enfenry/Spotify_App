@@ -3,8 +3,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ModalArtist from './ModalArtist.js';
 import { ModalContext, ResultsContext } from '../App';
-import moment from 'moment';
 import styled from 'styled-components';
+import { displayResult } from './displayResult';
 
 const StyledImg = styled.img`
     height: 100%;
@@ -82,155 +82,41 @@ export default function ResultsBox() {
         dispatchModal({ type: 'SET_RESULT', result: result, visible: true });
     }
 
-    const renderLocation = (result) => {
-        let venue = result._embedded.venues[0];
-        if (venue.state) {
-
-            return (
-                <span>{venue.city.name}, {venue.state.stateCode}</span>
-            )
-        }
-        else if (venue.city) {
-            return (
-                <span>{venue.city.name}, {venue.country.countryCode}</span>
-            )
-        }
-        else {
-            return (
-                <span></span>
-            )
-        }
-    }
-
-    const renderVenue = (result) => {
-        const venue = result._embedded.venues[0];
-        if (venue.name) {
-            if (venue.name.length < 20) {
-                return (
-                    <span>{venue.name}</span>
-                )
-            }
-            return (
-                <span>{`${venue.name.substring(0, 19)}...`}</span>
-            )
-        }
-    }
-
-    const renderDate = (result) => {
-        let format = "YYYY-MM-DD";
-        let convertedDate = moment(result.dates.start.localDate, format);
-        return convertedDate.format("MMM Do, YYYY")
-    }
-
-    const renderTime = (result) => {
-        let time = result.dates.start.localTime;
-        if (time) {
-            let hour = parseInt(time.substring(0, 2));
-            let minute = time.substring(2, time.length - 3);
-            let tail;
-            if (hour < 12) {
-                tail = 'AM';
-            }
-            else {
-                if (hour > 12) {
-                    hour -= 12;
-                }
-                tail = 'PM';
-            }
-            if (minute === ":00") {
-                return hour + tail;
-            }
-            return hour + minute + tail;
-        }
-        else {
-            console.log("result couldn't render time", result)
-        }
-    }
-
-    const renderPrices = (result) => {
-        if (result.priceRanges) {
-            const pricing = result.priceRanges[0];
-
-            if (pricing.max === pricing.min) {
-                return (
-                    <span>{pricing.min} {pricing.currency}</span>
-                )
-            }
-            else {
-                return (
-                    <span>{pricing.min} - {pricing.max} {pricing.currency}</span>
-                )
-            }
-        }
-    }
-
-    const renderGenre = (result) => {
-        if (result.classifications) {
-            let genre = result.classifications[0].genre;
-            if (genre) {
-                return (
-                    <span> Genre: {genre.name}</span>
-                )
-            }
-        }
-    }
-
     const renderResults = (results) => {
+
         var mapResults = [];
         mapResults = results.map((result, index) => {
-            if (result._embedded.attractions) {
+            const display = displayResult(result);
 
-                // TODO: CHECK IF THERE IS A SPOTIFY ID IN RESULT AND RENDERING RESULT DIFFERENTLY
-                //     var image;
-                //     var name;
-                //     var genres;
-
-                // if (result.spotify_id) {
-                //     genres = result.genres;
-                // }
                 return (
                     <Col className="padded" key={index} sm="auto">
                         <StyledImgContainer>
-                            <StyledImg src={result.images[0].url}
-                                alt={result._embedded.attractions[0].name} key={"img-" + result._embedded.attractions[0].name} data-toggle="modal"
+                            <StyledImg src={display.src}
+                                alt={display.name} key={"img-" + display.name} data-toggle="modal"
                                 data-target="#modal-artist" />
                             <StyledMask className="mask" onClick={() => handleModal(result)}>
                                 <Row>
-                                    <Col>
-                                        {result._embedded.attractions[0].name}
-                                    </Col>
+                                    <Col>{display.name}</Col>
                                 </Row>
                                 <Row>
                                     <Col>
                                         <Row>
-                                            <Col>
-                                                {renderGenre(result)}
-                                            </Col>
+                                            <Col>{display.genre}</Col>
                                         </Row>
                                         <Row>
-                                            <Col>
-                                                {renderVenue(result)}
-                                            </Col>
+                                            <Col>{display.venue}</Col>
                                         </Row>
                                         <Row>
-                                            <Col>
-                                                {renderLocation(result)}
-                                            </Col>
+                                            <Col>{display.location}</Col>
                                         </Row>
                                         <Row>
-                                            <Col>
-                                                {renderDate(result)}
-                                            </Col>
+                                            <Col>{display.date}</Col>
                                         </Row>
                                         <Row>
-                                            <Col>
-                                                {renderTime(result)}
-                                            </Col>
+                                            <Col>{display.time}</Col>
                                         </Row>
                                         <Row>
-                                            <Col>
-                                                {renderPrices(result)}
-                                            </Col>
+                                            <Col>{display.prices}</Col>
                                         </Row>
                                     </Col>
                                 </Row>
@@ -240,9 +126,6 @@ export default function ResultsBox() {
                         </StyledImgContainer>
                     </Col>
                 )
-            };
-            console.log(result);
-            return null;
         })
         return (
             <Row>
