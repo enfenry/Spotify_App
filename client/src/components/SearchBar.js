@@ -9,7 +9,7 @@ import { navigate } from 'hookrouter';
 
 import { getCoords } from './searchFunctions/Google';
 import { searchTicketmaster } from './searchFunctions/Ticketmaster';
-import { mapArtists, findOrCreatePlaylist } from './searchFunctions/Spotify';
+import { mapArtists, findOrCreatePlaylist, refillPlaylist, getPlaylistURIs } from './searchFunctions/Spotify';
 import { ResultsContext, PathContext, TokenContext, UserContext } from '../App';
 import { ThemeContext } from '../themes';
 import styled from 'styled-components';
@@ -69,7 +69,7 @@ export default function SearchBar() {
     const { tokenState } = useContext(TokenContext);
     const accessToken = tokenState.accessToken;
 
-    const {userState} = useContext(UserContext);
+    const { userState } = useContext(UserContext);
     const user = userState.user;
 
     const theme = useContext(ThemeContext);
@@ -124,11 +124,17 @@ export default function SearchBar() {
                             })
                     })
                     .then(newResults => {
-                        console.log('newResults', newResults)
-                        findOrCreatePlaylist(user,accessToken);
-                        dispatchPath({ type: 'SET_PATH', path: '/results' });
-                        dispatchResults({ type: 'SET_RESULTS', results: newResults });
-                        navigate("/results");
+                        console.log('newResults', newResults);
+                        findOrCreatePlaylist(user.data.id, accessToken)
+                            .then(playlist => {
+                                console.log('playlist in Searchbar', playlist);
+                                const uris = getPlaylistURIs(newResults, 1);
+                                // console.log('uris herrre', uris);
+                                refillPlaylist(playlist.id, uris, accessToken);
+                                dispatchPath({ type: 'SET_PATH', path: '/results' });
+                                dispatchResults({ type: 'SET_RESULTS', results: newResults });
+                                navigate("/results");
+                            })
                     })
                     .catch((error) => {
                         console.error(error)
