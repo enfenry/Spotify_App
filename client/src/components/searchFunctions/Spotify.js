@@ -44,13 +44,12 @@ export const findOrCreatePlaylist = async (userId, accessToken) => {
             'Authorization': 'Bearer ' + accessToken
         }
     })
-        .then(async playlists => {
-            const match = playlists.data.items.filter((playlist) => {
+        .then( playlists => {
+            const match = playlists.data.items.find((playlist) => {
                 return playlist.name === 'ThisWeekend' && playlist.owner.id === userId
             });
-            if (match.length) {
-                console.log('match[0]', match[0]);
-                return await match[0];
+            if (match) {
+                return match;
             }
             else {
                 return axios({
@@ -65,9 +64,8 @@ export const findOrCreatePlaylist = async (userId, accessToken) => {
                         'Content-Type': 'application/json'
                     }
                 })
-                    .then(async newPlaylist => {
-                        console.log('newPlaylist', newPlaylist);
-                        return await newPlaylist;
+                    .then( newPlaylist => {
+                        return newPlaylist;
                     })
                     .catch(error => {
                         console.log('accessToken may be expired', accessToken);
@@ -81,7 +79,7 @@ export const findOrCreatePlaylist = async (userId, accessToken) => {
         });
 }
 
-export const getTopTracks = async (artistId, accessToken) => {
+export const getTopTracks = (artistId, accessToken) => {
     const spotifyURL = `https://api.spotify.com/v1/artists/${artistId}/top-tracks?country=from_token`;
     return axios({
         method: 'get',
@@ -111,7 +109,7 @@ export const getPlaylistURIs = (results, tracksPerResult) => {
     return trackList;
 }
 
-export const refillPlaylist = async (playlistId, uris, accessToken) => {
+export const refillPlaylist = (playlistId, uris, accessToken) => {
     const spotifyURL = `https://api.spotify.com/v1/playlists/${playlistId}/tracks`;
     return axios({
         method: 'put',
@@ -125,7 +123,6 @@ export const refillPlaylist = async (playlistId, uris, accessToken) => {
         }
     })
         .then(result => {
-            console.log('result', result);
             return result;
         })
         .catch(error => {

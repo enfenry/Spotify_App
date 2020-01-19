@@ -127,9 +127,7 @@ export default function SearchBar() {
                         console.log('newResults', newResults);
                         findOrCreatePlaylist(user.data.id, accessToken)
                             .then(playlist => {
-                                console.log('playlist in Searchbar', playlist);
-                                const uris = getPlaylistURIs(newResults, 1);
-                                // console.log('uris herrre', uris);
+                                const uris = getPlaylistURIs(newResults, 2);
                                 refillPlaylist(playlist.id, uris, accessToken);
                                 dispatchPath({ type: 'SET_PATH', path: '/results' });
                                 dispatchResults({ type: 'SET_RESULTS', results: newResults });
