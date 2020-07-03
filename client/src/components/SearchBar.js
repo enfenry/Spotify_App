@@ -126,7 +126,6 @@ export default function SearchBar() {
                             })
                     })
                     .then(newResults => {
-                        console.log('newResults', newResults);
                         findOrCreatePlaylist(user.data.id, accessToken)
                             .then(newPlaylist => {
                                 const uris = getPlaylistURIs(newResults, 2);

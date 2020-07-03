@@ -138,11 +138,10 @@ export const replacePlaylist = async (playlistId, uris, accessToken) => {
                 }
             })
                 .then(res => {
-                    console.log(res);
-                    console.log(result);
                     return result;
                 })
                 .catch(error => {
+                    console.log('accessToken may be expired', accessToken);
                     console.log(error);
                 })
 
