@@ -41,10 +41,11 @@ export const findOrCreatePlaylist = async (userId, accessToken) => {
     const spotifyURL = `https://api.spotify.com/v1/users/${userId}/playlists`;
     return axios.get(spotifyURL, {
         headers: {
-            'Authorization': 'Bearer ' + accessToken
+            'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': 'application/json'
         }
     })
-        .then( playlists => {
+        .then(playlists => {
             const match = playlists.data.items.find((playlist) => {
                 return playlist.name === 'ThisWeekend' && playlist.owner.id === userId
             });
@@ -64,7 +65,7 @@ export const findOrCreatePlaylist = async (userId, accessToken) => {
                         'Content-Type': 'application/json'
                     }
                 })
-                    .then( newPlaylist => {
+                    .then(newPlaylist => {
                         return newPlaylist;
                     })
                     .catch(error => {
@@ -100,7 +101,7 @@ export const getTopTracks = (artistId, accessToken) => {
 export const getPlaylistURIs = (results, tracksPerResult) => {
     const trackList = [];
     const filteredResults = results.filter(result => { return result.trackIds })
-    filteredResults.map(result => {
+    filteredResults.forEach(result => {
         const filteredTrackIds = result.trackIds.filter((trackId, index) => { return index < tracksPerResult });
         const uris = filteredTrackIds.map(trackId => { return `spotify:track:${trackId}` });
         trackList.push(...uris);
@@ -108,7 +109,10 @@ export const getPlaylistURIs = (results, tracksPerResult) => {
     return trackList;
 }
 
-export const replacePlaylist = (playlistId, uris, accessToken) => {
+export const replacePlaylist = async (playlistId, uris, accessToken) => {
+    const detailURL = `https://api.spotify.com/v1/playlists/${playlistId}`;
+    const utc = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
+
     const spotifyURL = `https://api.spotify.com/v1/playlists/${playlistId}/tracks`;
     return axios({
         method: 'put',
@@ -122,7 +126,26 @@ export const replacePlaylist = (playlistId, uris, accessToken) => {
         }
     })
         .then(result => {
-            return result;
+            axios({
+                method: 'put',
+                url: detailURL,
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken,
+                    'Content-Type': 'application/json'
+                },
+                data: {
+                    "description": `Playlist created on ${utc} with the ThisWeekend app. Listen to artists playing in your area.`
+                }
+            })
+                .then(res => {
+                    console.log(res);
+                    console.log(result);
+                    return result;
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+
         })
         .catch(error => {
             console.log('accessToken may be expired', accessToken);
